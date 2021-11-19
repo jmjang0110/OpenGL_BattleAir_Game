@@ -1,4 +1,5 @@
 #pragma once
+
 class testClass
 {
 
@@ -12,7 +13,6 @@ public:
 
 	void NH_Funciton();
 	void JM_Funciton();
-
 
 
 	// public 건드리지 마시오 
