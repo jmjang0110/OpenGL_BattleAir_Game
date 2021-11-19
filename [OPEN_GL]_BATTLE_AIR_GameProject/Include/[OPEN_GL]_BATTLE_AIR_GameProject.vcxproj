@@ -147,6 +147,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="testClass_jm.cpp" />
+    <ClCompile Include="testClass2_nh.cpp" />
+    <ClCompile Include="testClass_Pro.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="testClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
