@@ -13,24 +13,27 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="01.Core">
+      <UniqueIdentifier>{e7077778-0744-488e-93ce-77f1942441ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="testClass_jm.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="testClass2_nh.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="testClass_Pro.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="CCore.cpp">
+      <Filter>01.Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="testClass.h">
+    <ClInclude Include="Game.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CCore.h">
+      <Filter>01.Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
