@@ -13,7 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="01.Core">
+    <Filter Include="01-1_Timer">
+      <UniqueIdentifier>{49a61a59-f519-40d5-93aa-8c05a03b89a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01-0_Core">
       <UniqueIdentifier>{e7077778-0744-488e-93ce-77f1942441ce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -22,7 +25,10 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CCore.cpp">
-      <Filter>01.Core</Filter>
+      <Filter>01-0_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>01-1_Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,7 +39,13 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CCore.h">
-      <Filter>01.Core</Filter>
+      <Filter>01-0_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>01-1_Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

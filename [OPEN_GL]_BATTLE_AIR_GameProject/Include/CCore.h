@@ -5,48 +5,53 @@
 class CCore
 {
 
-private:
-	CCore();
-	~CCore();
-
-// =====================================================
-	// 싱글톤 설정 
-private:
-	static CCore* m_pInst;
-public:
+//private:
+//	CCore();
+//	~CCore();
+//
+//// =====================================================
+//	// 싱글톤 설정 
+//private:
+//	static CCore* m_pInst;
+//public:
 
 	// 싱글톤 객체를 생성하고 생성되어있다면 
 	// 그 고유 객체를 반환하는 함수 입니다.
-	static CCore* GetInst()
-	{
-		if (!m_pInst)
-			m_pInst = new CCore;
-		return m_pInst;
-	}
+	//static CCore* GetInst()
+	//{
+	//	if (!m_pInst)
+	//		m_pInst = new CCore;
 
-	// 싱글톤 객체를 delete 하는 함수 입니다. 
-	static void DestroyInst()
-	{
-		if (m_pInst != nullptr)
-			delete m_pInst;
-		m_pInst = nullptr;
+	//	return m_pInst;
+	//}
 
-	}
+	//// 싱글톤 객체를 delete 하는 함수 입니다. 
+	//static void DestroyInst()
+	//{
+	//	if (m_pInst != nullptr)
+	//		delete m_pInst;
+	//	m_pInst = nullptr;
+
+	//}
 // =====================================================
 
 	// 나중에는 아래 매크로로 싱글톤을 정의할 겁니다. 
 	// 지금도 설정 가능인데 일단 파악하기 편하게 이렇게 해놨어요~
-//public:
-//	DECLARE_SINGLE(CCore);
+public:
+	DECLARE_SINGLE(CCore);
 
 // =====================================================
+
+
+private:
+	RESOLUTION	m_tRS; // 해상도 입니다. ( 창 크기 지정 )
 
 
 public:
 	bool Init(int argc, char** argv);
 	void Run();
 
-	void MyProgramInit();
+	bool MyProgramInit();
 	void MyDataDelete();
 
 public:
@@ -63,7 +68,7 @@ public:
 	GLvoid MyReshape(int width, int height);
 	GLvoid MyKeyboard(unsigned char key, int x, int y);
 	GLvoid MyMouse(int button, int state, int x, int y);
-	GLvoid MyDrawScene();
+	GLvoid MyDrawScene(float fdeltatime);
 	GLvoid MyTimer(GLint value);
 
 

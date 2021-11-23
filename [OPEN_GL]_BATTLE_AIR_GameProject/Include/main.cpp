@@ -1,5 +1,7 @@
 
 #include "CCore.h"
+#include "Timer.h"
+
 
 // =====================================================
 // main : Myglut_(Func) : 전역함수로 선언/정의 합니다. 
@@ -21,8 +23,13 @@ int main(int argc, char** argv)
 {
 	srand((unsigned int)time(NULL));
 
+	// *** 타이머 초기화 ***
+	if (!CTimer::GetInst()->Init())
+		return false;
+
+
 	// *** 게임 초기화 ***
-	if (CCore::GetInst()->Init(argc, argv))
+	if (!(CCore::GetInst()->Init(argc, argv)))
 	{
 		CCore::GetInst()->DestroyInst();
 		return 0;
@@ -82,7 +89,11 @@ GLvoid Myglut_DrawScene()
 {
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	CCore::GetInst()->MyDrawScene();
+
+	CTimer::GetInst()->Update();
+	float fdeltatime = CTimer::GetInst()->GetDeltaTime();
+	
+	CCore::GetInst()->MyDrawScene(fdeltatime);
 	glutSwapBuffers();
 
 }
