@@ -1,4 +1,7 @@
 #include "CCore.h"
+#include "Timer.h"
+#include "SceneManager.h"
+
 
 //DEFINITION_SINGLE(CCore);
 CCore* CCore::m_pInst = nullptr;
@@ -37,7 +40,18 @@ bool CCore::Init(int argc, char** argv)
 
 bool CCore::MyProgramInit()
 {
-	
+	// *** 타이머 초기화 ***
+	if (!CTimer::GetInst()->Init())
+		return false;
+
+	// ** 장면 관리자 초기화 ** 
+	if (!CSceneManager::GetInst()->Init())
+		return false;
+
+
+
+
+
 	return true;
 
 }
@@ -52,24 +66,37 @@ void CCore::Logic()
 
 void CCore::Input(float fDeltaTime)
 {
+	CSceneManager::GetInst()->Input(fDeltaTime);
+
+
 }
 
 int CCore::Update(float fDeltaTime)
 {
+	CSceneManager::GetInst()->Update(fDeltaTime);
+
 	return 0;
 }
 
 int CCore::LateUpdate(float fDeltaTime)
 {
+
+	CSceneManager::GetInst()->LateUpdate(fDeltaTime);
+
 	return 0;
 }
 
 void CCore::Collision(float fDeltaTime)
 {
+	CSceneManager::GetInst()->Collision(fDeltaTime);
+
+
 }
 
 void CCore::Render(float fDeltaTime)
 {
+
+	CSceneManager::GetInst()->Render(fDeltaTime);
 
 
 }
@@ -82,21 +109,61 @@ void CCore::Run()
 
 GLvoid CCore::MyReshape(int width, int height)
 {
-	return GLvoid();
+
+
+	glViewport(0, 0, width, height);
+	return;
+
 }
 
 GLvoid CCore::MyKeyboard(unsigned char key, int x, int y)
 {
-	return GLvoid();
+	switch (key)
+	{
+
+
+	default:
+		break;
+	}
+
+	return;
+
 }
 
 GLvoid CCore::MyMouse(int button, int state, int x, int y)
 {
-	return GLvoid();
+	// =================================================================
+	// 윈도우 키 좌표를 openGL 좌표 x y 로 변환 합니다. 
+	// =================================================================
+
+	GLfloat openGL_x = (x - m_tRS.iW / 2.0f) * (2.0f / m_tRS.iW);
+	GLfloat openGL_y = -1 * (y - m_tRS.iH / 2.0f) * (2.0f / m_tRS.iH);
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		cout << "WINDOW : ( " << x << " , " << y << " )  |  " <<
+			"OPEN_GL : ( " << openGL_x << " , " << openGL_y << " )" << endl;
+	}
+
+
+	return;
 }
 
-GLvoid CCore::MyDrawScene(float fdeltatime)
+GLvoid CCore::MyDrawScene()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	glutSwapBuffers();
+
+	return;
+}
+
+GLvoid CCore::MyTimer(GLint value)
+{
+
+	CTimer::GetInst()->Update();
+	float fdeltatime = CTimer::GetInst()->GetDeltaTime();
+	cout << fdeltatime << endl;
+
 
 	Input(fdeltatime);
 	Update(fdeltatime);
@@ -105,10 +172,6 @@ GLvoid CCore::MyDrawScene(float fdeltatime)
 	Render(fdeltatime);
 
 
-	return GLvoid();
-}
+	return;
 
-GLvoid CCore::MyTimer(GLint value)
-{
-	return GLvoid();
 }

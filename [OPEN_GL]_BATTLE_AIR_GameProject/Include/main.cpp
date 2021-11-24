@@ -1,6 +1,5 @@
 
 #include "CCore.h"
-#include "Timer.h"
 
 
 // =====================================================
@@ -23,9 +22,6 @@ int main(int argc, char** argv)
 {
 	srand((unsigned int)time(NULL));
 
-	// *** 타이머 초기화 ***
-	if (!CTimer::GetInst()->Init())
-		return false;
 
 
 	// *** 게임 초기화 ***
@@ -67,41 +63,45 @@ GLvoid MyglutFuncInit()
 	glutMouseFunc(Myglut_Mouse);
 	glutKeyboardFunc(Myglut_KeyBoard);
 	glutTimerFunc(100, Myglut_Timer, 1);
+
+
 }
 
 GLvoid Myglut_Mouse(int button, int state, int x, int y)
 {
 	CCore::GetInst()->MyMouse(button, state, x, y);
+	
 	glutPostRedisplay();
 }
 
 GLvoid Myglut_KeyBoard(unsigned char key, int x, int y)
 {
 	CCore::GetInst()->MyKeyboard(key, x, y);
+	glutPostRedisplay();
 }
 
 GLvoid Myglut_Reshape(int width, int height)
 {
 	CCore::GetInst()->MyReshape(width, height);
+	glutPostRedisplay();
+
 }
 
 GLvoid Myglut_DrawScene()
 {
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	CTimer::GetInst()->Update();
-	float fdeltatime = CTimer::GetInst()->GetDeltaTime();
 	
-	CCore::GetInst()->MyDrawScene(fdeltatime);
-	glutSwapBuffers();
+	CCore::GetInst()->MyDrawScene();
+
 
 }
 
 GLvoid Myglut_Timer(GLint value)
 {
 
+
+	CCore::GetInst()->MyTimer(1);
+
 	glutPostRedisplay();
-	glutTimerFunc(100, Myglut_Timer, 1);
+	glutTimerFunc(1, Myglut_Timer, 1);
 
 }

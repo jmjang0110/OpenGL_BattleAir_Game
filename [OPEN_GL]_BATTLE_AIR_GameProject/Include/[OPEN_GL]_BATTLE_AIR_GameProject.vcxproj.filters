@@ -19,6 +19,12 @@
     <Filter Include="01-0_Core">
       <UniqueIdentifier>{e7077778-0744-488e-93ce-77f1942441ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene">
+      <UniqueIdentifier>{eef03bf3-9cce-4548-af29-e2cdc13532d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\02-1.SceneManager">
+      <UniqueIdentifier>{db01c809-a852-4c18-9a4b-9baf81363792}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>01-1_Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>02.Scene\02-1.SceneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>01-1_Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>02.Scene\02-1.SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

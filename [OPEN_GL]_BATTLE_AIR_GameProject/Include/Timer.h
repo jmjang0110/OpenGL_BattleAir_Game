@@ -41,7 +41,6 @@ public:
 		return m_fTimeScale;
 	}
 
-public:
 	void SetTimeScale(float fTimeScale)
 	{
 		m_fTimeScale = fTimeScale;
@@ -52,6 +51,8 @@ public:
 		return m_fdeltatime_Update;
 
 	}
+
+
 public:
 	bool Init();
 	void Update();

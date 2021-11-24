@@ -10,3 +10,5 @@ typedef struct _tagResolution
 	float iH;
 
 }RESOLUTION, * PRESOLUTION;
+
+
