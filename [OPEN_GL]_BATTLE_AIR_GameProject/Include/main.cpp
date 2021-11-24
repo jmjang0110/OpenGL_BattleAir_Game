@@ -1,6 +1,5 @@
 
-#include "CCore.h"
-
+#include "CoreFile/CCore.h"
 
 // =====================================================
 // main : Myglut_(Func) : 전역함수로 선언/정의 합니다. 
@@ -17,7 +16,7 @@ GLvoid MyglutFuncInit();
 // =====================================================
 // 게임을 초기화 한 후 구동합니다. (Init)->(Run)->(Delete)
 // =====================================================
-
+  
 int main(int argc, char** argv)
 {
 	srand((unsigned int)time(NULL));

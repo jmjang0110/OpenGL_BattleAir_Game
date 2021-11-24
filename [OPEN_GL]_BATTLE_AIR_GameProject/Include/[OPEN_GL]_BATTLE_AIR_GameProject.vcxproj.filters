@@ -13,51 +13,83 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="01-1_Timer">
-      <UniqueIdentifier>{49a61a59-f519-40d5-93aa-8c05a03b89a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01-0_Core">
-      <UniqueIdentifier>{e7077778-0744-488e-93ce-77f1942441ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Scene">
       <UniqueIdentifier>{eef03bf3-9cce-4548-af29-e2cdc13532d4}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Scene\02-1.SceneManager">
       <UniqueIdentifier>{db01c809-a852-4c18-9a4b-9baf81363792}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Core">
+      <UniqueIdentifier>{95521699-3f21-458a-acf6-f7581a82b4e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\01-2_ShaderManager">
+      <UniqueIdentifier>{8f5f75e5-b3db-4792-97bb-dbe449333461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\01-1_Timer">
+      <UniqueIdentifier>{49a61a59-f519-40d5-93aa-8c05a03b89a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\01-0_Core">
+      <UniqueIdentifier>{e7077778-0744-488e-93ce-77f1942441ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\01-3_FileManager">
+      <UniqueIdentifier>{dd00fc58-00f8-48fe-84cf-5cbb9983b67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Core\01-2_ShaderManager\glslFIle">
+      <UniqueIdentifier>{e69ddf80-900c-4780-93ff-44b6a514746a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CoreFile\CCore.cpp">
+      <Filter>01.Core\01-0_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreFile\TimerFile\Timer.cpp">
+      <Filter>01.Core\01-1_Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreFile\ShaderManagerFile\ShaderManger.cpp">
+      <Filter>01.Core\01-2_ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreFile\FileManagerFile\FileManager.cpp">
+      <Filter>01.Core\01-3_FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFile\SceneManager.cpp">
+      <Filter>02.Scene\02-1.SceneManager</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CCore.cpp">
-      <Filter>01-0_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>01-1_Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>02.Scene\02-1.SceneManager</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CoreFile\CCore.h">
+      <Filter>01.Core\01-0_Core</Filter>
     </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CoreFile\TimerFile\Timer.h">
+      <Filter>01.Core\01-1_Timer</Filter>
     </ClInclude>
-    <ClInclude Include="CCore.h">
-      <Filter>01-0_Core</Filter>
+    <ClInclude Include="CoreFile\ShaderManagerFile\ShaderManger.h">
+      <Filter>01.Core\01-2_ShaderManager</Filter>
     </ClInclude>
-    <ClInclude Include="Types.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CoreFile\FileManagerFile\FileManager.h">
+      <Filter>01.Core\01-3_FileManager</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>01-1_Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
+    <ClInclude Include="SceneFile\SceneManager.h">
       <Filter>02.Scene\02-1.SceneManager</Filter>
     </ClInclude>
+    <ClInclude Include="HeaderFile\Game.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderFile\Macro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderFile\Types.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CoreFile\ShaderManagerFile\FragmentShader.glsl">
+      <Filter>01.Core\01-2_ShaderManager\glslFIle</Filter>
+    </None>
+    <None Include="CoreFile\ShaderManagerFile\VertexShader.glsl">
+      <Filter>01.Core\01-2_ShaderManager\glslFIle</Filter>
+    </None>
   </ItemGroup>
 </Project>

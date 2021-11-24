@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Game.h"
+#include "../HeaderFile/Game.h"
 
 class CCore
 {
@@ -44,6 +44,7 @@ public:
 
 private:
 	RESOLUTION	m_tRS; // 해상도 입니다. ( 창 크기 지정 )
+	class CShaderProgramManger* m_ShaderProgramManager = nullptr;
 
 
 public:

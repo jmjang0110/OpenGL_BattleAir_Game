@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Game.h"
+#include "../../HeaderFile/Game.h"
+
 
 // ΩÃ±€≈Ê¿∏∑Œ º≥¡§«’¥œ¥Ÿ. 
 class CTimer

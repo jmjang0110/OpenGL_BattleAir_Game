@@ -1,6 +1,12 @@
+//#include "CCore.h"
+//#include "Timer.h"
+//#include "SceneManager.h"
+//#include "ShaderManger.h"
+
 #include "CCore.h"
-#include "Timer.h"
-#include "SceneManager.h"
+#include "TimerFile/Timer.h"
+#include "../SceneFile/SceneManager.h"
+#include "ShaderManagerFile/ShaderManger.h"
 
 
 //DEFINITION_SINGLE(CCore);
@@ -46,6 +52,10 @@ bool CCore::MyProgramInit()
 
 	// ** 장면 관리자 초기화 ** 
 	if (!CSceneManager::GetInst()->Init())
+		return false;
+
+	// **  쉐이더 프로그램 관리자 초기화 ** 
+	if (!CShaderProgramManger::GetInst()->Init())
 		return false;
 
 

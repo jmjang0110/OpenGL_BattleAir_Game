@@ -32,8 +32,8 @@ using namespace std;
 
 
 // User defined headers 
-#include "Macro.h"
-#include "Types.h"
+#include "../HeaderFile/Macro.h"
+#include "../HeaderFile/Types.h"
 
 
 
