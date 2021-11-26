@@ -49,6 +49,9 @@
     <Filter Include="05.Light">
       <UniqueIdentifier>{304fc8da-5486-4dfe-ba09-6f459669af40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object\03-1.Axis">
+      <UniqueIdentifier>{f699ffbd-85fb-44ec-9185-4e78fdc7ed61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -77,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="LightFile\Light.cpp">
       <Filter>05.Light</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\AxisFile\Axis.cpp">
+      <Filter>03.Object\03-1.Axis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="LightFile\Light.h">
       <Filter>05.Light</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\AxisFile\Axis.h">
+      <Filter>03.Object\03-1.Axis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

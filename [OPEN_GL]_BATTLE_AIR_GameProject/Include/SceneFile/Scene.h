@@ -27,6 +27,11 @@ private:
 	// 화면에 대한 활성화 정보 입니다. 
 	GLboolean m_bEnable = false;
 
+private:
+	class CCamera*	m_Camera;
+	class CLight*	m_Light;
+	class CAxis*	m_Axis;
+
 
 public:
 	bool GetEnable()
@@ -37,6 +42,11 @@ public:
 	{
 		m_bEnable = enable;
 	}
+
+public:
+	void UpdateProjectionMat();
+	void UpdateOrthoMat();
+
 
 public:
 

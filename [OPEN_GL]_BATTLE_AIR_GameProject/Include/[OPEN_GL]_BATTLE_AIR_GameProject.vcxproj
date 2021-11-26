@@ -157,6 +157,7 @@
     <ClCompile Include="CoreFile\TimerFile\Timer.cpp" />
     <ClCompile Include="LightFile\Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectFile\AxisFile\Axis.cpp" />
     <ClCompile Include="SceneFile\Scene.cpp" />
     <ClCompile Include="SceneFile\SceneManager.cpp" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="HeaderFile\Macro.h" />
     <ClInclude Include="HeaderFile\Types.h" />
     <ClInclude Include="LightFile\Light.h" />
+    <ClInclude Include="ObjectFile\AxisFile\Axis.h" />
     <ClInclude Include="SceneFile\Scene.h" />
     <ClInclude Include="SceneFile\SceneManager.h" />
   </ItemGroup>
