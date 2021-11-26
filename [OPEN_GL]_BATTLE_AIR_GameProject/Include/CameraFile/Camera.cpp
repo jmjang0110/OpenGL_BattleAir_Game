@@ -1,9 +1,6 @@
 #include "Camera.h"
 #include "../CoreFile/ShaderManagerFile/ShaderManger.h"
-
-
-
-
+#include "../LightFile/Light.h"
 
 CCamera::CCamera()
 {
