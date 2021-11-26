@@ -43,6 +43,9 @@
     <Filter Include="03.Object">
       <UniqueIdentifier>{eccd36d7-194e-42bd-82c8-1a4111cb4056}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Camera">
+      <UniqueIdentifier>{2609c71d-22fb-4a67-8eba-9f5056abf3a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -65,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="SceneFile\Scene.cpp">
       <Filter>02.Scene\02-2.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFile\Camera.cpp">
+      <Filter>04.Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="SceneFile\Scene.h">
       <Filter>02.Scene\02-2.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFile\Camera.h">
+      <Filter>04.Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
