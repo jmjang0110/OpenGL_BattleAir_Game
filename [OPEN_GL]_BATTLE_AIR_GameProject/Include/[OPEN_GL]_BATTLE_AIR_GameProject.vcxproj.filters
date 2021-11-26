@@ -46,6 +46,9 @@
     <Filter Include="04.Camera">
       <UniqueIdentifier>{2609c71d-22fb-4a67-8eba-9f5056abf3a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Light">
+      <UniqueIdentifier>{304fc8da-5486-4dfe-ba09-6f459669af40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="CameraFile\Camera.cpp">
       <Filter>04.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="LightFile\Light.cpp">
+      <Filter>05.Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="CameraFile\Camera.h">
       <Filter>04.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="LightFile\Light.h">
+      <Filter>05.Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

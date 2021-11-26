@@ -155,6 +155,7 @@
     <ClCompile Include="CoreFile\FileManagerFile\FileManager.cpp" />
     <ClCompile Include="CoreFile\ShaderManagerFile\ShaderManger.cpp" />
     <ClCompile Include="CoreFile\TimerFile\Timer.cpp" />
+    <ClCompile Include="LightFile\Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SceneFile\Scene.cpp" />
     <ClCompile Include="SceneFile\SceneManager.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="HeaderFile\Game.h" />
     <ClInclude Include="HeaderFile\Macro.h" />
     <ClInclude Include="HeaderFile\Types.h" />
+    <ClInclude Include="LightFile\Light.h" />
     <ClInclude Include="SceneFile\Scene.h" />
     <ClInclude Include="SceneFile\SceneManager.h" />
   </ItemGroup>
