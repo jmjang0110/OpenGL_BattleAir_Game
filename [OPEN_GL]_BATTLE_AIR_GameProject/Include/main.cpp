@@ -88,9 +88,12 @@ GLvoid Myglut_Reshape(int width, int height)
 
 GLvoid Myglut_DrawScene()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	CCore::GetInst()->MyDrawScene();
-
+	
+	glutSwapBuffers();
+	return;
 
 }
 
@@ -100,7 +103,6 @@ GLvoid Myglut_Timer(GLint value)
 
 	CCore::GetInst()->MyTimer(1);
 
-	glutPostRedisplay();
 	glutTimerFunc(1, Myglut_Timer, 1);
 
 }

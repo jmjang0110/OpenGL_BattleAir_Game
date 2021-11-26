@@ -21,6 +21,9 @@ private:
 	RESOLUTION	m_tRS; // 해상도 입니다. ( 창 크기 지정 )
 	class CShaderProgramManger* m_ShaderProgramManager = nullptr;
 
+private:
+	GLfloat m_fDeltaTime = 0.0f;
+
 
 public:
 	bool Init(int argc, char** argv);

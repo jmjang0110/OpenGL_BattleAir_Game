@@ -105,11 +105,9 @@ void CCore::Collision(float fDeltaTime)
 
 void CCore::Render(float fDeltaTime)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 	CSceneManager::GetInst()->Render(fDeltaTime);
 
-	glutSwapBuffers();
 	return;
 
 }
@@ -163,13 +161,10 @@ GLvoid CCore::MyMouse(int button, int state, int x, int y)
 
 GLvoid CCore::MyDrawScene()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	CTimer::GetInst()->Update();
-	float fdeltatime = CTimer::GetInst()->GetDeltaTime();
-	Render(fdeltatime);
+	Render(m_fDeltaTime);
+	//cout << " DrawScene : "<< m_fDeltaTime << endl;
 
-	glutSwapBuffers();
 	return;
 }
 
@@ -177,16 +172,18 @@ GLvoid CCore::MyTimer(GLint value)
 {
 
 	CTimer::GetInst()->Update();
-	float fdeltatime = CTimer::GetInst()->GetDeltaTime();
+	m_fDeltaTime = CTimer::GetInst()->GetDeltaTime();
 	//cout << fdeltatime << endl;
 
 
-	Input(fdeltatime);
-	Update(fdeltatime);
-	LateUpdate(fdeltatime);
-	Collision(fdeltatime);
-	Render(fdeltatime);
+	Input(m_fDeltaTime);
+	Update(m_fDeltaTime);
+	LateUpdate(m_fDeltaTime);
+	Collision(m_fDeltaTime);
+	glutPostRedisplay(); // Render
+	//cout << " MyTimer : " << m_fDeltaTime << endl;
 
+	
 
 	return;
 
