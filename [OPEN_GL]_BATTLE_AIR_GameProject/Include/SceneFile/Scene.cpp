@@ -47,7 +47,6 @@ void CScene::UpdateOrthoMat()
 
 bool CScene::Init()
 {
-	m_MainWindowColor = glm::vec3(0.5f, 0.5f, 0.5f);
 
 	if (m_Camera == nullptr)
 	{
@@ -94,7 +93,7 @@ void CScene::Collision(float fDeltaTime)
 void CScene::Render(float fDeltaTime)
 {
 	
-	glClearColor(m_MainWindowColor.x, m_MainWindowColor.y, m_MainWindowColor.z, 1.0f);
+	
 	
 	UpdateProjectionMat();
 

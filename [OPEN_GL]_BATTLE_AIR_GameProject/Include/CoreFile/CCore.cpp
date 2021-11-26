@@ -180,7 +180,7 @@ GLvoid CCore::MyTimer(GLint value)
 	Update(m_fDeltaTime);
 	LateUpdate(m_fDeltaTime);
 	Collision(m_fDeltaTime);
-	glutPostRedisplay(); // Render
+	 // Render
 	//cout << " MyTimer : " << m_fDeltaTime << endl;
 
 	

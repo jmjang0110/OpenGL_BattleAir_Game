@@ -1,5 +1,9 @@
 
 #include "CoreFile/CCore.h"
+// 윈도우 창 화면 색깔 
+glm::vec3 g_MainWindowColor = glm::vec3(1.0f, 1.0f, 1.0f);
+
+
 
 // =====================================================
 // main : Myglut_(Func) : 전역함수로 선언/정의 합니다. 
@@ -88,6 +92,7 @@ GLvoid Myglut_Reshape(int width, int height)
 
 GLvoid Myglut_DrawScene()
 {
+	glClearColor(g_MainWindowColor.x, g_MainWindowColor.y, g_MainWindowColor.z, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	CCore::GetInst()->MyDrawScene();
@@ -102,7 +107,7 @@ GLvoid Myglut_Timer(GLint value)
 
 
 	CCore::GetInst()->MyTimer(1);
-
+	glutPostRedisplay();
 	glutTimerFunc(1, Myglut_Timer, 1);
 
 }
