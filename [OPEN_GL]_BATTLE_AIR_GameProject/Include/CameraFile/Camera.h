@@ -16,6 +16,17 @@ private:
 	glm::vec3		m_cameraDirection		= glm::vec3();	//--- 카메라 바라보는 방향
 	glm::vec3		m_cameraUp				= glm::vec3();  //--- 카메라 위쪽 방향
 
+	glm::mat4		m_View					= glm::mat4(1.0f);
+
+
+private:
+	friend class CLight;
+
+
+public:
+	void UpdateCameraMat(float fDeltaTime);
+
+
 
 public:
 
