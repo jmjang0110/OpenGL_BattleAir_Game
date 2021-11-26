@@ -26,6 +26,8 @@ private:
 	// ( false : 화면 비활성화 , true : 화면 활성화 )
 	// 화면에 대한 활성화 정보 입니다. 
 	GLboolean m_bEnable = false;
+
+
 public:
 	bool GetEnable()
 	{

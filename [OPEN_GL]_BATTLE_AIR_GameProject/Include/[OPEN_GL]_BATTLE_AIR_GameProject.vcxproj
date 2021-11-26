@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CameraFile\Camera.cpp" />
     <ClCompile Include="CoreFile\CCore.cpp" />
     <ClCompile Include="CoreFile\FileManagerFile\FileManager.cpp" />
     <ClCompile Include="CoreFile\ShaderManagerFile\ShaderManger.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="SceneFile\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraFile\Camera.h" />
     <ClInclude Include="CoreFile\CCore.h" />
     <ClInclude Include="CoreFile\FileManagerFile\FileManager.h" />
     <ClInclude Include="CoreFile\ShaderManagerFile\ShaderManger.h" />
