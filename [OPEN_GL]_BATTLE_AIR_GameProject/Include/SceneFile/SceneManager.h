@@ -22,9 +22,9 @@ public:
 
 
 private:
-	class CScene* m_Scene_Begin		= nullptr;		// 게임 시작
-	class CScene* m_Scene_MainStage	= nullptr;		// 실제 게임 구동 스테이지 
-	class CScene* m_Scene_End		= nullptr;		// 게임 끝 
+	class CScene * m_Scene_Begin		;		// 게임 시작
+	class CScene * m_Scene_MainStage	;		// 실제 게임 구동 스테이지 
+	class CScene * m_Scene_End		;		// 게임 끝 
 
 public:
 	

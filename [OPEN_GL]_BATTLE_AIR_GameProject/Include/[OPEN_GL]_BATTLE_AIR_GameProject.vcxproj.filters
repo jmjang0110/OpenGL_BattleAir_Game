@@ -37,6 +37,9 @@
     <Filter Include="01.Core\01-2_ShaderManager\glslFIle">
       <UniqueIdentifier>{e69ddf80-900c-4780-93ff-44b6a514746a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene\02-2.Scene">
+      <UniqueIdentifier>{6cf686fa-7ca2-44c1-9a0a-db118057f3b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFile\Scene.cpp">
+      <Filter>02.Scene\02-2.Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="HeaderFile\Types.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFile\Scene.h">
+      <Filter>02.Scene\02-2.Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
