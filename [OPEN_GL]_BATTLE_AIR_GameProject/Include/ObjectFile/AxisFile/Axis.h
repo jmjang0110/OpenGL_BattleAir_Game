@@ -47,7 +47,7 @@ public:
 
 
 public:
-	void Init(GLfloat pivot = 0.0f );
+	void Init(GLfloat pivot = 0.0f);
 
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트

@@ -47,6 +47,8 @@ void CScene::UpdateOrthoMat()
 
 bool CScene::Init()
 {
+	m_MainWindowColor = glm::vec3(1.0f, 1.0f, 1.0f);
+
 	if (m_Camera == nullptr)
 	{
 		m_Camera = new CCamera;
@@ -91,7 +93,11 @@ void CScene::Collision(float fDeltaTime)
 
 void CScene::Render(float fDeltaTime)
 {
-	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(m_MainWindowColor.x, m_MainWindowColor.y, m_MainWindowColor.z, 1.0f);
+
+	glUseProgram(CShaderProgramManger::Get_ShaderProgramID());
+
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 

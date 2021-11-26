@@ -2,6 +2,14 @@
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
 
 
+CAxis::CAxis()
+{
+}
+
+CAxis::~CAxis()
+{
+}
+
 void CAxis::Update_TranslateForm(GLfloat dx, GLfloat dy, GLfloat dz)
 {
 	m_Translate_Mat = glm::mat4(1.0f);
@@ -67,7 +75,7 @@ void CAxis::InitBuffer()
 
 }
 
-void CAxis::Init(GLfloat pivot = 0.0f)
+void CAxis::Init(GLfloat pivot)
 {
 	// X
 	m_Position[0] = { pivot - m_Size, pivot , pivot };
@@ -113,6 +121,7 @@ void CAxis::Render(float fDeltaTime)
 {
 	Update_ModelTransform(fDeltaTime);
 
+	glUseProgram(CShaderProgramManger::Get_ShaderProgramID());
 	glBindVertexArray(m_VAO);
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, 0.5f, 0.5f, 0.5f);

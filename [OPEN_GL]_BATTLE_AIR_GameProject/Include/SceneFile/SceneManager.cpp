@@ -35,16 +35,19 @@ bool CSceneManager::Init()
 
 	if (m_Scene_Begin == nullptr)
 		m_Scene_Begin = new CScene;
-	m_Scene_Begin->Init();
+		m_Scene_Begin->Init();
 
 
 	if (m_Scene_MainStage == nullptr)
 		m_Scene_MainStage = new CScene;
-	m_Scene_MainStage->Init();
+		m_Scene_MainStage->Init();
+		m_Scene_MainStage->SetEnable(true);
+
 
 	if (m_Scene_End == nullptr)
 		m_Scene_End = new CScene;
-	m_Scene_End->Init();
+		m_Scene_End->Init();
+	
 
 
 

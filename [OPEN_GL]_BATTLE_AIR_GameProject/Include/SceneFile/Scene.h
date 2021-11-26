@@ -33,6 +33,11 @@ private:
 	class CAxis*	m_Axis;
 
 
+private:
+	glm::vec3 m_MainWindowColor = glm::vec3(1.0f);
+
+
+
 public:
 	bool GetEnable()
 	{
