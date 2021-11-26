@@ -18,9 +18,9 @@ private:
 
 private:
 	glm::vec3 m_Position[6];
-	glm::vec3 m_Normal[3];
-
-	GLfloat	  m_Size = 1.5f;
+	glm::vec3 m_Normal[6];
+	glm::vec3 m_Colors[6];
+	GLfloat	  m_Size = 1.0f;
 
 private:
 	// 행렬 모음 

@@ -105,9 +105,12 @@ void CCore::Collision(float fDeltaTime)
 
 void CCore::Render(float fDeltaTime)
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	CSceneManager::GetInst()->Render(fDeltaTime);
 
+	glutSwapBuffers();
+	return;
 
 }
 
@@ -162,8 +165,11 @@ GLvoid CCore::MyDrawScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	glutSwapBuffers();
+	CTimer::GetInst()->Update();
+	float fdeltatime = CTimer::GetInst()->GetDeltaTime();
+	Render(fdeltatime);
 
+	glutSwapBuffers();
 	return;
 }
 
