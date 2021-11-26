@@ -172,7 +172,7 @@ GLvoid CCore::MyTimer(GLint value)
 
 	CTimer::GetInst()->Update();
 	float fdeltatime = CTimer::GetInst()->GetDeltaTime();
-	cout << fdeltatime << endl;
+	//cout << fdeltatime << endl;
 
 
 	Input(fdeltatime);

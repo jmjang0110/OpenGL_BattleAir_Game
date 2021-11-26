@@ -40,6 +40,9 @@
     <Filter Include="02.Scene\02-2.Scene">
       <UniqueIdentifier>{6cf686fa-7ca2-44c1-9a0a-db118057f3b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object">
+      <UniqueIdentifier>{eccd36d7-194e-42bd-82c8-1a4111cb4056}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">

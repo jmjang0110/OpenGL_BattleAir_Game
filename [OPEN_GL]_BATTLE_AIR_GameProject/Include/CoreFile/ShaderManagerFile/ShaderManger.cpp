@@ -124,6 +124,8 @@ bool CShaderProgramManger::InitShader()
 	// Use Shader Program
 	glUseProgram(ShaderProgramID);
 
+	return true;
+
 
 }
 

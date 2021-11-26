@@ -39,7 +39,7 @@ void CTimer::Update()
 	QueryPerformanceCounter(&tTime);
 	m_fDeltaTime = (tTime.QuadPart - m_tTime.QuadPart)
 		/ (float)m_tSecond.QuadPart;
-	printf("%f\n", m_fDeltaTime);
+	//printf("%f\n", m_fDeltaTime);
 
 	//m_fdeltatime_Update = 0.0033333f;
 
