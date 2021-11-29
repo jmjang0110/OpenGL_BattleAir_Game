@@ -15,9 +15,9 @@ public:
 //obj 파일 관련 변수들...
 // ==========================
 private:
-	std::vector< glm::vec3 > m_outvertex;	// 정점			리스트
-	std::vector< glm::vec3 > m_outnormal;	// 법선벡터		리스트
-	std::vector< glm::vec2 > m_outuv;		// 텍스처 uv	리스트
+	static std::vector< glm::vec3 > m_outvertex;	// 정점			리스트
+	static std::vector< glm::vec3 > m_outnormal;	// 법선벡터		리스트
+	static std::vector< glm::vec2 > m_outuv;		// 텍스처 uv	리스트
 
 	std::vector< glm::vec3 > temp_vertices;
 	std::vector< glm::vec3 > temp_normals;
@@ -27,7 +27,7 @@ private:
 
 private:
 	static GLint* m_Tri_Num2;	// 삼각형 개수 
-	GLint m_Tri_Num = 1;
+	static GLint m_Tri_Num;
 
 private:
 	float sumX = 0.0, sumY = 0.0, sumZ = 0.0;

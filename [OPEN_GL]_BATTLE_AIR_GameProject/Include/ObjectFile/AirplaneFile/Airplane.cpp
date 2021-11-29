@@ -1,6 +1,12 @@
 #include "Airplane.h"
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
 
+std::vector< glm::vec3 > CAirplane::m_outvertex;
+std::vector< glm::vec3 > CAirplane::m_outnormal;
+std::vector< glm::vec2 > CAirplane::m_outuv;
+GLint* CAirplane::m_Tri_Num2;
+GLint CAirplane::m_Tri_Num = 1;
+
 CAirplane::CAirplane()
 {
 }
@@ -51,7 +57,9 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_RotateForm(-90.0f, 1.0f, 0.0f, 0.0f);
 
-	m_Tri_Num = loadObj_normalize_center(filename);
+	if(m_Tri_Num == 1)
+		m_Tri_Num = loadObj_normalize_center(filename);
+
 	m_Speed = (rand() % 20) * 0.01f + 0.005f;
 
 	InitBuffer();
