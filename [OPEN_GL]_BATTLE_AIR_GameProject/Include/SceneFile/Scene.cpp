@@ -5,6 +5,8 @@
 #include "../CoreFile/ShaderManagerFile/ShaderManger.h"
 #include "../ObjectFile/AxisFile/Axis.h"
 
+#include "../ObjectFile/AirplaneFile/Airplane.h"
+
 
 
 CScene::CScene()
@@ -51,7 +53,7 @@ bool CScene::Init()
 	if (m_Camera == nullptr)
 	{
 		m_Camera = new CCamera;
-		m_Camera->Init(glm::vec3(1.0f,1.0f,1.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
+		m_Camera->Init(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
 	}
 
 	if (m_Light == nullptr)
@@ -64,6 +66,14 @@ bool CScene::Init()
 	{
 		m_Axis = new CAxis;
 		m_Axis->Init(0.0f);
+	}
+
+	if (m_Airplane == nullptr)
+	{
+		m_Airplane = new CAirplane;
+		// Init( scale color Pivot FileName )  
+		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, 0.0f / 255.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane.obj"); 
 	}
 
 
@@ -110,6 +120,11 @@ void CScene::Render(float fDeltaTime)
 
 	if (m_Axis != nullptr)
 		m_Axis->Render(fDeltaTime);
+
+	if (m_Airplane != nullptr)
+		m_Airplane->Render(fDeltaTime);
+
+
 
 
 }

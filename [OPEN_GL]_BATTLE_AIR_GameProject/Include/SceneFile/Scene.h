@@ -33,7 +33,11 @@ private:
 	class CAxis*	m_Axis;
 
 
-
+// **************************************
+// Test For Load OBJ File Render !! 
+// **************************************
+private:
+	class CAirplane* m_Airplane;
 
 
 public:
