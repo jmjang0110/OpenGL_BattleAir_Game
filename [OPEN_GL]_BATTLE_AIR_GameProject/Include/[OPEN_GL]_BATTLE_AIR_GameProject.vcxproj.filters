@@ -52,6 +52,9 @@
     <Filter Include="03.Object\03-1.Axis">
       <UniqueIdentifier>{f699ffbd-85fb-44ec-9185-4e78fdc7ed61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object\03-2 Airplane">
+      <UniqueIdentifier>{60b72328-40b5-4f62-a209-312d88275af7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="ObjectFile\AxisFile\Axis.cpp">
       <Filter>03.Object\03-1.Axis</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\AirplaneFile\Airplane.cpp">
+      <Filter>03.Object\03-2 Airplane</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="ObjectFile\AxisFile\Axis.h">
       <Filter>03.Object\03-1.Axis</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\AirplaneFile\Airplane.h">
+      <Filter>03.Object\03-2 Airplane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

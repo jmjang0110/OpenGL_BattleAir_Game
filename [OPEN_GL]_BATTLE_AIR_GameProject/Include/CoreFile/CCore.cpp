@@ -123,6 +123,8 @@ GLvoid CCore::MyReshape(int width, int height)
 
 
 	glViewport(0, 0, width, height);
+	
+	
 	return;
 
 }
