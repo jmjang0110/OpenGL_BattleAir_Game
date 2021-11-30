@@ -17,10 +17,10 @@ CAirplane::~CAirplane()
 
 
 
-void CAirplane::Update_TranslateForm(GLfloat dx, GLfloat dy, GLfloat dz)
+void CAirplane::Update_TranslateForm(glm::vec3 translate)
 {
 	m_Translate_Mat = glm::mat4(1.0f);
-	m_Translate_Mat = glm::translate(m_Translate_Mat, glm::vec3(dx, dy, dz));
+	m_Translate_Mat = glm::translate(m_Translate_Mat, glm::vec3(translate));
 
 }
 
@@ -60,7 +60,8 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	if(m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
-	m_Speed = (rand() % 20) * 0.01f + 0.005f;
+	m_Speed = 5.0f;
+
 
 	InitBuffer();
 
@@ -68,10 +69,64 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 
 void CAirplane::Input(float fDeltaTime)
 {
+
+	// 위로 
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	{
+
+		m_Pivot.y += fDeltaTime * m_Speed;
+
+
+	}
+	
+
+	// 아래로 
+	if (GetAsyncKeyState('V') & 0x8000)
+	{
+
+		m_Pivot.y -= fDeltaTime * m_Speed;
+
+	}
+
+	// 앞으로 
+	if (GetAsyncKeyState('W') & 0x8000)
+	{
+
+		m_Pivot.z -= fDeltaTime * m_Speed;
+
+	}
+	// 뒤로 
+	if (GetAsyncKeyState('S') & 0x8000)
+	{
+
+		m_Pivot.z += fDeltaTime * m_Speed;
+
+	}
+
+	// 왼쪽으로 
+	if (GetAsyncKeyState('A') & 0x8000)
+	{
+
+		m_Pivot.x -= fDeltaTime * m_Speed;
+
+	}
+	// 오른쪽으로 
+	if (GetAsyncKeyState('D') & 0x8000)
+	{
+		m_Pivot.x += fDeltaTime * m_Speed;
+
+
+	}
+
+	
+	
+
 }
 
 int CAirplane::Update(float fDeltaTime)
 {
+	Update_TranslateForm(m_Pivot);
+
 	return 0;
 }
 
@@ -86,8 +141,8 @@ void CAirplane::Collision(float fDeltaTime)
 
 void CAirplane::Render(float fDeltaTime)
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBindVertexArray(m_VAO);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	
 	Update_ModelTransform(fDeltaTime);
 
