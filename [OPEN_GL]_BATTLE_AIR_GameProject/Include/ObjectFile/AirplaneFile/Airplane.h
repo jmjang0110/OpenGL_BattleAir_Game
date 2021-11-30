@@ -44,10 +44,13 @@ private:
 	GLuint m_VBO[2];
 
 private:
+	// 현재 위치
 	glm::vec3 m_Pivot = glm::vec3(0.0f, 0.0f, 0.0f);
+	// Airplane Color 
 	glm::vec3 m_Color;
+	// Airplane Speed 
 	GLfloat m_Speed;
-
+	
 
 private:
 	// 행렬 모음 
@@ -70,7 +73,7 @@ public:
 
 public:
 	// ** 행렬 업데이트 함수 ** 
-	void Update_TranslateForm(GLfloat dx = 0.0f, GLfloat dy = 0.0f, GLfloat dz = 0.0f);
+	void Update_TranslateForm(glm::vec3 translate);
 	void Update_RotateForm(GLfloat Time, GLfloat Axis_x = 0.0f, GLfloat Axis_y = 0.0f, GLfloat Axis_z = 1.0f);
 	void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
 	// ** 행렬 최종 함수 ** 

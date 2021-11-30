@@ -87,20 +87,38 @@ bool CScene::Init()
 void CScene::Input(float fDeltaTime)
 {
 
+	if (m_Airplane != nullptr)
+	{
+		m_Airplane->Input(fDeltaTime);
+	}
+
 }
 
 int CScene::Update(float fDeltaTime)
 {
+	if (m_Airplane != nullptr)
+	{
+		m_Airplane->Update(fDeltaTime);
+	}
+
 	return 0;
 }
 
 int CScene::LateUpdate(float fDeltaTime)
 {
+	if (m_Airplane != nullptr)
+	{
+		m_Airplane->LateUpdate(fDeltaTime);
+	}
 	return 0;
 }
 
 void CScene::Collision(float fDeltaTime)
 {
+	if (m_Airplane != nullptr)
+	{
+		m_Airplane->Collision(fDeltaTime);
+	}
 }
 
 void CScene::Render(float fDeltaTime)
