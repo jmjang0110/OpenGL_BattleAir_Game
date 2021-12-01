@@ -159,6 +159,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectFile\AirplaneFile\Airplane.cpp" />
     <ClCompile Include="ObjectFile\AxisFile\Axis.cpp" />
+    <ClCompile Include="ObjectFile\BackgroundFile\Background.cpp" />
     <ClCompile Include="ObjectFile\MonsterFile\Monster.cpp" />
     <ClCompile Include="SceneFile\Scene.cpp" />
     <ClCompile Include="SceneFile\SceneManager.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="LightFile\Light.h" />
     <ClInclude Include="ObjectFile\AirplaneFile\Airplane.h" />
     <ClInclude Include="ObjectFile\AxisFile\Axis.h" />
+    <ClInclude Include="ObjectFile\BackgroundFile\Background.h" />
     <ClInclude Include="ObjectFile\MonsterFile\Monster.h" />
     <ClInclude Include="SceneFile\Scene.h" />
     <ClInclude Include="SceneFile\SceneManager.h" />

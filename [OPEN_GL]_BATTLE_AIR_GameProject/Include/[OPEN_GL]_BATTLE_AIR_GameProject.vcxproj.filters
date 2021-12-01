@@ -58,6 +58,9 @@
     <Filter Include="03.Object\03-3.Monster">
       <UniqueIdentifier>{35ec1597-82ea-405c-8792-e889fede85fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object\03-04 Background">
+      <UniqueIdentifier>{b499e59d-6990-4304-ba8b-433ea3a18de3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -95,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="ObjectFile\MonsterFile\Monster.cpp">
       <Filter>03.Object\03-3.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\BackgroundFile\Background.cpp">
+      <Filter>03.Object\03-04 Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="ObjectFile\MonsterFile\Monster.h">
       <Filter>03.Object\03-3.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\BackgroundFile\Background.h">
+      <Filter>03.Object\03-04 Background</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
