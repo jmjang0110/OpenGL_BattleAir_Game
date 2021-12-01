@@ -74,7 +74,7 @@ bool CScene::Init()
 		m_Airplane = new CAirplane;
 		// Init( scale color Pivot FileName )  
 		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane.obj");
+			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj");
 	}
 
 	

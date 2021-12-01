@@ -34,7 +34,7 @@ bool CCore::Init(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(m_tRS.iW, m_tRS.iH);
-	glutCreateWindow("Example5");
+	glutCreateWindow("BATTLE_AIR");
 	glewExperimental = GL_TRUE;
 	glewInit();
 

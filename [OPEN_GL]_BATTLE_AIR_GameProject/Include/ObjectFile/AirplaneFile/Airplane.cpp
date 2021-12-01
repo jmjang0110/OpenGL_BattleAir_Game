@@ -156,7 +156,9 @@ void CAirplane::Render(float fDeltaTime)
 int CAirplane::loadObj_normalize_center(const char* filename)
 {
 	FILE* objFile = NULL;
-
+	static int i = 0;
+	cout << i++ << endl;
+	
 	fopen_s(&objFile, filename, "rb");
 
 	if (objFile == NULL) {
