@@ -6,6 +6,8 @@
 #include "../ObjectFile/AxisFile/Axis.h"
 
 #include "../ObjectFile/AirplaneFile/Airplane.h"
+#include "../ObjectFile/MonsterFile/Monster.h"
+
 
 
 
