@@ -3,14 +3,19 @@
 #include "../FileManagerFile/FileManager.h"
 
 GLuint CShaderProgramManger::ShaderProgramID = NULL;
+GLuint CShaderProgramManger::ShaderProgramID_Texture = NULL;
 DEFINITION_SINGLE(CShaderProgramManger);
 
 
 CShaderProgramManger::CShaderProgramManger()
 {
-	fragmentShader = -1;
-	vertexShader = -1;
+	m_fragmentShader = -1;
+	m_vertexShader = -1;
 	ShaderProgramID = -1;
+
+	m_fragmentShader_texture = -1;
+	m_vertexShader_texture = -1;
+	ShaderProgramID_Texture = -1;
 
 
 }
@@ -34,6 +39,13 @@ bool CShaderProgramManger::Init()
 		return false;
 	}
 
+	if (!InitShader_Texture())
+	{
+		cout << "Shader Program [ Texture ] Init Fail! " << endl;
+		return false;
+
+	}
+
 	return true;
 
 }
@@ -45,18 +57,18 @@ bool CShaderProgramManger::Make_VertexShaders()
 	vertexsource = m_fileManager->filetobuf("./CoreFile/ShaderManagerFile/VertexShader.glsl");
 
 	// vertex Shader 객체 생성
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, (const GLchar**)&vertexsource, NULL);
-	glCompileShader(vertexShader);
+	m_vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(m_vertexShader, 1, (const GLchar**)&vertexsource, NULL);
+	glCompileShader(m_vertexShader);
 
 	// Compile Error Check
 	GLint result;
 	GLchar errorLog[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &result);
+	glGetShaderiv(m_vertexShader, GL_COMPILE_STATUS, &result);
 
 	if (!result)
 	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, errorLog);
+		glGetShaderInfoLog(m_vertexShader, 512, NULL, errorLog);
 		cerr << "ERROR : Vertex Shader Compile Fail!\n\a" << errorLog << endl;
 
 		return false;
@@ -66,23 +78,23 @@ bool CShaderProgramManger::Make_VertexShaders()
 
 }
 
-bool CShaderProgramManger::make_FragmentShaders()
+bool CShaderProgramManger::Make_FragmentShaders()
 {
 	GLchar* fragmentsource;
 	fragmentsource = m_fileManager->filetobuf("./CoreFile/ShaderManagerFile/FragmentShader.glsl");
 
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentsource, NULL);
-	glCompileShader(fragmentShader);
+	m_fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(m_fragmentShader, 1, &fragmentsource, NULL);
+	glCompileShader(m_fragmentShader);
 
 	// Compile Error Check
 	GLint result;
 	GLchar errorLog[512];
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &result);
+	glGetShaderiv(m_fragmentShader, GL_COMPILE_STATUS, &result);
 
 	if (!result)
 	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, errorLog);
+		glGetShaderInfoLog(m_fragmentShader, 512, NULL, errorLog);
 		cerr << "ERROR : Fragment Shader Compile Fail!\n\a" << errorLog << endl;
 
 		return false;
@@ -94,15 +106,15 @@ bool CShaderProgramManger::make_FragmentShaders()
 bool CShaderProgramManger::InitShader()
 {
 	bool mVS = Make_VertexShaders();
-	bool mFS = make_FragmentShaders();
+	bool mFS = Make_FragmentShaders();
 
 	if (mVS == false || mFS == false)
 		return false;
 
 	ShaderProgramID = glCreateProgram();
 
-	glAttachShader(ShaderProgramID, vertexShader);
-	glAttachShader(ShaderProgramID, fragmentShader);
+	glAttachShader(ShaderProgramID, m_vertexShader);
+	glAttachShader(ShaderProgramID, m_fragmentShader);
 	glLinkProgram(ShaderProgramID);
 
 	GLint result;
@@ -118,14 +130,112 @@ bool CShaderProgramManger::InitShader()
 
 	// Shader Delete 
 	// 이미 링크 했으므로 삭제해도 무방하다.
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	glDeleteShader(m_vertexShader);
+	glDeleteShader(m_fragmentShader);
 
 	// Use Shader Program
 	glUseProgram(ShaderProgramID);
 
 	return true;
 
+
+}
+
+
+
+// ==============================================
+// Texture Shader Program Init
+// ==============================================
+
+
+bool CShaderProgramManger::Make_FragmentShaders_Texrure()
+{
+
+	GLchar* fragmentsource;
+	fragmentsource = m_fileManager->filetobuf("./CoreFile/ShaderManagerFile/FragmentTexture.glsl");
+
+	m_fragmentShader_texture = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(m_fragmentShader_texture, 1, &fragmentsource, NULL);
+	glCompileShader(m_fragmentShader_texture);
+
+	// Compile Error Check
+	GLint result;
+	GLchar errorLog[512];
+	glGetShaderiv(m_fragmentShader_texture, GL_COMPILE_STATUS, &result);
+
+	if (!result)
+	{
+		glGetShaderInfoLog(m_fragmentShader_texture, 512, NULL, errorLog);
+		cerr << "ERROR : Fragment Shader Texture Compile Fail!\n\a" << errorLog << endl;
+
+		return false;
+	}
+
+	return true;
+}
+
+bool CShaderProgramManger::Make_VertexShaders_Texture()
+{
+	GLchar* vertexsource;
+	vertexsource = m_fileManager->filetobuf("./CoreFile/ShaderManagerFile/VertexTexture.glsl");
+
+	// vertex Shader 객체 생성
+	m_vertexShader_texture = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(m_vertexShader_texture, 1, (const GLchar**)&vertexsource, NULL);
+	glCompileShader(m_vertexShader_texture);
+
+	// Compile Error Check
+	GLint result;
+	GLchar errorLog[512];
+	glGetShaderiv(m_vertexShader_texture, GL_COMPILE_STATUS, &result);
+
+	if (!result)
+	{
+		glGetShaderInfoLog(m_vertexShader_texture, 512, NULL, errorLog);
+		cerr << "ERROR : Vertex Shader Texture Compile Fail!\n\a" << errorLog << endl;
+
+		return false;
+	}
+
+	return true;
+}
+
+bool CShaderProgramManger::InitShader_Texture()
+{
+	bool mVS = Make_VertexShaders_Texture();
+	bool mFS = Make_FragmentShaders_Texrure();
+
+	if (mVS == false || mFS == false)
+		return false;
+
+	ShaderProgramID_Texture = glCreateProgram();
+
+	glAttachShader(ShaderProgramID_Texture, m_vertexShader_texture);
+	glAttachShader(ShaderProgramID_Texture, m_fragmentShader_texture);
+	glLinkProgram(ShaderProgramID_Texture);
+
+	GLint result;
+	glGetProgramiv(ShaderProgramID_Texture, GL_LINK_STATUS, &result);
+	GLchar errorLog[512]{ NULL };
+
+	if (!result)
+	{
+		glGetShaderInfoLog(ShaderProgramID, 512, NULL, errorLog);
+		cerr << "ERROR : Shader Program Compile Fail!! \n\a" << errorLog << endl;
+		return false;
+	}
+
+	// Shader Delete 
+	// 이미 링크 했으므로 삭제해도 무방하다.
+	glDeleteShader(m_vertexShader_texture);
+	glDeleteShader(m_fragmentShader_texture);
+
+	// Use Shader Program
+	glUseProgram(ShaderProgramID_Texture);
+
+
+
+	return true;
 
 }
 

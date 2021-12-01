@@ -131,12 +131,21 @@
     <ClInclude Include="ObjectFile\AirplaneFile\Airplane.h">
       <Filter>03.Object\03-2 Airplane</Filter>
     </ClInclude>
+    <ClInclude Include="HeaderFile\stb_image.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="CoreFile\ShaderManagerFile\FragmentShader.glsl">
       <Filter>01.Core\01-2_ShaderManager\glslFIle</Filter>
     </None>
     <None Include="CoreFile\ShaderManagerFile\VertexShader.glsl">
+      <Filter>01.Core\01-2_ShaderManager\glslFIle</Filter>
+    </None>
+    <None Include="CoreFile\ShaderManagerFile\FragmentTexture.glsl">
+      <Filter>01.Core\01-2_ShaderManager\glslFIle</Filter>
+    </None>
+    <None Include="CoreFile\ShaderManagerFile\VertexTexture.glsl">
       <Filter>01.Core\01-2_ShaderManager\glslFIle</Filter>
     </None>
   </ItemGroup>
