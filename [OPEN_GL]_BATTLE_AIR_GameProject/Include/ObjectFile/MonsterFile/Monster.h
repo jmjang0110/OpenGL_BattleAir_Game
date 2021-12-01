@@ -61,7 +61,8 @@ private:
 	// 적용할 모델 헹렬의 최종
 	glm::mat4 m_ModelMatrix_Result = glm::mat4(1.0f);
 
-
+private:
+	unsigned int m_texture;
 
 public:
 	glm::vec3 GetPivot() { return m_Pivot; }
@@ -79,7 +80,7 @@ public:
 	void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
 	// ** 행렬 최종 함수 ** 
 	void Update_ModelTransform(float fDeltaTime);
-
+	void InitTexture_1();
 
 public:
 	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename);

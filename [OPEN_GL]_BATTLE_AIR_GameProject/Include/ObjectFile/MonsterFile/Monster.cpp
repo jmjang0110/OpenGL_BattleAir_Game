@@ -1,6 +1,9 @@
 #include "Monster.h"
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
 
+#include "../../HeaderFile/stb_image.h"
+
+
 std::vector< glm::vec3 > CMonster::m_outvertex;
 std::vector< glm::vec3 > CMonster::m_outnormal;
 std::vector< glm::vec2 > CMonster::m_outuv;
@@ -48,13 +51,14 @@ void CMonster::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const
 	m_Pivot = pivot;
 	m_Color = color;
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
+	Update_TranslateForm(m_Pivot);
 
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
 	m_Speed = 0.0f;
 
-
+	InitTexture_1();
 	InitBuffer();
 
 }
@@ -86,14 +90,64 @@ void CMonster::Render(float fDeltaTime)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	Update_ModelTransform(fDeltaTime);
-
+	
+	m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f,102.0f / 255.0f);
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
 
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
 }
 
 
+
+void CMonster::InitTexture_1()
+{
+	unsigned int texture;
+	BITMAPINFO* bmp;
+	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
+
+	glGenTextures(1, &m_texture);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
+	//unsigned char* data = LoadDIBitmap("dog.bmp", &bmp);
+	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+
+	stbi_uc* data = NULL;
+	const char* filename = "./ObjectFile/MonsterFile/Gargoyle_1_Mask.jpg";
+
+	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	//cout << data << endl;
+
+
+	cout << widthImage << " " << heightImage << endl;
+
+
+
+	if (!data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+	//cout << data << endl;
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImage, heightImage, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	unsigned int tLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "outTexture");
+	glUniform1i(tLocation, 0);
+
+	int i = 0;
+	stbi_image_free(data);
+
+}
 
 
 int CMonster::loadObj_normalize_center(const char* filename)
@@ -214,7 +268,7 @@ void CMonster::InitBuffer()
 	glBindVertexArray(m_VAO);
 
 	// V B O
-	glGenBuffers(2, m_VBO);
+	glGenBuffers(3, m_VBO);
 
 	// < P O S I T O N >
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO[0]);
@@ -227,5 +281,11 @@ void CMonster::InitBuffer()
 	glBufferData(GL_ARRAY_BUFFER, m_outnormal.size() * sizeof(glm::vec3), &m_outnormal[0], GL_DYNAMIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 	glEnableVertexAttribArray(1);
+
+	// < T E X T U R E > 
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBO[2]);
+	glBufferData(GL_ARRAY_BUFFER, m_outuv.size() * sizeof(glm::vec2), &m_outuv[0], GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	glEnableVertexAttribArray(2);
 
 }

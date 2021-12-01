@@ -55,6 +55,9 @@
     <Filter Include="03.Object\03-2 Airplane">
       <UniqueIdentifier>{60b72328-40b5-4f62-a209-312d88275af7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object\03-3.Monster">
+      <UniqueIdentifier>{35ec1597-82ea-405c-8792-e889fede85fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -89,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="ObjectFile\AirplaneFile\Airplane.cpp">
       <Filter>03.Object\03-2 Airplane</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\MonsterFile\Monster.cpp">
+      <Filter>03.Object\03-3.Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="HeaderFile\stb_image.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\MonsterFile\Monster.h">
+      <Filter>03.Object\03-3.Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
