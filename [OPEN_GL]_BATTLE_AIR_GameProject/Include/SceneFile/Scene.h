@@ -26,6 +26,25 @@ private:
 	// ( false : 화면 비활성화 , true : 화면 활성화 )
 	// 화면에 대한 활성화 정보 입니다. 
 	GLboolean m_bEnable = false;
+<<<<<<< Updated upstream
+=======
+
+private:
+	class CCamera*	m_Camera;
+	class CLight*	m_Light;
+	class CAxis*	m_Axis;
+
+
+// **************************************
+// Test For Load OBJ File Render !! 
+// **************************************
+private:
+	class CAirplane* m_Airplane;
+
+private:
+	class CMonster* m_Monster;
+
+>>>>>>> Stashed changes
 public:
 	bool GetEnable()
 	{
