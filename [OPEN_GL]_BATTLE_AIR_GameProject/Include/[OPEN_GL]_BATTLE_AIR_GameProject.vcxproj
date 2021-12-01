@@ -170,6 +170,7 @@
     <ClInclude Include="CoreFile\TimerFile\Timer.h" />
     <ClInclude Include="HeaderFile\Game.h" />
     <ClInclude Include="HeaderFile\Macro.h" />
+    <ClInclude Include="HeaderFile\stb_image.h" />
     <ClInclude Include="HeaderFile\Types.h" />
     <ClInclude Include="LightFile\Light.h" />
     <ClInclude Include="ObjectFile\AirplaneFile\Airplane.h" />
@@ -179,7 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CoreFile\ShaderManagerFile\FragmentShader.glsl" />
+    <None Include="CoreFile\ShaderManagerFile\FragmentTexture.glsl" />
     <None Include="CoreFile\ShaderManagerFile\VertexShader.glsl" />
+    <None Include="CoreFile\ShaderManagerFile\VertexTexture.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

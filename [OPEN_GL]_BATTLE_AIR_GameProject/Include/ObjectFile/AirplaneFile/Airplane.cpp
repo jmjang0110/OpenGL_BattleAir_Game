@@ -1,5 +1,8 @@
 #include "Airplane.h"
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "../../HeaderFile/stb_image.h"
+
 
 std::vector< glm::vec3 > CAirplane::m_outvertex;
 std::vector< glm::vec3 > CAirplane::m_outnormal;
@@ -62,8 +65,54 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 
 	m_Speed = 5.0f;
 
-
+	InitTexture_1();
 	InitBuffer();
+
+}
+
+void CAirplane::InitTexture_1()
+{
+	unsigned int texture;
+	BITMAPINFO* bmp;
+	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
+
+	glGenTextures(1, &m_texture);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
+	//unsigned char* data = LoadDIBitmap("dog.bmp", &bmp);
+	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+
+	stbi_uc* data = NULL;
+	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
+
+	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	//cout << data << endl;
+
+
+	cout << widthImage << " " << heightImage << endl;
+
+	
+	
+	if (!data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+	//cout << data << endl;
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImage, heightImage, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	unsigned int tLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "outTexture");
+	glUniform1i(tLocation, 0);
+
+	int i = 0;
+	stbi_image_free(data);
 
 }
 
@@ -75,7 +124,6 @@ void CAirplane::Input(float fDeltaTime)
 	{
 
 		m_Pivot.y += fDeltaTime * m_Speed;
-
 
 	}
 	
@@ -145,9 +193,15 @@ void CAirplane::Render(float fDeltaTime)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	
 	Update_ModelTransform(fDeltaTime);
+	
+	m_Color = glm::vec3(1.0f, 1.0f, 1.0f);
 
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
 
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
 
@@ -270,7 +324,7 @@ void CAirplane::InitBuffer()
 	glBindVertexArray(m_VAO);
 
 	// V B O
-	glGenBuffers(2, m_VBO);
+	glGenBuffers(3, m_VBO);
 
 	// < P O S I T O N >
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO[0]);
@@ -283,5 +337,12 @@ void CAirplane::InitBuffer()
 	glBufferData(GL_ARRAY_BUFFER, m_outnormal.size() * sizeof(glm::vec3), &m_outnormal[0], GL_DYNAMIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 	glEnableVertexAttribArray(1);
+
+	// < T E X T U R E > 
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBO[2]);
+	glBufferData(GL_ARRAY_BUFFER, m_outuv.size() * sizeof(glm::vec2), &m_outuv[0], GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	glEnableVertexAttribArray(2);
+
 
 }
