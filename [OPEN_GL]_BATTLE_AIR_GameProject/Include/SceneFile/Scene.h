@@ -39,6 +39,8 @@ private:
 private:
 	class CAirplane* m_Airplane;
 	class CMonster* m_Monster;
+	class CBackground* m_Background;
+	
 
 
 public:

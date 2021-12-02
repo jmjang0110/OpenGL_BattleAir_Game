@@ -20,21 +20,17 @@ using namespace std;
 
 
 // openGL library headers
-#include <gl/glew.h>
+#include <gl/glew.h>		//--- 필요한 헤더파일 include
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-
-#include <gl/glm/glm.hpp>
-#include <gl/glm/ext.hpp>
-#include <gl/glm/gtc/matrix_transform.hpp>
-
-#include <gl/glut.h>
+#include<glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 
 // User defined headers 
 #include "../HeaderFile/Macro.h"
 #include "../HeaderFile/Types.h"
-
 
 
 

@@ -7,6 +7,7 @@
 
 #include "../ObjectFile/AirplaneFile/Airplane.h"
 #include "../ObjectFile/MonsterFile/Monster.h"
+#include "../ObjectFile/BackgroundFile/Background.h"
 
 
 
@@ -70,6 +71,13 @@ bool CScene::Init()
 		m_Axis->Init(0.0f);
 	}
 
+	if (m_Background == nullptr)
+	{
+		m_Background = new CBackground;
+		m_Background->Init(glm::vec3(10.0f, 10.0f, 10.0f), glm::vec3(1.0,1.0,1.0),
+			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/BackgroundFile/sphere.obj");
+
+	}
 	
 	if (m_Airplane == nullptr)
 	{
@@ -79,6 +87,7 @@ bool CScene::Init()
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj");
 	}
 
+	
 	if (m_Monster == nullptr)
 	{
 		m_Monster = new CMonster;
@@ -86,8 +95,6 @@ bool CScene::Init()
 			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/monster.obj");
 
 	}
-	
-	
 
 
 	return true;
@@ -159,7 +166,8 @@ void CScene::Render(float fDeltaTime)
 	if (m_Monster != nullptr)
 		m_Monster->Render(fDeltaTime);
 
-
+	if (m_Background != nullptr)
+		m_Background->Render(fDeltaTime);
 
 
 }
