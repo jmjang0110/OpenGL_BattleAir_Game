@@ -23,10 +23,12 @@ using namespace std;
 #include <gl/glew.h>		//--- 필요한 헤더파일 include
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include<glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
+#include <gl/glm/glm.hpp>
+#include <gl/glm/ext.hpp>
+#include <gl/glm/gtc/matrix_transform.hpp>
+
+#include <gl/glut.h>
 
 // User defined headers 
 #include "../HeaderFile/Macro.h"

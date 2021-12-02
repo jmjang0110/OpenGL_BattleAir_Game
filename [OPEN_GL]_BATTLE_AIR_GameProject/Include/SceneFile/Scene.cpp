@@ -56,13 +56,13 @@ bool CScene::Init()
 	if (m_Camera == nullptr)
 	{
 		m_Camera = new CCamera;
-		m_Camera->Init(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
+		m_Camera->Init(glm::vec3(2.0f, -2.0f, 2.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
 	}
 
 	if (m_Light == nullptr)
 	{
 		m_Light = new CLight;
-		m_Light->Init(glm::vec3(0.0f, 3.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		m_Light->Init(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	}
 
 	if (m_Axis == nullptr)
