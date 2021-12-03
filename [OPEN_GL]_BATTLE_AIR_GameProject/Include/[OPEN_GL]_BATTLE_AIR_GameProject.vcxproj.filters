@@ -61,6 +61,12 @@
     <Filter Include="03.Object\03-04 Background">
       <UniqueIdentifier>{b499e59d-6990-4304-ba8b-433ea3a18de3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object\03-5 Triangle">
+      <UniqueIdentifier>{ed630fd9-eb1f-419d-9e79-2c666a36cc09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Object\03-6 Floor">
+      <UniqueIdentifier>{68a9beda-4655-468e-b018-d429f140d133}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -101,6 +107,12 @@
     </ClCompile>
     <ClCompile Include="ObjectFile\BackgroundFile\Background.cpp">
       <Filter>03.Object\03-04 Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\FloorFile\Floor.cpp">
+      <Filter>03.Object\03-6 Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\TriangleFile\Triangle.cpp">
+      <Filter>03.Object\03-5 Triangle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +163,12 @@
     </ClInclude>
     <ClInclude Include="ObjectFile\BackgroundFile\Background.h">
       <Filter>03.Object\03-04 Background</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\FloorFile\Floor.h">
+      <Filter>03.Object\03-6 Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\TriangleFile\Triangle.h">
+      <Filter>03.Object\03-5 Triangle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

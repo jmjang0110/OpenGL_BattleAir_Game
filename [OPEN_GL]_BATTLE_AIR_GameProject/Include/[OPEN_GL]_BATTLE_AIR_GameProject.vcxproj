@@ -162,7 +162,9 @@
     <ClCompile Include="ObjectFile\BackgroundFile\Background.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjectFile\FloorFile\Floor.cpp" />
     <ClCompile Include="ObjectFile\MonsterFile\Monster.cpp" />
+    <ClCompile Include="ObjectFile\TriangleFile\Triangle.cpp" />
     <ClCompile Include="SceneFile\Scene.cpp" />
     <ClCompile Include="SceneFile\SceneManager.cpp" />
   </ItemGroup>
@@ -182,7 +184,9 @@
     <ClInclude Include="ObjectFile\BackgroundFile\Background.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="ObjectFile\FloorFile\Floor.h" />
     <ClInclude Include="ObjectFile\MonsterFile\Monster.h" />
+    <ClInclude Include="ObjectFile\TriangleFile\Triangle.h" />
     <ClInclude Include="SceneFile\Scene.h" />
     <ClInclude Include="SceneFile\SceneManager.h" />
   </ItemGroup>

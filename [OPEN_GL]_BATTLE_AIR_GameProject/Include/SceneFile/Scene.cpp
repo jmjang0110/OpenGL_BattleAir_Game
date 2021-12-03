@@ -8,8 +8,8 @@
 #include "../ObjectFile/AirplaneFile/Airplane.h"
 #include "../ObjectFile/MonsterFile/Monster.h"
 #include "../ObjectFile/BackgroundFile/Background.h"
-
-
+#include "../ObjectFile/FloorFile/Floor.h"
+#include "../ObjectFile/TriangleFile/Triangle.h"
 
 
 CScene::CScene()
@@ -56,13 +56,13 @@ bool CScene::Init()
 	if (m_Camera == nullptr)
 	{
 		m_Camera = new CCamera;
-		m_Camera->Init(glm::vec3(2.0f, -2.0f, 2.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
+		m_Camera->Init(glm::vec3(0.01f, 2.0f, 5.0f), glm::vec3(0.0f,2.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
 	}
 
 	if (m_Light == nullptr)
 	{
 		m_Light = new CLight;
-		m_Light->Init(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		m_Light->Init(glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	}
 
 	if (m_Axis == nullptr)
@@ -78,7 +78,25 @@ bool CScene::Init()
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/BackgroundFile/sphere.obj");
 
 	}
-	
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (m_Floor[i] == nullptr)
+		{
+			m_Floor[i] = new CFloor;
+			m_Floor[i]->Init("./ObjectFile/FloorFile/grass.jpg");
+
+		}
+
+	}
+
+	//if (m_Floor_test == nullptr)
+	//{
+	//	m_Floor_test = new CFloor;
+	//	m_Floor_test->Init();
+
+	//}
+
 	if (m_Airplane == nullptr)
 	{
 		m_Airplane = new CAirplane;
@@ -87,7 +105,6 @@ bool CScene::Init()
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj");
 	}
 
-	
 	if (m_Monster == nullptr)
 	{
 		m_Monster = new CMonster;
@@ -116,6 +133,38 @@ int CScene::Update(float fDeltaTime)
 	{
 		m_Airplane->Update(fDeltaTime);
 	}
+
+
+	// ====================================================================
+	// F L O O R 배치 ( 1 ~ 4 사분면 ) 위치로 Floor 객체 이동 - 처음 생성시 (0.0f , 0.0f , 0.0f) 위치
+	// ====================================================================
+
+	if (m_Floor[0] != nullptr)
+	{
+		GLfloat size = m_Floor[0]->GetSize();
+		m_Floor[0]->Update_TranslateForm(size, 0.0f, -size); // 1 사분면 
+
+	}
+	if (m_Floor[1] != nullptr)
+	{
+		GLfloat size = m_Floor[1]->GetSize();
+		m_Floor[1]->Update_TranslateForm(-size, 0.0f, -size); // 2 사분면 
+
+	}
+	if (m_Floor[2] != nullptr)
+	{
+		GLfloat size = m_Floor[2]->GetSize();
+		m_Floor[2]->Update_TranslateForm(-size, 0.0f, size); // 3 사분면 
+
+	}
+	if (m_Floor[3] != nullptr)
+	{
+		GLfloat size = m_Floor[3]->GetSize();
+		m_Floor[3]->Update_TranslateForm(size, 0.0f, size); // 4 사분면 
+
+	}
+	// ====================================================================
+	// ====================================================================
 
 	return 0;
 }
@@ -158,6 +207,14 @@ void CScene::Render(float fDeltaTime)
 	if (m_Axis != nullptr)
 		m_Axis->Render(fDeltaTime);
 
+	for (int i = 0; i < 4; ++i)
+	{
+		if (m_Floor[i] != nullptr)
+			m_Floor[i]->Render();
+	}
+
+	//if (m_Floor_test != nullptr)
+	//	m_Floor_test->Render();
 
 	if (m_Airplane != nullptr)
 		m_Airplane->Render(fDeltaTime);
@@ -171,3 +228,5 @@ void CScene::Render(float fDeltaTime)
 
 
 }
+
+

@@ -90,6 +90,7 @@ void CAirplane::InitTexture_1()
 
 	stbi_uc* data = NULL;
 	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
+	
 
 	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	//cout << data << endl;

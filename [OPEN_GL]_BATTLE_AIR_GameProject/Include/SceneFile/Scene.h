@@ -41,6 +41,11 @@ private:
 	class CMonster* m_Monster;
 	class CBackground* m_Background;
 	
+	
+	class CFloor* m_Floor[4]; // Floor 을 4개 생성하고 각 (1~4)사분면에 배치 
+	class CFloor* m_Floor_test;
+	class CTriangle* m_triangle;
+
 
 
 public:
