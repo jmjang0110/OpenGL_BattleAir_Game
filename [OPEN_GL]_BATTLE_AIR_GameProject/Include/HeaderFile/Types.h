@@ -14,3 +14,9 @@ typedef struct _tagResolution
 }RESOLUTION, * PRESOLUTION;
 
 
+typedef enum RENDER_TYPE
+{
+	LINE,
+	LINE_LOOP,
+	TRIANGLES
+}RENDER_TYPE, * PRENDER_TYPE;

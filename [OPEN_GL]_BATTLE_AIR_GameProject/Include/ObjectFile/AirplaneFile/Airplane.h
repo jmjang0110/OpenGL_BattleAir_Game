@@ -39,6 +39,8 @@ private:
 // ==========================
 // ==========================
 
+
+
 private:
 	GLuint m_VAO;
 	GLuint m_VBO[3];
@@ -52,6 +54,11 @@ private:
 	glm::vec3 m_Color;
 	// Airplane Speed 
 	GLfloat m_Speed;
+
+private:
+	// collide box [ *** 충돌 박스 *** ]
+	class Chexahedron* m_CollideBox;
+
 	
 
 private:

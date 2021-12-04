@@ -2,6 +2,8 @@
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "../../HeaderFile/stb_image.h"
+#include "../../ObjectFile/HexaheronFile/hexahedron.h"
+
 
 
 std::vector< glm::vec3 > CAirplane::m_outvertex;
@@ -54,6 +56,9 @@ void CAirplane::Update_ModelTransform(float fDeltaTime)
 
 void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
 {
+	// *** 충돌 박스 초기화 ***
+	m_CollideBox = new Chexahedron;
+	m_CollideBox->Init(2.0f, 2.0f, 1.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
 
 	m_Pivot = pivot;
 	m_Color = color;
@@ -202,6 +207,10 @@ void CAirplane::Render(float fDeltaTime)
 
 
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
+
+	if (m_CollideBox != nullptr)
+		m_CollideBox->Render();
+
 
 }
 

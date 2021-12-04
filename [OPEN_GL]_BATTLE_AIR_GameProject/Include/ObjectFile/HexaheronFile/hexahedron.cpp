@@ -166,9 +166,11 @@ void Chexahedron::Render()
 
 	for (int i = 0; i < 12; ++i)
 	{
+		glLineWidth(2.0f);
+		
 		if (m_Tri[i] != nullptr)
-			m_Tri[i]->Render();
-
+			m_Tri[i]->Render(RENDER_TYPE::LINE_LOOP);
+		
 	}
 
 
