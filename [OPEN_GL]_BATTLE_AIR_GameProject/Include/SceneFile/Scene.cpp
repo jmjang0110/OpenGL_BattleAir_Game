@@ -52,11 +52,18 @@ void CScene::UpdateOrthoMat()
 
 bool CScene::Init()
 {
+	if (m_Airplane == nullptr)
+	{
+		m_Airplane = new CAirplane;
+		// Init( scale color Pivot FileName )  
+		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj");
+	}
 
 	if (m_Camera == nullptr)
 	{
 		m_Camera = new CCamera;
-		m_Camera->Init(glm::vec3(0.01f, -12.0f, -55.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		m_Camera->Init(glm::vec3(0.0f, -12.0f, -15.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	}
 	if (m_Light == nullptr)
@@ -97,13 +104,7 @@ bool CScene::Init()
 
 	//}
 
-	if (m_Airplane == nullptr)
-	{
-		m_Airplane = new CAirplane;
-		// Init( scale color Pivot FileName )  
-		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj");
-	}
+	
 
 	if (m_Monster == nullptr)
 	{
@@ -125,15 +126,29 @@ void CScene::Input(float fDeltaTime)
 		m_Airplane->Input(fDeltaTime);
 	}
 
+	if (m_Camera != nullptr)
+	{
+		m_Camera->Input(fDeltaTime);
+	}
+
 }
 
 int CScene::Update(float fDeltaTime)
 {
+
 	if (m_Airplane != nullptr)
 	{
 		m_Airplane->Update(fDeltaTime);
 	}
 
+	if (m_Camera != nullptr)
+	{
+
+		m_Camera->UPdate_Airplane_Pivot(m_Airplane->GetPivot());
+		//m_Camera->UPdate_Camera_Mat_From_Airplane(m_Airplane->GetTranslateMat(),m_Airplane->GetRotateMat(),m_Airplane->GetSacaleMat());
+
+		m_Camera->Update(fDeltaTime);
+	}
 
 	// ====================================================================
 	// F L O O R 배치 ( 1 ~ 4 사분면 ) 위치로 Floor 객체 이동 - 처음 생성시 (0.0f , 0.0f , 0.0f) 위치
@@ -188,8 +203,6 @@ void CScene::Collision(float fDeltaTime)
 
 void CScene::Render(float fDeltaTime)
 {
-	
-	
 	
 	UpdateProjectionMat();
 

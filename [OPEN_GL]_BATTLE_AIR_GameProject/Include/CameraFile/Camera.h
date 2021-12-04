@@ -12,20 +12,28 @@ public:
 
 private:
 	// 카메라 관련 변수
-	glm::vec3		m_cameraPos				= glm::vec3();	//--- 카메라 위치
-	glm::vec3		m_cameraDirection		= glm::vec3();	//--- 카메라 바라보는 방향
-	glm::vec3		m_cameraUp				= glm::vec3();  //--- 카메라 위쪽 방향
+	glm::vec3		m_cameraPos = glm::vec3();	//--- 카메라 위치
+	glm::vec3		m_cameraDirection = glm::vec3();	//--- 카메라 바라보는 방향
+	glm::vec3		m_cameraUp = glm::vec3();  //--- 카메라 위쪽 방향
 
-	glm::mat4		m_View					= glm::mat4(1.0f);
+	glm::mat4 m_Translate_Mat = glm::mat4(1.0f);
+	glm::mat4 m_Rotate_Mat = glm::mat4(1.0f);
+	glm::mat4 m_Scale_Mat = glm::mat4(1.0f);
 
+	glm::mat4 m_View = glm::mat4(1.0f);
+	glm::mat4 m_View_Mat_Result = glm::mat4(1.0f);
+	
 
 private:
 	friend class CLight;
 
 
 public:
-	void UpdateCameraMat(float fDeltaTime);
+	void UPdate_Airplane_Pivot(glm::vec3 air_pivot);
 
+	void UPdate_Camera_Mat_From_Airplane(glm::mat4 trans, glm::mat4 rotate, glm::mat4 scale);
+
+	void UpdateCameraMat(float fDeltaTime);
 
 
 public:
