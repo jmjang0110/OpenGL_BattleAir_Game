@@ -3,6 +3,8 @@
 //#include "SceneManager.h"
 //#include "ShaderManger.h"
 
+int i = 0;
+
 #include "CCore.h"
 #include "TimerFile/Timer.h"
 #include "../SceneFile/SceneManager.h"
