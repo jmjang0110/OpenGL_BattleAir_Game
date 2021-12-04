@@ -46,6 +46,8 @@ private:
 private:
 	// 현재 위치
 	glm::vec3 m_Pivot = glm::vec3(0.0f, 0.0f, 0.0f);
+	// dir(보고 있는) 위치
+	glm::vec3 m_Dir = glm::vec3(0.0f, 0.0f, 2.0f);
 	// Airplane Color 
 	glm::vec3 m_Color;
 	// Airplane Speed 
