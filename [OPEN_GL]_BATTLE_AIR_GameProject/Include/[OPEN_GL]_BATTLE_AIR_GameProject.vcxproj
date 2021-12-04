@@ -163,6 +163,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjectFile\FloorFile\Floor.cpp" />
+    <ClCompile Include="ObjectFile\HexaheronFile\hexahedron.cpp" />
     <ClCompile Include="ObjectFile\MonsterFile\Monster.cpp" />
     <ClCompile Include="ObjectFile\TriangleFile\Triangle.cpp" />
     <ClCompile Include="SceneFile\Scene.cpp" />
@@ -185,6 +186,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjectFile\FloorFile\Floor.h" />
+    <ClInclude Include="ObjectFile\HexaheronFile\hexahedron.h" />
     <ClInclude Include="ObjectFile\MonsterFile\Monster.h" />
     <ClInclude Include="ObjectFile\TriangleFile\Triangle.h" />
     <ClInclude Include="SceneFile\Scene.h" />

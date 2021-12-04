@@ -1,6 +1,7 @@
 
 
 #include "CoreFile/CCore.h"
+
 // 윈도우 창 화면 색깔 
 glm::vec3 g_MainWindowColor = glm::vec3(1.0f, 1.0f, 1.0f);
 
@@ -17,6 +18,8 @@ GLvoid Myglut_DrawScene();
 GLvoid Myglut_Timer(GLint value);
 
 GLvoid MyglutFuncInit();
+
+
 
 // =====================================================
 // 게임을 초기화 한 후 구동합니다. (Init)->(Run)->(Delete)

@@ -58,14 +58,17 @@
     <Filter Include="03.Object\03-3.Monster">
       <UniqueIdentifier>{35ec1597-82ea-405c-8792-e889fede85fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Object\03-04 Background">
-      <UniqueIdentifier>{b499e59d-6990-4304-ba8b-433ea3a18de3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Object\03-5 Triangle">
       <UniqueIdentifier>{ed630fd9-eb1f-419d-9e79-2c666a36cc09}</UniqueIdentifier>
     </Filter>
     <Filter Include="03.Object\03-6 Floor">
       <UniqueIdentifier>{68a9beda-4655-468e-b018-d429f140d133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Object\03-7 Hexahedron">
+      <UniqueIdentifier>{e34ad857-fff8-4704-ac6d-6de0247c7c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Object\03-4 Background">
+      <UniqueIdentifier>{b499e59d-6990-4304-ba8b-433ea3a18de3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,13 +109,16 @@
       <Filter>03.Object\03-3.Monster</Filter>
     </ClCompile>
     <ClCompile Include="ObjectFile\BackgroundFile\Background.cpp">
-      <Filter>03.Object\03-04 Background</Filter>
+      <Filter>03.Object\03-4 Background</Filter>
     </ClCompile>
     <ClCompile Include="ObjectFile\FloorFile\Floor.cpp">
       <Filter>03.Object\03-6 Floor</Filter>
     </ClCompile>
     <ClCompile Include="ObjectFile\TriangleFile\Triangle.cpp">
       <Filter>03.Object\03-5 Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\HexaheronFile\hexahedron.cpp">
+      <Filter>03.Object\03-7 Hexahedron</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,13 +168,16 @@
       <Filter>03.Object\03-3.Monster</Filter>
     </ClInclude>
     <ClInclude Include="ObjectFile\BackgroundFile\Background.h">
-      <Filter>03.Object\03-04 Background</Filter>
+      <Filter>03.Object\03-4 Background</Filter>
     </ClInclude>
     <ClInclude Include="ObjectFile\FloorFile\Floor.h">
       <Filter>03.Object\03-6 Floor</Filter>
     </ClInclude>
     <ClInclude Include="ObjectFile\TriangleFile\Triangle.h">
       <Filter>03.Object\03-5 Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\HexaheronFile\hexahedron.h">
+      <Filter>03.Object\03-7 Hexahedron</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

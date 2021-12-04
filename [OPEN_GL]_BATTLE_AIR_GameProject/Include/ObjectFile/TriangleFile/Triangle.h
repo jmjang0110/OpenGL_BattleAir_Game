@@ -7,17 +7,8 @@
 class CTriangle
 {
 public:
-	CTriangle()
-	{
-
-	}
-	~CTriangle()
-	{
-		//m_bEnable = GL_TRUE;
-
-	}
-
-
+	CTriangle();
+	~CTriangle();
 
 private:
 	GLuint m_VAO;
@@ -54,43 +45,32 @@ public:
 	void InitTexture_1(const char* filepath);
 
 	void InitBuffer();
-	
-public:
 
+public:
 	// 초기화 ( 위치 + 색 + Buffer 등록 )
 	void Init(glm::vec3 Pos0, glm::vec3 Pos1, glm::vec3 Pos2,
 		GLfloat R, GLfloat G, GLfloat B, glm::vec3 Normal1, glm::vec3 Normal2, glm::vec3 Normal3,
-		glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3,const char * filepath);
+		glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3, const char* filepath);
+
 	void InitTexture(glm::vec2 Pos0, glm::vec2 Pos1, glm::vec2 Pos2);
-	
 	//  삼각형의 0,1,2 위치 값을 받습니다. 
 	void InitPosition(glm::vec3 Pos0, glm::vec3 Pos1, glm::vec3 Pos2);
-	
-
 	void InitNormal(glm::vec3 Nor0, glm::vec3 Nor1, glm::vec3 Nor2);
 
-
-		// 삼각형의 R G B 색을 설정합니다. 
-		void InitColor(GLfloat R, GLfloat G, GLfloat B);
-
-		// 이동 행렬 업데이트 
-		void Update_TranslateForm(GLfloat dx = 0.0f, GLfloat dy = 0.0f, GLfloat dz = 0.0f);
-
-		// 회전 행렬 업데이트
-		void Update_RotateForm(GLfloat Time, GLfloat Axis_x = 0.0f, GLfloat Axis_y = 0.0f, GLfloat Axis_z = 1.0f);
-
-
-		// 신축 행렬 업데이트 
-		void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
-
-
-		// 이동 / 회전 / 신축 의 통합 행렬 업데이트 ( modelTransform 에 최종 삽입 )
-		void Update_ModelTransform();
-	
+	// 삼각형의 R G B 색을 설정합니다. 
+	void InitColor(GLfloat R, GLfloat G, GLfloat B);
+	// 이동 행렬 업데이트 
+	void Update_TranslateForm(GLfloat dx = 0.0f, GLfloat dy = 0.0f, GLfloat dz = 0.0f);
+	// 회전 행렬 업데이트
+	void Update_RotateForm(GLfloat Time, GLfloat Axis_x = 0.0f, GLfloat Axis_y = 0.0f, GLfloat Axis_z = 1.0f);
+	// 신축 행렬 업데이트 
+	void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
+	// 이동 / 회전 / 신축 의 통합 행렬 업데이트 ( modelTransform 에 최종 삽입 )
+	void Update_ModelTransform();
 
 public:
 
 	void Render();
-	
+
 };
 

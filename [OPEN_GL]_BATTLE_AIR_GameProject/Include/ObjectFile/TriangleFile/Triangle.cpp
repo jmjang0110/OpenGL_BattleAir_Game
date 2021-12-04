@@ -3,7 +3,15 @@
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
 
 
-void CTriangle::InitTexture_1(const char * filepath)
+CTriangle::CTriangle()
+{
+}
+
+CTriangle::~CTriangle()
+{
+}
+
+void CTriangle::InitTexture_1(const char* filepath)
 {
 	unsigned int texture;
 	BITMAPINFO* bmp;
@@ -76,7 +84,7 @@ void CTriangle::InitBuffer()
 }
 
 void CTriangle::Init(glm::vec3 Pos0, glm::vec3 Pos1, glm::vec3 Pos2, GLfloat R, GLfloat G, GLfloat B, glm::vec3 Normal1, glm::vec3 Normal2, glm::vec3 Normal3
-, glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3, const char* filepath)
+	, glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3, const char* filepath)
 {
 	InitPosition(Pos0, Pos1, Pos2);
 	InitColor(R, G, B);
