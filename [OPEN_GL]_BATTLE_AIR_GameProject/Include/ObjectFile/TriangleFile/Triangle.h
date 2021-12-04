@@ -70,7 +70,7 @@ public:
 
 public:
 
-	void Render();
+	void Render(RENDER_TYPE renderType);
 
 };
 

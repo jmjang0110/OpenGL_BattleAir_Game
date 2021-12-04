@@ -123,7 +123,7 @@ void CScene::Input(float fDeltaTime)
 
 	if (m_Airplane != nullptr)
 	{
-		m_Airplane->Input(fDeltaTime);
+		//m_Airplane->Input(fDeltaTime);
 	}
 
 	if (m_Camera != nullptr)
@@ -144,7 +144,7 @@ int CScene::Update(float fDeltaTime)
 	if (m_Camera != nullptr)
 	{
 
-		m_Camera->UPdate_Airplane_Pivot(m_Airplane->GetPivot());
+		//m_Camera->UPdate_Airplane_Pivot(m_Airplane->GetPivot());
 		//m_Camera->UPdate_Camera_Mat_From_Airplane(m_Airplane->GetTranslateMat(),m_Airplane->GetRotateMat(),m_Airplane->GetSacaleMat());
 
 		m_Camera->Update(fDeltaTime);

@@ -173,7 +173,7 @@ void CTriangle::Update_ModelTransform()
 
 }
 
-void CTriangle::Render()
+void CTriangle::Render(RENDER_TYPE renderType )
 {
 	if (m_bEnable == GL_FALSE)
 		return;
@@ -185,7 +185,13 @@ void CTriangle::Render()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+	if(renderType == RENDER_TYPE::TRIANGLES)
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+	else if(renderType == RENDER_TYPE::LINE)
+		glDrawElements(GL_LINE, 3, GL_UNSIGNED_INT, 0);
+	else if (renderType == RENDER_TYPE::LINE_LOOP)
+		glDrawElements(GL_LINE_LOOP, 3, GL_UNSIGNED_INT, 0);
+
 	//glDrawArrays(GL_POLYGON, 0, 3);
 
 

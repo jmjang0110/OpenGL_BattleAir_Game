@@ -116,8 +116,8 @@ void CFloor::Render()
 
 	if (m_Tri[0] != nullptr && m_Tri[1] != nullptr)
 	{
-		m_Tri[0]->Render();
-		m_Tri[1]->Render();
+		m_Tri[0]->Render(RENDER_TYPE::TRIANGLES);
+		m_Tri[1]->Render(RENDER_TYPE::TRIANGLES);
 	}
 	
 }
