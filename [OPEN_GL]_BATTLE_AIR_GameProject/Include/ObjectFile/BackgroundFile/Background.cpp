@@ -114,7 +114,6 @@ void CBackground::Render(float fDeltaTime)
 }
 
 
-
 void CBackground::InitTexture_1()
 {
 	unsigned int texture;
@@ -134,7 +133,7 @@ void CBackground::InitTexture_1()
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 
 	stbi_uc* data = NULL;
-	const char* filename = "./ObjectFile/BackgroundFile/back2.jpg";
+	const char* filename = "./ObjectFile/BackgroundFile/back3.jpg";
 
 	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	//cout << data << endl;
