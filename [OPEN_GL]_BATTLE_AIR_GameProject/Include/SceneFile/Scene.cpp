@@ -33,7 +33,7 @@ CScene::~CScene()
 void CScene::UpdateProjectionMat()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
-	projection = glm::perspective(glm::radians(45.0f), (float)WINDOW_SIZE_WIDTH / (float)WINDOW_SIZE_HEIGHT, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), (float)WINDOW_SIZE_WIDTH / (float)WINDOW_SIZE_HEIGHT, 0.1f, 1000.0f);
 	projection = glm::translate(projection, glm::vec3(0.0, 0.0, -2.0)); //--- 공간을 약간 뒤로 미뤄줌
 	unsigned int projectionLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "projectionTransform"); //--- 투영 변환 값 설정
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
@@ -56,9 +56,9 @@ bool CScene::Init()
 	if (m_Camera == nullptr)
 	{
 		m_Camera = new CCamera;
-		m_Camera->Init(glm::vec3(0.01f, 2.0f, 5.0f), glm::vec3(0.0f,2.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
-	}
+		m_Camera->Init(glm::vec3(0.01f, -10.0f, 5.0f), glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
+	}
 	if (m_Light == nullptr)
 	{
 		m_Light = new CLight;
@@ -74,7 +74,7 @@ bool CScene::Init()
 	if (m_Background == nullptr)
 	{
 		m_Background = new CBackground;
-		m_Background->Init(glm::vec3(10.0f, 10.0f, 10.0f), glm::vec3(1.0,1.0,1.0),
+		m_Background->Init(glm::vec3(100.0f, 100.0f, 100.0f), glm::vec3(1.0,1.0,1.0),
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/BackgroundFile/sphere.obj");
 
 	}

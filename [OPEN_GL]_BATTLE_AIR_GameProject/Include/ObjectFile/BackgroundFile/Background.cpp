@@ -59,6 +59,7 @@ void CBackground::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, co
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_TranslateForm(m_Pivot);
 
+
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
@@ -74,6 +75,7 @@ void CBackground::Input(float fDeltaTime)
 
 int CBackground::Update(float fDeltaTime)
 {
+	Update_RotateForm(fDeltaTime, 0.0f, 1.0f, 0.0f);
 	Update_TranslateForm(m_Pivot);
 
 
