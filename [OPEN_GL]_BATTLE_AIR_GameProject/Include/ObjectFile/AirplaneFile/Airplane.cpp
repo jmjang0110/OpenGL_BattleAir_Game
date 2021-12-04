@@ -167,9 +167,6 @@ void CAirplane::Input(float fDeltaTime)
 
 	}
 
-	
-	
-
 }
 
 int CAirplane::Update(float fDeltaTime)

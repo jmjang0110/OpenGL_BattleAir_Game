@@ -73,6 +73,12 @@ public:
 	void InitBuffer();
 
 public:
+	// ** 이동행렬 반환 함수 **
+	glm::mat4 GetTranslateMat() { return m_Translate_Mat; }
+	glm::mat4 GetRotateMat() { return m_Rotate_Mat; }
+	glm::mat4 GetSacaleMat() { return m_Scale_Mat; }
+
+public:
 	// ** 행렬 업데이트 함수 ** 
 	void Update_TranslateForm(glm::vec3 translate);
 	void Update_RotateForm(GLfloat Time, GLfloat Axis_x = 0.0f, GLfloat Axis_y = 0.0f, GLfloat Axis_z = 1.0f);
