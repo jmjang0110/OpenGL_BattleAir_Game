@@ -23,7 +23,7 @@ private:
 
 private:
 	class CTriangle* m_Tri[2]; 
-	GLfloat m_Floor_Size = 5.0f;
+	GLfloat m_Floor_Size = 500.0f;
 
 private:
 	// 행렬 모음 

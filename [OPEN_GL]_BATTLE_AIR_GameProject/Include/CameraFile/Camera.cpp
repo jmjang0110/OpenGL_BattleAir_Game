@@ -50,7 +50,7 @@ void CCamera::Input(float fDeltaTime)
 	// x°ª + 
 	if (GetAsyncKeyState('I') & 0x8000)
 	{
-		cout << "camer input in" << endl;
+		//cout << "camer input in" << endl;
 
 		m_cameraPos.x += fDeltaTime * 5.0f;
 	}
@@ -79,7 +79,7 @@ void CCamera::Input(float fDeltaTime)
 	{
 		m_cameraPos.z -= fDeltaTime * 5.0f;
 	}
-	cout << "camer input in" << endl;
+	//cout << "camer input in" << endl;
 }
 
 

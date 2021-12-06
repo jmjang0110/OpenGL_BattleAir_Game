@@ -50,7 +50,7 @@ void CScene::UpdateOrthoMat()
 
 }
 
-bool CScene::Init()
+void CScene::Init_MainStage(SCENE_TYPE type)
 {
 	if (m_Airplane == nullptr)
 	{
@@ -81,7 +81,7 @@ bool CScene::Init()
 	if (m_Background == nullptr)
 	{
 		m_Background = new CBackground;
-		m_Background->Init(glm::vec3(100.0f, 100.0f, 100.0f), glm::vec3(1.0,1.0,1.0),
+		m_Background->Init(glm::vec3(500.0f, 500.0f, 500.0f), glm::vec3(1.0, 1.0, 1.0),
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/BackgroundFile/sphere.obj");
 
 	}
@@ -97,15 +97,6 @@ bool CScene::Init()
 
 	}
 
-	//if (m_Floor_test == nullptr)
-	//{
-	//	m_Floor_test = new CFloor;
-	//	m_Floor_test->Init();
-
-	//}
-
-	
-
 	if (m_Monster == nullptr)
 	{
 		m_Monster = new CMonster;
@@ -113,6 +104,40 @@ bool CScene::Init()
 			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/monster.obj");
 
 	}
+}
+
+void CScene::Init_BeginStage(SCENE_TYPE type)
+{
+}
+
+void CScene::Init_EndStage(SCENE_TYPE type)
+{
+}
+
+bool CScene::Init(SCENE_TYPE type)
+{
+	switch (type)
+	{
+	case NONE:
+		break;
+	case BEGIN:
+		Init_BeginStage(type);
+		break;
+	case MAIN_STAGE:
+		Init_MainStage(type);
+		break;
+	case END:
+		Init_EndStage(type);
+
+		break;
+	default:
+		break;
+	}
+	if (type == SCENE_TYPE::MAIN_STAGE)
+	{
+	
+	}
+	
 
 
 	return true;

@@ -1,7 +1,8 @@
 #include "Monster.h"
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
-
 #include "../../HeaderFile/stb_image.h"
+#include "../HexaheronFile/hexahedron.h"
+
 
 
 std::vector< glm::vec3 > CMonster::m_outvertex;
@@ -48,6 +49,10 @@ void CMonster::Update_ModelTransform(float fDeltaTime)
 
 void CMonster::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
 {
+	// *** 충돌 박스 초기화 ***
+	m_CollideBox = new Chexahedron;
+	m_CollideBox->Init(2.0f, 2.0f, 2.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
+
 	m_Pivot = pivot;
 	m_Color = color;
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
@@ -99,6 +104,10 @@ void CMonster::Render(float fDeltaTime)
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
+
+	// *** 충돌 박스 출력 ***
+	if (m_CollideBox != nullptr)
+		m_CollideBox->Render();
 }
 
 

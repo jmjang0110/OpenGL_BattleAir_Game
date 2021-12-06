@@ -54,6 +54,11 @@ private:
 
 
 private:
+	// collide box [ *** 충돌 박스 *** ]
+	class Chexahedron* m_CollideBox;
+
+
+private:
 	// 행렬 모음 
 	glm::mat4 m_Translate_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Rotate_Mat = glm::mat4(1.0f);
