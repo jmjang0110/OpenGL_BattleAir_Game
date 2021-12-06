@@ -64,8 +64,12 @@ public:
 
 
 public:
+	void Init_MainStage(SCENE_TYPE type);
+	void Init_BeginStage(SCENE_TYPE type);
+	void Init_EndStage(SCENE_TYPE type);
 
-	bool Init();
+
+	bool Init(SCENE_TYPE type);
 
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트
