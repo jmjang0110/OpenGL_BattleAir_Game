@@ -16,6 +16,7 @@
 #include <math.h>
 #include <random>
 
+
 using namespace std;
 
 
@@ -34,6 +35,11 @@ using namespace std;
 #include "../HeaderFile/Macro.h"
 #include "../HeaderFile/Types.h"
 
+
+// Sound headers 
+#include <mmsystem.h>
+#include <fmod.h>
+#include <fmod.hpp>
 
 
 
