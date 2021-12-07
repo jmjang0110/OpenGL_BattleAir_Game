@@ -70,6 +70,12 @@
     <Filter Include="03.Object\03-4 Background">
       <UniqueIdentifier>{b499e59d-6990-4304-ba8b-433ea3a18de3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Sound">
+      <UniqueIdentifier>{42ef8f99-3b40-4b96-8376-729a026f3db6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Sound\06-1.SoundManager">
+      <UniqueIdentifier>{adb24658-245d-4bcf-acde-e65740e6052e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -119,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="ObjectFile\HexaheronFile\hexahedron.cpp">
       <Filter>03.Object\03-7 Hexahedron</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundFile\SoundManager.cpp">
+      <Filter>06.Sound\06-1.SoundManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="ObjectFile\HexaheronFile\hexahedron.h">
       <Filter>03.Object\03-7 Hexahedron</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundFile\SoundManager.h">
+      <Filter>06.Sound\06-1.SoundManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
