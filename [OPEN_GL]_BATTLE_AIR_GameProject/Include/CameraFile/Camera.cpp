@@ -11,9 +11,23 @@ CCamera::~CCamera()
 {
 }
 
-void CCamera::UPdate_Airplane_Pivot(glm::vec3 air_pivot)
+// xpos,ypos,zpos를통해서 피봇점을 기준으로 카메라위치를 변경해 줄건데
+// 왼쪽으로 어느정도 이동하면 카메라 위치를 왼쪽으로 옮기고
+// 오른쪽으로 어느정도 이동하면 카메라 위치를 오른쪽으로 옮기는데 사용 할거임
+void CCamera::UPdate_Pivot_From_Airplane(glm::vec3 air_pivot,float xpos,float ypos,float zpos)
 {
-	m_cameraPos = air_pivot;
+	cout << "px = " << air_pivot.x << "py = " << air_pivot.y << "pz = " << air_pivot.z << endl<<endl;
+	m_cameraPos.x = air_pivot.x+xpos;
+	m_cameraPos.y = air_pivot.y+ypos;
+	m_cameraPos.z = air_pivot.z+zpos;
+
+}
+
+void CCamera::UPdate_Dir_From_Airplane(glm::vec3 air_dir)
+{
+	cout << "dx = " << air_dir.x << "dy = " << air_dir.y << "dz = " << air_dir.z << endl << endl;
+
+	m_cameraDirection = air_dir;
 }
 
 void CCamera::UPdate_Camera_Mat_From_Airplane(glm::mat4 trans, glm::mat4 rotate, glm::mat4 scale)

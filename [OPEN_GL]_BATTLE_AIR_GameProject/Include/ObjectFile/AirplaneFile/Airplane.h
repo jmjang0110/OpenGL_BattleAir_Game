@@ -48,12 +48,14 @@ private:
 private:
 	// 현재 위치
 	glm::vec3 m_Pivot = glm::vec3(0.0f, 0.0f, 0.0f);
-	// dir(보고 있는) 위치
-	glm::vec3 m_Dir = glm::vec3(0.0f, 0.0f, 2.0f);
+	// dir(보고 있는) 위치 // Init에서 초기화
+	glm::vec3 m_Dir;
 	// Airplane Color 
 	glm::vec3 m_Color;
 	// Airplane Speed 
 	GLfloat m_Speed;
+
+	int m_Turn = 0; // turn == -1 좌측으로 이동중 // 0 == 중지 // 1== 우측으로 이동중
 
 private:
 	// collide box [ *** 충돌 박스 *** ]
@@ -66,6 +68,9 @@ private:
 	glm::mat4 m_Translate_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Rotate_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Scale_Mat = glm::mat4(1.0f);
+	// 초기 비행기 생성 시 회전 행렬(변동 x)
+	glm::mat4 m_Init_Rotate_Mat = glm::mat4(1.0f);
+	
 	// 적용할 모델 헹렬의 최종
 	glm::mat4 m_ModelMatrix_Result = glm::mat4(1.0f);
 
@@ -74,6 +79,13 @@ private:
 
 public:
 	glm::vec3 GetPivot() { return m_Pivot; }
+
+	glm::vec3 GetDir() { return m_Dir; }
+
+	int GetTurn() { return m_Turn; }
+	
+	// dir 업데이트 - input에서 사용 
+	void Update_Dir(glm::vec3 pivot);
 
 public:
 	int loadObj_normalize_center(const char* filename);

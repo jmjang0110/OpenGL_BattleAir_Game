@@ -29,7 +29,9 @@ private:
 
 
 public:
-	void UPdate_Airplane_Pivot(glm::vec3 air_pivot);
+	void UPdate_Pivot_From_Airplane(glm::vec3 air_pivot, float xpos, float ypos, float zpos);
+
+	void UPdate_Dir_From_Airplane(glm::vec3 air_dir);
 
 	void UPdate_Camera_Mat_From_Airplane(glm::mat4 trans, glm::mat4 rotate, glm::mat4 scale);
 

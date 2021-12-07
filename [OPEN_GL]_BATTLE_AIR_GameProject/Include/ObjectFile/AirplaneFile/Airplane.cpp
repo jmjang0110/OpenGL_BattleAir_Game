@@ -47,7 +47,13 @@ void CAirplane::Update_ScaleForm(GLfloat sx, GLfloat sy, GLfloat sz)
 
 void CAirplane::Update_ModelTransform(float fDeltaTime)
 {
-	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Scale_Mat;
+	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Init_Rotate_Mat * m_Scale_Mat;
+
+	glm::vec4 m_Dir_temp = glm::vec4(m_Dir, 1.0f);
+	m_Dir_temp = m_Translate_Mat * m_Rotate_Mat * m_Scale_Mat * m_Dir_temp;
+	m_Dir = glm::vec3(m_Dir_temp);
+
+
 
 	unsigned int MLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "modelTransform");
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
@@ -58,14 +64,17 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 {
 	// *** 충돌 박스 초기화 ***
 	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(2.5f , 2.5f, 1.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
+	m_CollideBox->Init(2.5f, 2.5f, 1.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
 
 	m_Pivot = pivot;
 	m_Color = color;
-	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
-	Update_RotateForm(-90.0f, 1.0f, 0.0f, 0.0f);
+	m_Dir = glm::vec3(pivot.x, pivot.y, pivot.z - 4.0f);
 
-	if(m_Tri_Num == 1)
+	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
+
+	m_Init_Rotate_Mat = glm::rotate(m_Init_Rotate_Mat, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
 	m_Speed = 5.0f;
@@ -95,7 +104,7 @@ void CAirplane::InitTexture_1()
 
 	stbi_uc* data = NULL;
 	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
-	
+
 
 	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	//cout << data << endl;
@@ -103,8 +112,8 @@ void CAirplane::InitTexture_1()
 
 	cout << widthImage << " " << heightImage << endl;
 
-	
-	
+
+
 	if (!data) {
 		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
 		exit(0);
@@ -122,37 +131,42 @@ void CAirplane::InitTexture_1()
 
 }
 
+void CAirplane::Update_Dir(glm::vec3 pivot) {
+	m_Dir.x = pivot.x; m_Dir.y = pivot.y; m_Dir.z = pivot.z-4.0f;
+}
+
+
 void CAirplane::Input(float fDeltaTime)
 {
 
 	// 위로 
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-
+		m_Turn = 0;
 		m_Pivot.y += fDeltaTime * m_Speed;
 
 	}
-	
+
 
 	// 아래로 
 	if (GetAsyncKeyState('V') & 0x8000)
 	{
-
+		m_Turn = 0;
 		m_Pivot.y -= fDeltaTime * m_Speed;
-
+		
 	}
 
 	// 앞으로 
 	if (GetAsyncKeyState('W') & 0x8000)
 	{
-
+		m_Turn = 0;
 		m_Pivot.z -= fDeltaTime * m_Speed;
 
 	}
 	// 뒤로 
 	if (GetAsyncKeyState('S') & 0x8000)
 	{
-
+		m_Turn = 0;
 		m_Pivot.z += fDeltaTime * m_Speed;
 
 	}
@@ -160,18 +174,22 @@ void CAirplane::Input(float fDeltaTime)
 	// 왼쪽으로 
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
-
+		m_Turn = -1;
 		m_Pivot.x -= fDeltaTime * m_Speed;
 
 	}
 	// 오른쪽으로 
 	if (GetAsyncKeyState('D') & 0x8000)
 	{
-		m_Pivot.x += fDeltaTime * m_Speed;
+		m_Turn = 1;
 
+		m_Pivot.x += fDeltaTime * m_Speed;
 
 	}
 
+
+	// m_Pivot값 바뀌자마자 m_Dir값도 바꿔줌
+	Update_Dir(m_Pivot);
 }
 
 int CAirplane::Update(float fDeltaTime)
@@ -194,9 +212,9 @@ void CAirplane::Render(float fDeltaTime)
 {
 	glBindVertexArray(m_VAO);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	
+
 	Update_ModelTransform(fDeltaTime);
-	
+
 	m_Color = glm::vec3(1.0f, 1.0f, 1.0f);
 
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
@@ -219,7 +237,7 @@ int CAirplane::loadObj_normalize_center(const char* filename)
 	FILE* objFile = NULL;
 	static int i = 0;
 	cout << i++ << endl;
-	
+
 	fopen_s(&objFile, filename, "rb");
 
 	if (objFile == NULL) {
