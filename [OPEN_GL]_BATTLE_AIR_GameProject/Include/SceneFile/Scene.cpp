@@ -64,7 +64,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Camera = new CCamera;
 		// 카메라 위치 , 바라보고있는 방향은 비행기 피봇값에의해 변동되므로 아래 파라미터 값들은 의미 없음
-		m_Camera->Init(glm::vec3(0.0f, 20.0f, 20.0f), glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		m_Camera->Init(glm::vec3(0.01f, 5.0f, 2.0f), glm::vec3(0.001f, 5.0f, -2.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	}
 	if (m_Light == nullptr)
@@ -165,25 +165,17 @@ int CScene::Update(float fDeltaTime)
 	if (m_Airplane != nullptr)
 	{
 		m_Airplane->Update(fDeltaTime);
+		m_Airplane->Update_Rotate_LR(0.0f, 0.0f, 1.0f);
+
 	}
 
 	if (m_Camera != nullptr)
 	{
-		cout << m_Airplane->GetTurn() << endl;
-		//좌측으로 이동중
-		if (m_Airplane->GetTurn() == -1) m_Camera->UPdate_Pivot_From_Airplane(m_Airplane->GetPivot(), -0.2, 0.3, 0.5);
-		//우측으로 이동중
-		else if(m_Airplane->GetTurn() == 1) m_Camera->UPdate_Pivot_From_Airplane(m_Airplane->GetPivot(), 0.2, 0.3, 0.5);
-		// 앞뒤로 위아래로만 이동중
-		else m_Camera->UPdate_Pivot_From_Airplane(m_Airplane->GetPivot(), 0.0, 0.3, 0.5);
-
-
-		
-
-		m_Camera->UPdate_Dir_From_Airplane(m_Airplane->GetDir());
-		//m_Camera->UPdate_Camera_Mat_From_Airplane(m_Airplane->GetTranslateMat(),m_Airplane->GetRotateMat(),m_Airplane->GetSacaleMat());
+		m_Camera->UpdateCameraPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR());
+		m_Camera->UpdateCameraDirection(m_Airplane->GetAngleLR());
 
 		m_Camera->Update(fDeltaTime);
+
 	}
 
 	// ====================================================================
