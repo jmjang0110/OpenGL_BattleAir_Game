@@ -39,8 +39,6 @@ private:
 // ==========================
 // ==========================
 
-
-
 private:
 	GLuint m_VAO;
 	GLuint m_VBO[3];
@@ -48,14 +46,15 @@ private:
 private:
 	// 현재 위치
 	glm::vec3 m_Pivot = glm::vec3(0.0f, 0.0f, 0.0f);
-	// dir(보고 있는) 위치 // Init에서 초기화
-	glm::vec3 m_Dir;
 	// Airplane Color 
 	glm::vec3 m_Color;
 	// Airplane Speed 
 	GLfloat m_Speed;
 
-	int m_Turn = 0; // turn == -1 좌측으로 이동중 // 0 == 중지 // 1== 우측으로 이동중
+private:
+
+	GLfloat m_Angle_LR = 0.0f; // 좌우 각도 
+	GLfloat m_Angle_UD = 0.0f; // 상하 각도 
 
 private:
 	// collide box [ *** 충돌 박스 *** ]
@@ -68,24 +67,23 @@ private:
 	glm::mat4 m_Translate_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Rotate_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Scale_Mat = glm::mat4(1.0f);
-	// 초기 비행기 생성 시 회전 행렬(변동 x)
-	glm::mat4 m_Init_Rotate_Mat = glm::mat4(1.0f);
 	
 	// 적용할 모델 헹렬의 최종
 	glm::mat4 m_ModelMatrix_Result = glm::mat4(1.0f);
+
+	// Angle ( for Updating Move Vector )
+	glm::mat4 m_Rotate_Mat_LR = glm::mat4(1.0f);
+	glm::mat4 m_Rotate_Mat_UD = glm::mat4(1.0f);
+
+	// 이동 방향 벡터 입니다. ( 회전에 따른 이동 방향 ) 
+	glm::vec3 m_MoveDir_vector = glm::vec3(1.0f, 0.0f, 0.0f);
 
 private:
 	unsigned int m_texture;
 
 public:
 	glm::vec3 GetPivot() { return m_Pivot; }
-
-	glm::vec3 GetDir() { return m_Dir; }
-
-	int GetTurn() { return m_Turn; }
-	
-	// dir 업데이트 - input에서 사용 
-	void Update_Dir(glm::vec3 pivot);
+	GLfloat GetAngleLR() { return m_Angle_LR; }
 
 public:
 	int loadObj_normalize_center(const char* filename);
@@ -107,6 +105,10 @@ public:
 	// ** 행렬 최종 함수 ** 
 	void Update_ModelTransform(float fDeltaTime);
 	void InitTexture_1();
+
+
+public:
+	void Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z);
 
 
 public:

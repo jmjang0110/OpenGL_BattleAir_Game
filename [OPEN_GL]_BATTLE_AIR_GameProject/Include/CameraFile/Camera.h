@@ -22,6 +22,10 @@ private:
 
 	glm::mat4 m_View = glm::mat4(1.0f);
 	glm::mat4 m_View_Mat_Result = glm::mat4(1.0f);
+
+private:
+	GLfloat m_Direction_Length = 100.0f;
+
 	
 
 private:
@@ -29,13 +33,11 @@ private:
 
 
 public:
-	void UPdate_Pivot_From_Airplane(glm::vec3 air_pivot, float xpos, float ypos, float zpos);
-
-	void UPdate_Dir_From_Airplane(glm::vec3 air_dir);
-
-	void UPdate_Camera_Mat_From_Airplane(glm::mat4 trans, glm::mat4 rotate, glm::mat4 scale);
-
 	void UpdateCameraMat(float fDeltaTime);
+
+public:
+	void UpdateCameraPos(glm::vec3 AirplanePos, GLfloat airplane_Angle);
+	void UpdateCameraDirection(GLfloat airplane_Angle);
 
 
 public:
