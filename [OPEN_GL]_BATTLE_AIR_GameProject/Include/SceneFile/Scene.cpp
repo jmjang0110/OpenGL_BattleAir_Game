@@ -121,7 +121,7 @@ void CScene::UpdateOrthoMat()
 
 void CScene::Init_MainStage(SCENE_TYPE type)
 {
-	
+	// 텍스처 정보들을 저장합니다. 
 	InitTexture_All();
 
 	if (CSoundManager::GetInst()->Init())
