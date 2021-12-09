@@ -72,12 +72,11 @@ void CBulletList::PushBack(glm::vec3 AirplanePos, GLfloat airplane_Angle)
 
 	PNODE NewNode = new NODE;
 	
-	
-	
 
 	NewNode->bullet = new CBullet;
-	NewNode->bullet->Init(glm::vec3(0.5f / 3, 0.5f / 3, 2.0f / 3), AirplanePos, glm::vec3(0.0f, 1.0f, 0.0f),
+	NewNode->bullet->Init(glm::vec3(2.0f / 3, 0.5f / 3, 0.5f / 3), glm::vec3(0.0f, 0.0f, 0.0f), AirplanePos,
 		"./ObjectFile/BulletFile/Missile.obj", airplane_Angle);
+	
 
 	NewNode->pNext = m_pEnd;
 	m_pEnd->pPrev->pNext = NewNode;
@@ -175,7 +174,11 @@ void CBulletList::Update(float fDeltaTime)
 	for (PNODE pNode = m_pBegin->pNext; pNode != m_pEnd; pNode = pNode->pNext)
 	{
 		if (pNode->bullet)
+		{
+			//pNode->bullet->Update_Rotate_LR(0.0f, 1.0f, 0.0f);
 			pNode->bullet->Update(fDeltaTime);
+
+		}
 
 		if (pNode->bullet->GetEnable() == false)
 		{

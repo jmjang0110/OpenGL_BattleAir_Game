@@ -42,17 +42,20 @@ void CBullet::Update_ScaleForm(GLfloat sx, GLfloat sy, GLfloat sz)
 void CBullet::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 {
 	m_Rotate_Mat_LR = glm::mat4(1.0f);
-	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle + 90.0f + 180.0f), glm::vec3(Axis_x, Axis_y, Axis_z));
+	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians((m_Angle + 180.0f) * -1), glm::vec3(Axis_x, Axis_y, Axis_z));
 
 
 }
 
 
-
-
 void CBullet::Update_ModelTransform(float fDeltaTime)
 {
-	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Scale_Mat  * m_Rotate_Mat_LR;
+
+	/*glm::mat4 Rotate_Mat_Origin = glm::mat4(1.0f);
+	Rotate_Mat_Origin = glm::rotate(Rotate_Mat_Origin, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));*/
+
+	m_ModelMatrix_Result = glm::mat4(1.0f);
+	m_ModelMatrix_Result = m_Translate_Mat *m_Rotate_Mat_LR *m_Scale_Mat;
 
 	unsigned int MLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "modelTransform");
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
@@ -62,11 +65,16 @@ void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const 
 {
 
 	m_Angle = angle;
-
 	m_Pivot = pivot;
 	m_Color = color;
+
+
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
-	Update_TranslateForm(m_Pivot);
+	Update_Rotate_LR(0.0f, 1.0f, 0.0f);
+
+	cout << "CBullet Iniit :"<< m_Pivot.x << " " << m_Pivot.z << endl;
+
+ 	Update_TranslateForm(m_Pivot);
 
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
@@ -76,6 +84,10 @@ void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const 
 	InitTexture_1();
 	InitBuffer();
 
+	m_Angle = angle;
+	m_Pivot = pivot;
+	m_Color = color;
+
 }
 
 void CBullet::Input(float fDeltaTime)
@@ -84,10 +96,11 @@ void CBullet::Input(float fDeltaTime)
 
 int CBullet::Update(float fDeltaTime)
 {
-	
-	m_Pivot.x += fDeltaTime * m_Speed * cos(glm::radians((m_Angle + 90.0f) * -1));
-	m_Pivot.z += fDeltaTime * m_Speed * sin(glm::radians((m_Angle + 90.0f) * -1));
+
+	m_Pivot.x += fDeltaTime * m_Speed * cos(glm::radians((m_Angle)));
+	m_Pivot.z += fDeltaTime * m_Speed * sin(glm::radians((m_Angle)));
 	Update_TranslateForm(m_Pivot);
+
 
 	return 0;
 }
@@ -109,12 +122,12 @@ void CBullet::Render(float fDeltaTime)
 	Update_ModelTransform(fDeltaTime);
 
 	m_Color = glm::vec3(128.0f / 255.0f, 128.0f / 255.0f, 128.0f / 255.0f);
-	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
+	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); 
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
 
+	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
 
 	// *** 충돌 박스 출력 ***

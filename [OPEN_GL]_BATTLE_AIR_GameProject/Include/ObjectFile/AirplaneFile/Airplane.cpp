@@ -143,7 +143,11 @@ void CAirplane::Input(float fDeltaTime)
 {
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
-		m_myBulletList->PushBack(m_Pivot, m_Angle_LR);
+		cout << "Present Airplane spot : "<< m_Pivot.x << " " << m_Pivot.z << endl;
+
+		glm::vec3 BulletPivot = m_Pivot;
+		BulletPivot.y -= 0.4f;
+ 		m_myBulletList->PushBack(BulletPivot, (m_Angle_LR + 90.0f) * -1);
 
 
 	}

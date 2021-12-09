@@ -36,7 +36,7 @@ bool CSoundManager::Init()
 	/*FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme1.mp3",
 		FMOD_LOOP_NORMAL, 0, &m_bgmSound_Begin);*/
 
-	FMOD_System_CreateSound(soundSystem, "./SoundFile/MainStage.mp3",
+	FMOD_System_CreateSound(soundSystem, "./SoundFile/honor-and-sword-main-11222.mp3",
 		FMOD_LOOP_NORMAL, 0, &m_bgmSound_MainStage);
 
 	/*FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme3_(2).mp3",
