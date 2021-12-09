@@ -50,7 +50,7 @@ private:
 	// Airplane Color 
 	glm::vec3 m_Color;
 	// Airplane Speed 
-	GLfloat m_Speed = 5.0f;
+	GLfloat m_Speed = 15.0f;
 	GLfloat m_Angle = 0.0f;
 	GLboolean m_bEnable = true;
 
