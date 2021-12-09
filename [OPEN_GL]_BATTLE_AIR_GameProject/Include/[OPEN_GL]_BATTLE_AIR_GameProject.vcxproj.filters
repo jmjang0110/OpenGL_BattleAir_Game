@@ -76,6 +76,9 @@
     <Filter Include="06.Sound\06-1.SoundManager">
       <UniqueIdentifier>{adb24658-245d-4bcf-acde-e65740e6052e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object\03-8 Bullet">
+      <UniqueIdentifier>{5f3aa33f-41fe-4448-8d9b-7aeba2b8cfcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -128,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="SoundFile\SoundManager.cpp">
       <Filter>06.Sound\06-1.SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\BulletFile\Bullet.cpp">
+      <Filter>03.Object\03-8 Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\BulletFile\BulletList.cpp">
+      <Filter>03.Object\03-8 Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="SoundFile\SoundManager.h">
       <Filter>06.Sound\06-1.SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\BulletFile\Bullet.h">
+      <Filter>03.Object\03-8 Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\BulletFile\BulletList.h">
+      <Filter>03.Object\03-8 Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

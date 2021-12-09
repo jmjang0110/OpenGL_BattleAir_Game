@@ -1,97 +1,130 @@
-#include "Airplane.h"
+#include "Bullet.h"
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include "../../HeaderFile/stb_image.h"
-#include "../../ObjectFile/HexaheronFile/hexahedron.h"
-#include "../BulletFile/Bullet.h"
-#include "../BulletFile/BulletList.h"
+#include "../HexaheronFile/hexahedron.h"
 
 
 
-std::vector< glm::vec3 > CAirplane::m_outvertex;
-std::vector< glm::vec3 > CAirplane::m_outnormal;
-std::vector< glm::vec2 > CAirplane::m_outuv;
-GLint* CAirplane::m_Tri_Num2;
-GLint CAirplane::m_Tri_Num = 1;
+std::vector< glm::vec3 > CBullet::m_outvertex;
+std::vector< glm::vec3 > CBullet::m_outnormal;
+std::vector< glm::vec2 > CBullet::m_outuv;
+GLint* CBullet::m_Tri_Num2;
+GLint CBullet::m_Tri_Num = 1;
 
-CAirplane::CAirplane()
+
+CBullet::CBullet()
 {
 }
 
-CAirplane::~CAirplane()
+CBullet::~CBullet()
 {
 }
 
 
-
-void CAirplane::Update_TranslateForm(glm::vec3 translate)
+void CBullet::Update_TranslateForm(glm::vec3 translate)
 {
 	m_Translate_Mat = glm::mat4(1.0f);
 	m_Translate_Mat = glm::translate(m_Translate_Mat, glm::vec3(translate));
-
 }
 
-void CAirplane::Update_RotateForm(GLfloat Time, GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
+void CBullet::Update_RotateForm(GLfloat Angle, GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 {
 	m_Rotate_Mat = glm::mat4(1.0f);
-	m_Rotate_Mat = glm::rotate(m_Rotate_Mat, glm::radians(Time), glm::vec3(Axis_x, Axis_y, Axis_z));
-
-
+	m_Rotate_Mat = glm::rotate(m_Rotate_Mat, glm::radians(Angle), glm::vec3(Axis_x, Axis_y, Axis_z));
 }
 
-void CAirplane::Update_ScaleForm(GLfloat sx, GLfloat sy, GLfloat sz)
+void CBullet::Update_ScaleForm(GLfloat sx, GLfloat sy, GLfloat sz)
 {
 	m_Scale_Mat = glm::mat4(1.0f);
 	m_Scale_Mat = glm::scale(m_Scale_Mat, glm::vec3(sx, sy, sz));
+}
+
+void CBullet::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
+{
+	m_Rotate_Mat_LR = glm::mat4(1.0f);
+	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle + 90.0f + 180.0f), glm::vec3(Axis_x, Axis_y, Axis_z));
 
 
 }
 
-void CAirplane::Update_ModelTransform(float fDeltaTime)
-{
 
-	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Scale_Mat * m_Rotate_Mat_LR;
+
+
+void CBullet::Update_ModelTransform(float fDeltaTime)
+{
+	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Scale_Mat  * m_Rotate_Mat_LR;
 
 	unsigned int MLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "modelTransform");
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
-
 }
 
-void CAirplane::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
+void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle )
 {
-	m_Rotate_Mat_LR = glm::mat4(1.0f);
-	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle_LR), glm::vec3(Axis_x, Axis_y, Axis_z));
 
-
-}
-
-void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
-{
-	m_myBulletList = new CBulletList;
-	m_myBulletList->Init();
-
-
-	// *** 충돌 박스 초기화 ***
-	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(2.5f, 2.5f, 1.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
+	m_Angle = angle;
 
 	m_Pivot = pivot;
 	m_Color = color;
-
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
-	m_Rotate_Mat = glm::rotate(m_Rotate_Mat, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	Update_TranslateForm(m_Pivot);
 
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
-	m_Speed = 10.0f;
+	
 
 	InitTexture_1();
 	InitBuffer();
 
 }
 
-void CAirplane::InitTexture_1()
+void CBullet::Input(float fDeltaTime)
+{
+}
+
+int CBullet::Update(float fDeltaTime)
+{
+	
+	m_Pivot.x += fDeltaTime * m_Speed * cos(glm::radians((m_Angle + 90.0f) * -1));
+	m_Pivot.z += fDeltaTime * m_Speed * sin(glm::radians((m_Angle + 90.0f) * -1));
+	Update_TranslateForm(m_Pivot);
+
+	return 0;
+}
+
+int CBullet::LateUpdate(float fDeltaTime)
+{
+	return 0;
+}
+
+void CBullet::Collision(float fDeltaTime)
+{
+}
+
+void CBullet::Render(float fDeltaTime)
+{
+	glBindVertexArray(m_VAO);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	Update_ModelTransform(fDeltaTime);
+
+	m_Color = glm::vec3(128.0f / 255.0f, 128.0f / 255.0f, 128.0f / 255.0f);
+	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
+	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
+
+	// *** 충돌 박스 출력 ***
+	if (m_CollideBox != nullptr)
+		m_CollideBox->Render();
+}
+
+
+
+void CBullet::InitTexture_1()
 {
 	unsigned int texture;
 	BITMAPINFO* bmp;
@@ -110,8 +143,7 @@ void CAirplane::InitTexture_1()
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 
 	stbi_uc* data = NULL;
-	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
-
+	const char* filename = "./ObjectFile/BulletFile/MissileTexture.png";
 
 	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	//cout << data << endl;
@@ -139,113 +171,7 @@ void CAirplane::InitTexture_1()
 }
 
 
-void CAirplane::Input(float fDeltaTime)
-{
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
-	{
-		m_myBulletList->PushBack(m_Pivot, m_Angle_LR);
-
-
-	}
-
-	// 위로 
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-	{
-		m_Pivot.y += fDeltaTime * m_Speed;
-
-
-	}
-
-
-	// 아래로 
-	if (GetAsyncKeyState('V') & 0x8000)
-	{
-		m_Pivot.y -= fDeltaTime * m_Speed;
-		
-	}
-
-	// 앞으로 
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-		//m_Pivot.z -= fDeltaTime * m_Speed;
-
-		m_Pivot.x += fDeltaTime * m_Speed * cos(glm::radians((m_Angle_LR + 90.0f) * -1));
-		m_Pivot.z += fDeltaTime * m_Speed * sin(glm::radians((m_Angle_LR + 90.0f) * -1));
-	}
-	// 뒤로 
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		m_Pivot.z += fDeltaTime * m_Speed;
-
-	}
-
-	// 왼쪽으로 
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		m_Angle_LR += fDeltaTime * m_Speed * 5.0f ;
-
-	}
-	// 오른쪽으로 
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		
-		m_Angle_LR -= fDeltaTime * m_Speed * 5.0f;
-
-	}
-
-}
-
-int CAirplane::Update(float fDeltaTime)
-{
-	Update_TranslateForm(m_Pivot);
-
-	if (m_myBulletList != nullptr)
-	{
-		m_myBulletList->Update(fDeltaTime);
-
-
-	}
-	return 0;
-}
-
-int CAirplane::LateUpdate(float fDeltaTime)
-{
-	return 0;
-}
-
-void CAirplane::Collision(float fDeltaTime)
-{
-}
-
-void CAirplane::Render(float fDeltaTime)
-{
-	glBindVertexArray(m_VAO);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	Update_ModelTransform(fDeltaTime);
-	m_Color = glm::vec3(1.0f, 1.0f, 1.0f);
-
-	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
-	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
-
-
-	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
-
-	if (m_CollideBox != nullptr)
-		m_CollideBox->Render();
-
-	if (m_myBulletList != nullptr)
-		m_myBulletList->RenderAll(fDeltaTime);
-
-
-
-
-}
-
-int CAirplane::loadObj_normalize_center(const char* filename)
+int CBullet::loadObj_normalize_center(const char* filename)
 {
 	FILE* objFile = NULL;
 	static int i = 0;
@@ -355,7 +281,8 @@ int CAirplane::loadObj_normalize_center(const char* filename)
 	return m_outvertex.size();
 }
 
-void CAirplane::InitBuffer()
+
+void CBullet::InitBuffer()
 {
 	// V A O
 	glGenVertexArrays(1, &m_VAO);
@@ -381,6 +308,5 @@ void CAirplane::InitBuffer()
 	glBufferData(GL_ARRAY_BUFFER, m_outuv.size() * sizeof(glm::vec2), &m_outuv[0], GL_DYNAMIC_DRAW);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 	glEnableVertexAttribArray(2);
-
 
 }
