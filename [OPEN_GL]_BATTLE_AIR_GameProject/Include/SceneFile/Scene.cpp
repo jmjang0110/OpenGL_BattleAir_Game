@@ -36,13 +36,41 @@ CScene::~CScene()
 
 	if (m_Light != nullptr)
 		delete m_Light;
+	
+	if (m_Airplane != nullptr)
+		delete m_Airplane;
 
+	if (m_Monster != nullptr)
+		delete m_Monster;
+
+	if (m_Background != nullptr)
+		delete m_Background;
+
+	if (m_Building1 != nullptr)
+		delete m_Building1;
+
+	if (m_Building2 != nullptr)
+		delete m_Building2;
+
+	if (m_Building3 != nullptr)
+		delete m_Building3;
+
+	if (m_triangle != nullptr)
+		delete m_triangle;
+
+	if (m_Floor != nullptr)
+		delete[] m_Floor;
+
+
+	stbi_image_free(m_Airplane_Text_data);
+	stbi_image_free(m_Bullet_Text_data);
 
 }
 
 void CScene::InitTexture_All()
 {
 
+	// *** 비행기 텍스처 데이터 저장 ***
 	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
 	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
 	m_Airplane_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
@@ -56,7 +84,7 @@ void CScene::InitTexture_All()
 		exit(0);
 	}
 
-
+	// *** 미사일( Bullet ) 텍스처 데이터 저장 ***
 	filename = "./ObjectFile/BulletFile/MissileTexture.png";
 	m_Bullet_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	m_Bullet_width = widthImage;

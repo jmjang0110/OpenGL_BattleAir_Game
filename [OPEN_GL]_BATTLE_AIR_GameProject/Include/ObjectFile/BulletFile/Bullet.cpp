@@ -158,10 +158,7 @@ void CBullet::InitTexture_1(stbi_uc* textData2, int width, int height)
 	//data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	////cout << data << endl;
 
-
 	//cout << widthImage << " " << heightImage << endl;
-
-
 
 	//if (!data) {
 	//	fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
