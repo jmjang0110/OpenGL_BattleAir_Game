@@ -46,8 +46,7 @@ void CCamera::UpdateCameraDirection(GLfloat airplane_Angle)
 	m_cameraDirection.z = m_cameraPos.z + m_Direction_Length  * sin(glm::radians((airplane_Angle + 90.0f) * -1));
 	m_cameraDirection.y = m_cameraPos.y - 1.0f;
 
-	cout << "camera Airplane Angle : " << airplane_Angle << endl;
-
+	
 
 
 

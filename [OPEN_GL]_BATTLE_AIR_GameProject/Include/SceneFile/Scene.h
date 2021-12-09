@@ -48,6 +48,7 @@ private:
 
 
 
+
 public:
 	bool GetEnable()
 	{

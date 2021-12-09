@@ -60,6 +60,7 @@ void CAirplane::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 	m_Rotate_Mat_LR = glm::mat4(1.0f);
 	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle_LR), glm::vec3(Axis_x, Axis_y, Axis_z));
 
+
 }
 
 void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
@@ -77,7 +78,7 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
-	m_Speed = 5.0f;
+	m_Speed = 10.0f;
 
 	InitTexture_1();
 	InitBuffer();
@@ -169,14 +170,14 @@ void CAirplane::Input(float fDeltaTime)
 	// 왼쪽으로 
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
-		m_Angle_LR -= fDeltaTime * m_Speed * 5.0f ;
+		m_Angle_LR += fDeltaTime * m_Speed * 5.0f ;
 
 	}
 	// 오른쪽으로 
 	if (GetAsyncKeyState('D') & 0x8000)
 	{
 		
-		m_Angle_LR += fDeltaTime * m_Speed * 5.0f;
+		m_Angle_LR -= fDeltaTime * m_Speed * 5.0f;
 
 	}
 

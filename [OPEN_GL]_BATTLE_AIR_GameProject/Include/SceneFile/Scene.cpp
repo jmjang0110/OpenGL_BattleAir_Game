@@ -10,7 +10,7 @@
 #include "../ObjectFile/BackgroundFile/Background.h"
 #include "../ObjectFile/FloorFile/Floor.h"
 #include "../ObjectFile/TriangleFile/Triangle.h"
-
+#include "../SoundFile/SoundManager.h"
 
 CScene::CScene()
 {
@@ -52,6 +52,13 @@ void CScene::UpdateOrthoMat()
 
 void CScene::Init_MainStage(SCENE_TYPE type)
 {
+	if (CSoundManager::GetInst()->Init())
+	{
+		cout << "Sound File Load Success" << endl;
+
+	}
+
+
 	if (m_Airplane == nullptr)
 	{
 		m_Airplane = new CAirplane;
@@ -152,10 +159,10 @@ void CScene::Input(float fDeltaTime)
 		m_Airplane->Input(fDeltaTime);
 	}
 
-	if (m_Camera != nullptr)
-	{
-		m_Camera->Input(fDeltaTime);
-	}
+	//if (m_Camera != nullptr)
+	//{
+	//	m_Camera->Input(fDeltaTime);
+	//}
 
 }
 

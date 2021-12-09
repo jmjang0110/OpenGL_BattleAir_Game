@@ -33,13 +33,13 @@ bool CSoundManager::Init()
 	FMOD_System_Init(soundSystem, 32, FMOD_INIT_NORMAL, NULL);
 
 
-	FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme1.mp3",
-		FMOD_LOOP_NORMAL, 0, &m_bgmSound_Begin);
+	/*FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme1.mp3",
+		FMOD_LOOP_NORMAL, 0, &m_bgmSound_Begin);*/
 
-	FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme2.mp3",
+	FMOD_System_CreateSound(soundSystem, "./SoundFile/MainStage.mp3",
 		FMOD_LOOP_NORMAL, 0, &m_bgmSound_MainStage);
 
-	FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme3_(2).mp3",
+	/*FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme3_(2).mp3",
 		FMOD_LOOP_NORMAL, 0, &m_bgmSound_End);
 
 	FMOD_System_CreateSound(soundSystem, "./Sound/MainMenu_Theme.mp3",
@@ -49,7 +49,7 @@ bool CSoundManager::Init()
 		FMOD_DEFAULT, 0, &m_effectSound_Explode);
 
 	FMOD_System_CreateSound(soundSystem, "./Sound/YouWin.wav",
-		FMOD_LOOP_NORMAL, 0, &bgmSound_StageClear);
+		FMOD_LOOP_NORMAL, 0, &bgmSound_StageClear);*/
 
 
 	for (int i = 0; i < 10; ++i)
@@ -57,8 +57,9 @@ bool CSoundManager::Init()
 
 
 	// 초기화 동시에 시작 브금을 틉니다. ( 로딩하면서 브금을 트는 효과 )
-	CSoundManager::GetInst()->playSound(SCENE_TYPE::BEGIN);
+	//CSoundManager::GetInst()->playSound(SCENE_TYPE::BEGIN);
 
+	CSoundManager::GetInst()->playSound(SCENE_TYPE::MAIN_STAGE);
 
 	return true;
 
