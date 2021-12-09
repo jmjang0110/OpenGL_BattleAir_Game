@@ -203,7 +203,6 @@ int CAirplane::Update(float fDeltaTime)
 	{
 		m_myBulletList->Update(fDeltaTime);
 
-
 	}
 	return 0;
 }

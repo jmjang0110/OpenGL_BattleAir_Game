@@ -8,6 +8,12 @@
 #include "../ObjectFile/AirplaneFile/Airplane.h"
 #include "../ObjectFile/MonsterFile/Monster.h"
 #include "../ObjectFile/BackgroundFile/Background.h"
+#include "../ObjectFile/BuildingFile/Building1.h"
+#include "../ObjectFile/BuildingFile/Building2.h"
+#include "../ObjectFile/BuildingFile/Building3.h"
+
+
+
 #include "../ObjectFile/FloorFile/Floor.h"
 #include "../ObjectFile/TriangleFile/Triangle.h"
 #include "../SoundFile/SoundManager.h"
@@ -108,6 +114,31 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/BackgroundFile/sphere.obj");
 
 	}
+
+	if (m_Building1 == nullptr)
+	{
+		m_Building1 = new CBuilding1;
+		m_Building1->Init(glm::vec3(3.0f, 1.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(3.0f, 3.0f, 3.0f), "./ObjectFile/BuildingFile/BrownTown.obj");
+
+	}
+
+	if (m_Building2 == nullptr)
+	{
+		m_Building2 = new CBuilding2;
+		m_Building2->Init(glm::vec3(3.0f, 5.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(-3.0f, -3.0f, -3.0f), "./ObjectFile/BuildingFile/WindMill.obj");
+
+	}
+
+	if (m_Building3 == nullptr)
+	{
+		m_Building3 = new CBuilding3;
+		m_Building3->Init(glm::vec3(15.0f, 3.0f, 15.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(-10.0f, 3.0f, -3.0f), "./ObjectFile/BuildingFile/top.obj");
+
+	}
+
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -304,7 +335,14 @@ void CScene::Render(float fDeltaTime)
 	if (m_Background != nullptr)
 		m_Background->Render(fDeltaTime);
 
+	if (m_Building1 != nullptr)
+		m_Building1->Render(fDeltaTime);
 
+	if (m_Building2 != nullptr)
+		m_Building2->Render(fDeltaTime);
+
+	if (m_Building3 != nullptr)
+		m_Building3->Render(fDeltaTime);
 }
 
 
