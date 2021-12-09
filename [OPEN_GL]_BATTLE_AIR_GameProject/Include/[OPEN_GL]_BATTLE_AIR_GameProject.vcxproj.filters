@@ -79,6 +79,9 @@
     <Filter Include="03.Object\03-8 Bullet">
       <UniqueIdentifier>{5f3aa33f-41fe-4448-8d9b-7aeba2b8cfcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Object\03-9 Building">
+      <UniqueIdentifier>{26d2f1e4-d282-4124-8251-65e2d0d03b45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreFile\CCore.cpp">
@@ -137,6 +140,15 @@
     </ClCompile>
     <ClCompile Include="ObjectFile\BulletFile\BulletList.cpp">
       <Filter>03.Object\03-8 Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\BuildingFile\Building1.cpp">
+      <Filter>03.Object\03-9 Building</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\BuildingFile\Building2.cpp">
+      <Filter>03.Object\03-9 Building</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\BuildingFile\Building3.cpp">
+      <Filter>03.Object\03-9 Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +217,15 @@
     </ClInclude>
     <ClInclude Include="ObjectFile\BulletFile\BulletList.h">
       <Filter>03.Object\03-8 Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\BuildingFile\Building1.h">
+      <Filter>03.Object\03-9 Building</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\BuildingFile\Building2.h">
+      <Filter>03.Object\03-9 Building</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\BuildingFile\Building3.h">
+      <Filter>03.Object\03-9 Building</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
