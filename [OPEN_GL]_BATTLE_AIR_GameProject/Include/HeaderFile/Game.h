@@ -34,6 +34,7 @@ using namespace std;
 // User defined headers 
 #include "../HeaderFile/Macro.h"
 #include "../HeaderFile/Types.h"
+#include "stb_image.h"
 
 
 // Sound headers 

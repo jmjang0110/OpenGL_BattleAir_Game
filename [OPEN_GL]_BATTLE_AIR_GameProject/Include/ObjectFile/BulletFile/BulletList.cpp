@@ -19,8 +19,12 @@ CBulletList::~CBulletList()
 }
 
 
-void CBulletList::Init()
+void CBulletList::Init(stbi_uc* textData2, int text_width, int text_height)
 {
+	m_Bullet_Text_data = textData2;
+	m_Bullet_width = text_width;
+	m_Bullet_height = text_height;
+
 
 	m_pBegin = new NODE;
 	m_pEnd = new NODE;
@@ -75,7 +79,7 @@ void CBulletList::PushBack(glm::vec3 AirplanePos, GLfloat airplane_Angle)
 
 	NewNode->bullet = new CBullet;
 	NewNode->bullet->Init(glm::vec3(2.0f / 3, 0.5f / 3, 0.5f / 3), glm::vec3(0.0f, 0.0f, 0.0f), AirplanePos,
-		"./ObjectFile/BulletFile/Missile.obj", airplane_Angle);
+		"./ObjectFile/BulletFile/Missile.obj", airplane_Angle, m_Bullet_Text_data, m_Bullet_width,m_Bullet_height);
 	
 
 	NewNode->pNext = m_pEnd;

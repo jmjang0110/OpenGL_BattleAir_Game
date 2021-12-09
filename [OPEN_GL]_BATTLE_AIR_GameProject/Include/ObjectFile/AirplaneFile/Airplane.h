@@ -59,7 +59,7 @@ private:
 private:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
-
+	stbi_uc* m_Airplane_Text_data = NULL;
 
 private:
 	// 행렬 모음 
@@ -110,7 +110,7 @@ public:
 	void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
 	// ** 행렬 최종 함수 ** 
 	void Update_ModelTransform(float fDeltaTime);
-	void InitTexture_1();
+	void InitTexture_1(stbi_uc* textData, int text_airplane_width, int text_airplane_height);
 
 
 public:
@@ -118,7 +118,8 @@ public:
 
 
 public:
-	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename);
+	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
+		int text_airplane_width, int text_airplane_height, int text_bullet_width, int text_height_width);
 
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트

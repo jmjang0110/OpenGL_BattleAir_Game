@@ -44,10 +44,6 @@ private:
 	class CBuilding2* m_Building2;
 	class CBuilding3* m_Building3;
 
-
-
-	
-	
 	class CFloor* m_Floor[4]; // Floor 을 4개 생성하고 각 (1~4)사분면에 배치 
 	class CFloor* m_Floor_test;
 	class CTriangle* m_triangle;
@@ -56,7 +52,16 @@ private:
 	class CBullet* m_Missile;
 
 
+private:
 
+	stbi_uc* m_Airplane_Text_data = NULL;
+	int m_Airplane_width = 0 , m_Airplane_height = 0;
+
+	stbi_uc* m_Bullet_Text_data = NULL;
+	int m_Bullet_width = 0, m_Bullet_height = 0;
+
+public:
+	void InitTexture_All();
 
 
 public:

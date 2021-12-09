@@ -65,10 +65,13 @@ void CAirplane::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 
 }
 
-void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
+void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
+	int text_airplane_width, int text_airplane_height, int text_bullet_width, int text_height_width)
 {
+	m_Airplane_Text_data = textData;
+
 	m_myBulletList = new CBulletList;
-	m_myBulletList->Init();
+	m_myBulletList->Init(textData2, text_bullet_width, text_height_width);
 
 
 	// *** 충돌 박스 초기화 ***
@@ -86,12 +89,12 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 
 	m_Speed = 10.0f;
 
-	InitTexture_1();
+	InitTexture_1(m_Airplane_Text_data,  text_airplane_width,  text_airplane_height);
 	InitBuffer();
 
 }
 
-void CAirplane::InitTexture_1()
+void CAirplane::InitTexture_1(stbi_uc* textData, int text_airplane_width, int text_airplane_height)
 {
 	unsigned int texture;
 	BITMAPINFO* bmp;
@@ -109,32 +112,26 @@ void CAirplane::InitTexture_1()
 	//unsigned char* data = LoadDIBitmap("dog.bmp", &bmp);
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 
-	stbi_uc* data = NULL;
-	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
+	//stbi_uc* data = NULL;
+	//const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
 
-
-	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
-	//cout << data << endl;
-
-
+	//data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	cout << widthImage << " " << heightImage << endl;
 
-
-
-	if (!data) {
-		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+	if (!m_Airplane_Text_data) {
+		//fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
 		exit(0);
 	}
 	//cout << data << endl;
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImage, heightImage, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, text_airplane_width, text_airplane_height, 0, GL_RGB, GL_UNSIGNED_BYTE, m_Airplane_Text_data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	unsigned int tLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "outTexture");
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(data);
+	stbi_image_free(m_Airplane_Text_data);
 
 }
 

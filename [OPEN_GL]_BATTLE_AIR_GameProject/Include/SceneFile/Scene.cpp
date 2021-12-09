@@ -40,6 +40,37 @@ CScene::~CScene()
 
 }
 
+void CScene::InitTexture_All()
+{
+
+	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
+	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
+	m_Airplane_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Airplane_width = widthImage;
+	m_Airplane_height = heightImage;
+
+	cout << widthImage << " " << heightImage << endl;
+
+	if (!m_Airplane_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+
+	filename = "./ObjectFile/BulletFile/MissileTexture.png";
+	m_Bullet_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Bullet_width = widthImage;
+	m_Bullet_height = heightImage;
+
+	cout << widthImage << " " << heightImage << endl;
+
+	if (!m_Bullet_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+}
+
 void CScene::UpdateProjectionMat()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
@@ -62,6 +93,9 @@ void CScene::UpdateOrthoMat()
 
 void CScene::Init_MainStage(SCENE_TYPE type)
 {
+	
+	InitTexture_All();
+
 	if (CSoundManager::GetInst()->Init())
 	{
 		cout << "Sound File Load Success" << endl;
@@ -74,18 +108,19 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		m_Airplane = new CAirplane;
 		// Init( scale color Pivot FileName )  
 		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj");
+			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj",
+			m_Airplane_Text_data, m_Bullet_Text_data, m_Airplane_width, m_Airplane_height, m_Bullet_width, m_Bullet_height);
 	}
 
 
 	// missile ÃÊ±âÈ­ 
-	if (m_Missile == nullptr)
+	/*if (m_Missile == nullptr)
 	{
 		m_Missile = new CBullet;
 		m_Missile->Init(glm::vec3(2.0f / 3, 0.5f / 3, 0.5f / 3), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5.0f, 1.0f, 5.0f),
 			"./ObjectFile/BulletFile/Missile.obj", m_Airplane->GetAngleLR());
 
-	}
+	}*/
 
 
 	if (m_Camera == nullptr)

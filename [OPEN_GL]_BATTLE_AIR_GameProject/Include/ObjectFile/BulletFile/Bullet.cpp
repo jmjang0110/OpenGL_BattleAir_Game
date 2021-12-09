@@ -61,7 +61,7 @@ void CBullet::Update_ModelTransform(float fDeltaTime)
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
 }
 
-void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle )
+void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle , stbi_uc* textData2,int text_width, int text_height)
 {
 
 	m_Angle = angle;
@@ -81,7 +81,7 @@ void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const 
 
 	
 
-	InitTexture_1();
+	InitTexture_1(textData2, text_width , text_height);
 	InitBuffer();
 
 	m_Angle = angle;
@@ -137,12 +137,9 @@ void CBullet::Render(float fDeltaTime)
 
 
 
-void CBullet::InitTexture_1()
+void CBullet::InitTexture_1(stbi_uc* textData2, int width, int height)
 {
-	unsigned int texture;
-	BITMAPINFO* bmp;
-	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
-
+	
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
@@ -155,31 +152,31 @@ void CBullet::InitTexture_1()
 	//unsigned char* data = LoadDIBitmap("dog.bmp", &bmp);
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 
-	stbi_uc* data = NULL;
-	const char* filename = "./ObjectFile/BulletFile/MissileTexture.png";
+	//stbi_uc* data = NULL;
+	//const char* filename = "./ObjectFile/BulletFile/MissileTexture.png";
 
-	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	//data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	////cout << data << endl;
+
+
+	//cout << widthImage << " " << heightImage << endl;
+
+
+
+	//if (!data) {
+	//	fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+	//	exit(0);
+	//}
 	//cout << data << endl;
 
-
-	cout << widthImage << " " << heightImage << endl;
-
-
-
-	if (!data) {
-		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
-		exit(0);
-	}
-	//cout << data << endl;
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImage, heightImage, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, textData2);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	unsigned int tLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "outTexture");
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(data);
+	//stbi_image_free(textData2);
 
 }
 

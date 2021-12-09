@@ -28,6 +28,10 @@ private:
 
 
 private:
+	stbi_uc* m_Bullet_Text_data = NULL;
+	int m_Bullet_width = 0, m_Bullet_height = 0;
+
+private:
 	float m_fAttack = 100; // ÃÑ¾Ë °ø°Ý·Â 
 
 
@@ -49,7 +53,7 @@ public:
 
 	}
 public:
-	void Init();
+	void Init(stbi_uc* textData2,int text_width, int text_height);
 
 
 public:

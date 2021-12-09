@@ -27,6 +27,11 @@ private:
 	std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 
 private:
+	// 텍스처 데이터 저장 
+	stbi_uc* m_Bullet_Text_data = NULL;
+	int m_Bullet_width = 0, m_Bullet_height = 0;
+
+private:
 	static GLint* m_Tri_Num2;	// 삼각형 개수 
 	static GLint m_Tri_Num;
 
@@ -98,10 +103,10 @@ public:
 
 	// ** 행렬 최종 함수 ** 
 	void Update_ModelTransform(float fDeltaTime);
-	void InitTexture_1();
+	void InitTexture_1(stbi_uc* textData2, int width, int height);
 
 public:
-	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle );
+	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle, stbi_uc* textData2, int text_width, int text_height);
 
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트
