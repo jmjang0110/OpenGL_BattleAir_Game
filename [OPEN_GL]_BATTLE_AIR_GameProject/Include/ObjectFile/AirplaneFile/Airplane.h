@@ -60,7 +60,6 @@ private:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
 
-	
 
 private:
 	// 행렬 모음 
@@ -90,6 +89,13 @@ public:
 
 public:
 	void InitBuffer();
+
+
+private:
+	// 플레이어의 총알을 양뱡향 연결리스트로 관리합니다...
+	class CBulletList* m_myBulletList;	
+
+
 
 public:
 	// ** 이동행렬 반환 함수 **

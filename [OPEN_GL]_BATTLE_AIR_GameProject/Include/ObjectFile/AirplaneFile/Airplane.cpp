@@ -3,6 +3,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../../HeaderFile/stb_image.h"
 #include "../../ObjectFile/HexaheronFile/hexahedron.h"
+#include "../BulletFile/Bullet.h"
+#include "../BulletFile/BulletList.h"
 
 
 
@@ -60,10 +62,15 @@ void CAirplane::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 	m_Rotate_Mat_LR = glm::mat4(1.0f);
 	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle_LR), glm::vec3(Axis_x, Axis_y, Axis_z));
 
+
 }
 
 void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
 {
+	m_myBulletList = new CBulletList;
+	m_myBulletList->Init();
+
+
 	// *** 충돌 박스 초기화 ***
 	m_CollideBox = new Chexahedron;
 	m_CollideBox->Init(2.5f, 2.5f, 1.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
@@ -77,7 +84,7 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
-	m_Speed = 5.0f;
+	m_Speed = 10.0f;
 
 	InitTexture_1();
 	InitBuffer();
@@ -134,6 +141,12 @@ void CAirplane::InitTexture_1()
 
 void CAirplane::Input(float fDeltaTime)
 {
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+	{
+		m_myBulletList->PushBack(m_Pivot, m_Angle_LR);
+
+
+	}
 
 	// 위로 
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
@@ -169,14 +182,14 @@ void CAirplane::Input(float fDeltaTime)
 	// 왼쪽으로 
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
-		m_Angle_LR -= fDeltaTime * m_Speed * 5.0f ;
+		m_Angle_LR += fDeltaTime * m_Speed * 5.0f ;
 
 	}
 	// 오른쪽으로 
 	if (GetAsyncKeyState('D') & 0x8000)
 	{
 		
-		m_Angle_LR += fDeltaTime * m_Speed * 5.0f;
+		m_Angle_LR -= fDeltaTime * m_Speed * 5.0f;
 
 	}
 
@@ -186,6 +199,12 @@ int CAirplane::Update(float fDeltaTime)
 {
 	Update_TranslateForm(m_Pivot);
 
+	if (m_myBulletList != nullptr)
+	{
+		m_myBulletList->Update(fDeltaTime);
+
+
+	}
 	return 0;
 }
 
@@ -217,6 +236,11 @@ void CAirplane::Render(float fDeltaTime)
 
 	if (m_CollideBox != nullptr)
 		m_CollideBox->Render();
+
+	if (m_myBulletList != nullptr)
+		m_myBulletList->RenderAll(fDeltaTime);
+
+
 
 
 }

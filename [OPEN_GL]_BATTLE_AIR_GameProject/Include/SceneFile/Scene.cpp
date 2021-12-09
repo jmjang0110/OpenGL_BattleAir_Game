@@ -10,6 +10,10 @@
 #include "../ObjectFile/BackgroundFile/Background.h"
 #include "../ObjectFile/FloorFile/Floor.h"
 #include "../ObjectFile/TriangleFile/Triangle.h"
+#include "../SoundFile/SoundManager.h"
+
+#include "../ObjectFile/BulletFile/Bullet.h"
+
 
 
 CScene::CScene()
@@ -52,6 +56,13 @@ void CScene::UpdateOrthoMat()
 
 void CScene::Init_MainStage(SCENE_TYPE type)
 {
+	if (CSoundManager::GetInst()->Init())
+	{
+		cout << "Sound File Load Success" << endl;
+
+	}
+
+
 	if (m_Airplane == nullptr)
 	{
 		m_Airplane = new CAirplane;
@@ -59,6 +70,17 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj");
 	}
+
+
+	// missile ÃÊ±âÈ­ 
+	if (m_Missile == nullptr)
+	{
+		m_Missile = new CBullet;
+		m_Missile->Init(glm::vec3(0.5f / 3, 0.5f / 3, 2.0f / 3), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
+			"./ObjectFile/BulletFile/Missile.obj", m_Airplane->GetAngleLR());
+
+	}
+
 
 	if (m_Camera == nullptr)
 	{
@@ -152,10 +174,10 @@ void CScene::Input(float fDeltaTime)
 		m_Airplane->Input(fDeltaTime);
 	}
 
-	if (m_Camera != nullptr)
-	{
-		m_Camera->Input(fDeltaTime);
-	}
+	//if (m_Camera != nullptr)
+	//{
+	//	m_Camera->Input(fDeltaTime);
+	//}
 
 }
 
@@ -166,6 +188,14 @@ int CScene::Update(float fDeltaTime)
 	{
 		m_Airplane->Update(fDeltaTime);
 		m_Airplane->Update_Rotate_LR(0.0f, 0.0f, 1.0f);
+
+	}
+
+	if (m_Missile != nullptr)
+	{
+		m_Missile->Update_Rotate_LR(0.0f, 1.0f, 0.0f);
+		m_Missile->Update(fDeltaTime);
+
 
 	}
 
@@ -261,6 +291,13 @@ void CScene::Render(float fDeltaTime)
 		m_Airplane->Render(fDeltaTime);
 
 	
+	if (m_Missile != nullptr)
+	{
+		m_Missile->Render(fDeltaTime);
+
+	}
+
+
 	if (m_Monster != nullptr)
 		m_Monster->Render(fDeltaTime);
 

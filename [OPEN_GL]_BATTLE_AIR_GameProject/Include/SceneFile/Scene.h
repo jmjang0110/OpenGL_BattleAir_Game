@@ -47,6 +47,11 @@ private:
 	class CTriangle* m_triangle;
 
 
+	class CBullet* m_Missile;
+
+
+
+
 
 public:
 	bool GetEnable()
