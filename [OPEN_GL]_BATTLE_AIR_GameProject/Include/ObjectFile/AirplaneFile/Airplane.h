@@ -56,9 +56,11 @@ private:
 	GLfloat m_Angle_LR = 0.0f; // 좌우 각도 
 	GLfloat m_Angle_UD = 0.0f; // 상하 각도 
 
+public:
+	class Chexahedron* m_CollideBox;
+
 private:
 	// collide box [ *** 충돌 박스 *** ]
-	class Chexahedron* m_CollideBox;
 	stbi_uc* m_Airplane_Text_data = NULL;
 
 private:

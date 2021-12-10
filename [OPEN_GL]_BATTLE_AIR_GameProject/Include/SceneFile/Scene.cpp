@@ -6,7 +6,12 @@
 #include "../ObjectFile/AxisFile/Axis.h"
 
 #include "../ObjectFile/AirplaneFile/Airplane.h"
-#include "../ObjectFile/MonsterFile/Monster.h"
+#include "../ObjectFile/MonsterFile/Monster1.h"
+#include "../ObjectFile/MonsterFile/Monster2.h"
+#include "../ObjectFile/MonsterFile/Monster3.h"
+#include "../ObjectFile/MonsterFile/Ballon.h"
+
+
 #include "../ObjectFile/BackgroundFile/Background.h"
 #include "../ObjectFile/BuildingFile/Building1.h"
 #include "../ObjectFile/BuildingFile/Building2.h"
@@ -20,6 +25,7 @@
 
 #include "../ObjectFile/BulletFile/Bullet.h"
 
+#include "../ObjectFile/HexaheronFile/hexahedron.h"
 
 
 CScene::CScene()
@@ -40,8 +46,17 @@ CScene::~CScene()
 	if (m_Airplane != nullptr)
 		delete m_Airplane;
 
-	if (m_Monster != nullptr)
-		delete m_Monster;
+	if (m_Monster1 != nullptr)
+		delete m_Monster1;
+
+	if (m_Monster2 != nullptr)
+		delete m_Monster2;
+
+	if (m_Monster3 != nullptr)
+		delete m_Monster3;
+
+	if (m_AirBallon != nullptr)
+		delete m_Monster3;
 
 	if (m_Background != nullptr)
 		delete m_Background;
@@ -64,6 +79,15 @@ CScene::~CScene()
 
 	stbi_image_free(m_Airplane_Text_data);
 	stbi_image_free(m_Bullet_Text_data);
+
+	stbi_image_free(m_Monster1_Text_data);
+	stbi_image_free(m_Monster2_Text_data);
+	stbi_image_free(m_Monster3_Text_data);
+	stbi_image_free(m_airballon_Text_data);
+
+	stbi_image_free(m_Building1_Text_data);
+	stbi_image_free(m_Building2_Text_data);
+	stbi_image_free(m_Building3_Text_data);
 
 }
 
@@ -111,10 +135,7 @@ void CScene::InitTexture_All()
 		exit(0);
 	}
 
-
-	
-
-		// *** Grass 텍스처 데이터 저장 ***
+	// *** Grass 텍스처 데이터 저장 ***
 	filename = "./ObjectFile/FloorFile/grass.jpg";
 	m_Grass_Text_dtat = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	m_Grass_width = widthImage;
@@ -127,6 +148,97 @@ void CScene::InitTexture_All()
 		exit(0);
 	}
 
+	// *** Airballon 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/MonsterFile/ballon.jpg";
+	m_airballon_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_airballon_width = widthImage;
+	m_airballon_height = heightImage;
+
+	cout << m_airballon_width << " " << m_airballon_height << endl;
+
+	if (!m_airballon_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+	// *** Monster1 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/MonsterFile/Gargoyle_1_Mask.jpg";
+	m_Monster1_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Monster1_width = widthImage;
+	m_Monster1_height = heightImage;
+
+	cout << m_Monster1_width << " " << m_Monster1_height << endl;
+
+	if (!m_Monster1_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+	// *** Monster2 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/MonsterFile/Demon.png";
+	m_Monster2_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Monster2_width = widthImage;
+	m_Monster2_height = heightImage;
+
+	cout << m_Monster2_width << " " << m_Monster2_height << endl;
+
+	if (!m_Monster2_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+	// *** Monster3 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/MonsterFile/monster2.jpg";
+	m_Monster3_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Monster3_width = widthImage;
+	m_Monster3_height = heightImage;
+
+	cout << m_Monster3_width << " " << m_Monster3_height << endl;
+
+	if (!m_Monster3_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+
+	// *** Building1 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BuildingFile/Brown.jpg";
+	m_Building1_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Building1_width = widthImage;
+	m_Building1_height = heightImage;
+
+	cout << m_Building1_width << " " << m_Building1_height << endl;
+
+	if (!m_Building1_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+	// *** Building2 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BuildingFile/WindMill.jpg";
+	m_Building2_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Building2_width = widthImage;
+	m_Building2_height = heightImage;
+
+	cout << m_Building2_width << " " << m_Building2_height << endl;
+
+	if (!m_Building2_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+	// *** Building3 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BuildingFile/top.jpg";
+	m_Building3_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Building3_width = widthImage;
+	m_Building3_height = heightImage;
+
+	cout << m_Building3_width << " " << m_Building3_height << endl;
+
+	if (!m_Building3_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
 
 }
 
@@ -174,14 +286,42 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 			m_RedPng_width, m_RedPng_height);
 	}
 
-	if (m_Monster == nullptr)
+	if (m_AirBallon == nullptr)
 	{
-		m_Monster = new CMonster;
-		m_Monster->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/monster.obj", m_RedPng_Text_data,
-			m_RedPng_width, m_RedPng_height);
+		m_AirBallon = new CAirballon;
+		m_AirBallon->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f,1.0f,1.0f),
+			glm::vec3(-15.0f, 15.0f, 15.0f), "./ObjectFile/MonsterFile/ballon.obj", m_airballon_Text_data, m_RedPng_Text_data,
+			m_airballon_width, m_airballon_height, m_RedPng_width, m_RedPng_height);
 
 	}
+
+	if (m_Monster1 == nullptr)
+	{
+		m_Monster1 = new CMonster1;
+		m_Monster1->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
+			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/monster.obj", m_Monster1_Text_data, m_RedPng_Text_data,
+			m_Monster1_width, m_Monster1_height, m_RedPng_width, m_RedPng_height);
+
+	}
+
+	if (m_Monster2 == nullptr)
+	{
+		m_Monster2 = new CMonster2;
+		m_Monster2->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
+			glm::vec3(10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/Demon.obj", m_Monster2_Text_data, m_RedPng_Text_data,
+			m_Monster2_width, m_Monster2_height, m_RedPng_width, m_RedPng_height);
+
+	}
+
+	if (m_Monster3 == nullptr)
+	{
+		m_Monster3 = new CMonster3;
+		m_Monster3->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
+			glm::vec3(-10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/monster2.obj", m_Monster3_Text_data, m_RedPng_Text_data,
+			m_Monster3_width, m_Monster3_height, m_RedPng_width, m_RedPng_height);
+
+	}
+
 	// missile 초기화 
 	/*if (m_Missile == nullptr)
 	{
@@ -223,7 +363,8 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Building1 = new CBuilding1;
 		m_Building1->Init(glm::vec3(3.0f, 1.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-			glm::vec3(3.0f, 3.0f, 3.0f), "./ObjectFile/BuildingFile/BrownTown.obj");
+			glm::vec3(3.0f, 3.0f, 3.0f), "./ObjectFile/BuildingFile/BrownTown.obj",m_Building1_Text_data,m_RedPng_Text_data,
+			m_Building1_width,m_Building1_height, m_RedPng_width, m_RedPng_height);
 
 	}
 
@@ -231,7 +372,8 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Building2 = new CBuilding2;
 		m_Building2->Init(glm::vec3(3.0f, 5.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-			glm::vec3(-3.0f, -3.0f, -3.0f), "./ObjectFile/BuildingFile/WindMill.obj");
+			glm::vec3(-3.0f, -3.0f, -3.0f), "./ObjectFile/BuildingFile/WindMill.obj", m_Building2_Text_data, m_RedPng_Text_data,
+			m_Building2_width, m_Building2_height, m_RedPng_width, m_RedPng_height);
 
 	}
 
@@ -239,7 +381,8 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Building3 = new CBuilding3;
 		m_Building3->Init(glm::vec3(15.0f, 3.0f, 15.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-			glm::vec3(-10.0f, 3.0f, -3.0f), "./ObjectFile/BuildingFile/top.obj");
+			glm::vec3(-20.0f, 3.0f, -3.0f), "./ObjectFile/BuildingFile/top.obj", m_Building3_Text_data, m_RedPng_Text_data,
+			m_Building3_width, m_Building3_height, m_RedPng_width, m_RedPng_height);
 
 	}
 
@@ -381,11 +524,56 @@ int CScene::LateUpdate(float fDeltaTime)
 	return 0;
 }
 
+bool CScene::check_crash(Chexahedron* airplane, Chexahedron* obj)
+{
+	float x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4;
+
+	x1 = airplane->GetCollide_Position(3).x;
+	y1 = airplane->GetCollide_Position(3).y;
+	z1 = airplane->GetCollide_Position(3).z;
+
+	x2 = airplane->GetCollide_Position(5).x;
+	y2 = airplane->GetCollide_Position(5).y;
+	z2 = airplane->GetCollide_Position(5).z;
+
+	x3 = obj->GetCollide_Position(3).x;
+	y3 = obj->GetCollide_Position(3).y;
+	z3 = obj->GetCollide_Position(3).z;
+
+
+	x4 = obj->GetCollide_Position(5).x;
+	y4 = obj->GetCollide_Position(5).y;
+	z4 = obj->GetCollide_Position(5).z;
+
+	cout << "--------------------------------------------------------------------" << endl;
+	cout << "비행기" << endl;
+	cout << " x1 = " << x1 << " y1 = " << y1 << " z1 = " << z1 << endl;
+	cout << " x2 = " << x2 << " y2 = " << y2 << " z2 = " << z2 << endl;
+
+	cout << "몬스터" << endl;
+	cout << " x3 = " << x3 << " y3 = " << y3 << " z3 = " << z3 << endl;
+	cout << " x4 = " << x4 << " y4 = " << y4 << " z4 = " << z4 << endl;
+	cout << "--------------------------------------------------------------------" << endl;
+
+
+	if ((x1 <= x4 && x2 >= x3) && (y1 <= y4 && y2 >= y3) && (z1 <= z4 && z2 >= z3)) {
+		return true;
+	}
+
+	return false;
+}
+
 void CScene::Collision(float fDeltaTime)
 {
-	if (m_Airplane != nullptr)
+	if (m_Airplane != nullptr&&m_Monster2!=nullptr)
 	{
-		m_Airplane->Collision(fDeltaTime);
+		if (check_crash(m_Airplane->m_CollideBox, m_Monster2->m_CollideBox)) {
+			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+
+		}
 	}
 }
 
@@ -427,9 +615,17 @@ void CScene::Render(float fDeltaTime)
 
 	}
 
+	if (m_AirBallon != nullptr)
+		m_AirBallon->Render(fDeltaTime);
 
-	if (m_Monster != nullptr)
-		m_Monster->Render(fDeltaTime);
+	if (m_Monster1 != nullptr)
+		m_Monster1->Render(fDeltaTime);
+
+	if (m_Monster2 != nullptr)
+		m_Monster2->Render(fDeltaTime);
+
+	if (m_Monster3 != nullptr)
+		m_Monster3->Render(fDeltaTime);
 
 	if (m_Background != nullptr)
 		m_Background->Render(fDeltaTime);

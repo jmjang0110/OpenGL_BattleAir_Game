@@ -1,0 +1,28 @@
+# Blender MTL File: 'future monster_low.blend'
+# Material Count: 2
+
+newmtl body
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump _body_Normal.jpg
+map_Ns _body_Roughness.jpg
+refl _body_Metallic.jpg
+
+newmtl details
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump _details_Normal.jpg
+map_Ns _details_Roughness.jpg
+refl _details_Metallic.jpg

@@ -117,7 +117,7 @@
     <ClCompile Include="ObjectFile\AirplaneFile\Airplane.cpp">
       <Filter>03.Object\03-2 Airplane</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectFile\MonsterFile\Monster.cpp">
+    <ClCompile Include="ObjectFile\MonsterFile\Monster1.cpp">
       <Filter>03.Object\03-3.Monster</Filter>
     </ClCompile>
     <ClCompile Include="ObjectFile\BackgroundFile\Background.cpp">
@@ -149,6 +149,15 @@
     </ClCompile>
     <ClCompile Include="ObjectFile\BuildingFile\Building3.cpp">
       <Filter>03.Object\03-9 Building</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\MonsterFile\Monster2.cpp">
+      <Filter>03.Object\03-3.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\MonsterFile\Monster3.cpp">
+      <Filter>03.Object\03-3.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\MonsterFile\Ballon.cpp">
+      <Filter>03.Object\03-3.Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +203,7 @@
     <ClInclude Include="HeaderFile\stb_image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectFile\MonsterFile\Monster.h">
+    <ClInclude Include="ObjectFile\MonsterFile\Monster1.h">
       <Filter>03.Object\03-3.Monster</Filter>
     </ClInclude>
     <ClInclude Include="ObjectFile\BackgroundFile\Background.h">
@@ -226,6 +235,15 @@
     </ClInclude>
     <ClInclude Include="ObjectFile\BuildingFile\Building3.h">
       <Filter>03.Object\03-9 Building</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\MonsterFile\Monster2.h">
+      <Filter>03.Object\03-3.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\MonsterFile\Monster3.h">
+      <Filter>03.Object\03-3.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\MonsterFile\Ballon.h">
+      <Filter>03.Object\03-3.Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
