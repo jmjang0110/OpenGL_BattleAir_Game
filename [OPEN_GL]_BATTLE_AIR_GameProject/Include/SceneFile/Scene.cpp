@@ -517,10 +517,6 @@ int CScene::Update(float fDeltaTime)
 	// ====================================================================
 	// ====================================================================
 
-	if (m_AirBallon != nullptr)
-		m_AirBallon->Update(fDeltaTime);
-
-
 	return 0;
 }
 
