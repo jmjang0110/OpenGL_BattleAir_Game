@@ -52,10 +52,11 @@ private:
 	// Airplane Speed 
 	GLfloat m_Speed;
 
-
-private:
+public:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
+
+private:
 	stbi_uc* m_Monster1_Text_data = NULL;
 
 public:

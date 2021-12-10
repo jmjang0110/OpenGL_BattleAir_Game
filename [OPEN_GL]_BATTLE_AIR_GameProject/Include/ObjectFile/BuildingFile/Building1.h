@@ -48,9 +48,11 @@ private:
 	glm::vec3 m_Pivot = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 m_Color;
 
-private:
+public:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
+
+private:
 	stbi_uc* m_Building1_Text_data = NULL;
 
 public:

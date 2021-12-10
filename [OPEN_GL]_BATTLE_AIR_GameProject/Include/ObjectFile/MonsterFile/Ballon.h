@@ -51,10 +51,11 @@ private:
 	// Airplane Speed 
 	GLfloat m_Speed;
 
-
-private:
+public:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
+
+private:
 	stbi_uc* m_airballon_Text_data = NULL;
 public:
 	glm::vec3 GetCollide_Position(int idx);

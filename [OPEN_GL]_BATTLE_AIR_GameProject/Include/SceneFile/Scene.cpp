@@ -42,7 +42,7 @@ CScene::~CScene()
 
 	if (m_Light != nullptr)
 		delete m_Light;
-	
+
 	if (m_Airplane != nullptr)
 		delete m_Airplane;
 
@@ -281,7 +281,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj",
 			m_Airplane_Text_data, m_Bullet_Text_data, m_RedPng_Text_data,
-			m_Airplane_width, m_Airplane_height, 
+			m_Airplane_width, m_Airplane_height,
 			m_Bullet_width, m_Bullet_height,
 			m_RedPng_width, m_RedPng_height);
 	}
@@ -289,7 +289,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	if (m_AirBallon == nullptr)
 	{
 		m_AirBallon = new CAirballon;
-		m_AirBallon->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f,1.0f,1.0f),
+		m_AirBallon->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f),
 			glm::vec3(-15.0f, 15.0f, 15.0f), "./ObjectFile/MonsterFile/ballon.obj", m_airballon_Text_data, m_RedPng_Text_data,
 			m_airballon_width, m_airballon_height, m_RedPng_width, m_RedPng_height);
 
@@ -363,8 +363,8 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Building1 = new CBuilding1;
 		m_Building1->Init(glm::vec3(3.0f, 1.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-			glm::vec3(3.0f, 3.0f, 3.0f), "./ObjectFile/BuildingFile/BrownTown.obj",m_Building1_Text_data,m_RedPng_Text_data,
-			m_Building1_width,m_Building1_height, m_RedPng_width, m_RedPng_height);
+			glm::vec3(3.0f, 3.0f, 3.0f), "./ObjectFile/BuildingFile/BrownTown.obj", m_Building1_Text_data, m_RedPng_Text_data,
+			m_Building1_width, m_Building1_height, m_RedPng_width, m_RedPng_height);
 
 	}
 
@@ -430,9 +430,9 @@ bool CScene::Init(SCENE_TYPE type)
 	}
 	if (type == SCENE_TYPE::MAIN_STAGE)
 	{
-	
+
 	}
-	
+
 
 
 	return true;
@@ -545,15 +545,15 @@ bool CScene::check_crash(Chexahedron* airplane, Chexahedron* obj)
 	y4 = obj->GetCollide_Position(5).y;
 	z4 = obj->GetCollide_Position(5).z;
 
-	cout << "--------------------------------------------------------------------" << endl;
-	cout << "비행기" << endl;
-	cout << " x1 = " << x1 << " y1 = " << y1 << " z1 = " << z1 << endl;
-	cout << " x2 = " << x2 << " y2 = " << y2 << " z2 = " << z2 << endl;
+	//cout << "--------------------------------------------------------------------" << endl;
+	//cout << "비행기" << endl;
+	//cout << " x1 = " << x1 << " y1 = " << y1 << " z1 = " << z1 << endl;
+	//cout << " x2 = " << x2 << " y2 = " << y2 << " z2 = " << z2 << endl;
 
-	cout << "몬스터" << endl;
-	cout << " x3 = " << x3 << " y3 = " << y3 << " z3 = " << z3 << endl;
-	cout << " x4 = " << x4 << " y4 = " << y4 << " z4 = " << z4 << endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	//cout << "몬스터" << endl;
+	//cout << " x3 = " << x3 << " y3 = " << y3 << " z3 = " << z3 << endl;
+	//cout << " x4 = " << x4 << " y4 = " << y4 << " z4 = " << z4 << endl;
+	//cout << "--------------------------------------------------------------------" << endl;
 
 
 	if ((x1 <= x4 && x2 >= x3) && (y1 <= y4 && y2 >= y3) && (z1 <= z4 && z2 >= z3)) {
@@ -565,27 +565,28 @@ bool CScene::check_crash(Chexahedron* airplane, Chexahedron* obj)
 
 void CScene::Collision(float fDeltaTime)
 {
-	if (m_Airplane != nullptr&&m_Monster2!=nullptr)
+	if (m_Airplane != nullptr)
 	{
-		if (check_crash(m_Airplane->m_CollideBox, m_Monster2->m_CollideBox)) {
-			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-			cout << "충돌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
-
-		}
+		if (m_Monster1 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster1->m_CollideBox)) cout << "monster1 충돌" << endl;
+		if (m_Monster2 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster2->m_CollideBox)) cout << "monster2 충돌" << endl;
+		if (m_Monster3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster3->m_CollideBox)) cout << "monster3 충돌" << endl;
+		if (m_Building1 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building1->m_CollideBox)) cout << "building1 충돌" << endl;
+		if (m_Building2 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building2->m_CollideBox)) cout << "building2 충돌" << endl;
+		if (m_Building3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building3->m_CollideBox)) cout << "building3 충돌" << endl;
+		if (m_AirBallon != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_AirBallon->m_CollideBox)) cout << "air ballon 충돌" << endl;
+	
 	}
 }
 
 void CScene::Render(float fDeltaTime)
 {
-	
+
 	UpdateProjectionMat();
 
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 
-	
+
 
 	if (m_Camera != nullptr)
 		m_Camera->Render(fDeltaTime);
@@ -608,7 +609,7 @@ void CScene::Render(float fDeltaTime)
 	if (m_Airplane != nullptr)
 		m_Airplane->Render(fDeltaTime);
 
-	
+
 	if (m_Missile != nullptr)
 	{
 		m_Missile->Render(fDeltaTime);
