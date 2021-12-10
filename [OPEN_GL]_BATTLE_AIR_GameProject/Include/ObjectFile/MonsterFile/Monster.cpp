@@ -47,11 +47,12 @@ void CMonster::Update_ModelTransform(float fDeltaTime)
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
 }
 
-void CMonster::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
+void CMonster::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData,
+	int text_width, int text_height)
 {
 	// *** 충돌 박스 초기화 ***
 	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(2.0f, 2.0f, 2.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
+	m_CollideBox->Init(2.0f, 2.0f, 2.0f, pivot, textData, text_width, text_height);
 
 	m_Pivot = pivot;
 	m_Color = color;

@@ -60,6 +60,14 @@ private:
 	stbi_uc* m_Bullet_Text_data = NULL;
 	int m_Bullet_width = 0, m_Bullet_height = 0;
 
+	stbi_uc* m_RedPng_Text_data = NULL;
+	int m_RedPng_width = 0, m_RedPng_height = 0;
+
+	stbi_uc* m_Grass_Text_dtat = NULL;
+	int m_Grass_width = 0, m_Grass_height = 0;
+
+
+
 public:
 	void InitTexture_All();
 

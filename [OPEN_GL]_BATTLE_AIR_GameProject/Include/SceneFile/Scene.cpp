@@ -97,6 +97,37 @@ void CScene::InitTexture_All()
 		exit(0);
 	}
 
+
+	// *** Red 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/HexaheronFile/Red.png";
+	m_RedPng_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_RedPng_width = widthImage;
+	m_RedPng_height = heightImage;
+
+	cout << widthImage << " " << heightImage << endl;
+
+	if (!m_RedPng_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+
+	
+
+		// *** Grass 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/FloorFile/grass.jpg";
+	m_Grass_Text_dtat = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Grass_width = widthImage;
+	m_Grass_height = heightImage;
+
+	cout << m_Grass_width << " " << m_Grass_height << endl;
+
+	if (!m_Grass_Text_dtat) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+
 }
 
 void CScene::UpdateProjectionMat()
@@ -137,10 +168,20 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		// Init( scale color Pivot FileName )  
 		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
 			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj",
-			m_Airplane_Text_data, m_Bullet_Text_data, m_Airplane_width, m_Airplane_height, m_Bullet_width, m_Bullet_height);
+			m_Airplane_Text_data, m_Bullet_Text_data, m_RedPng_Text_data,
+			m_Airplane_width, m_Airplane_height, 
+			m_Bullet_width, m_Bullet_height,
+			m_RedPng_width, m_RedPng_height);
 	}
 
+	if (m_Monster == nullptr)
+	{
+		m_Monster = new CMonster;
+		m_Monster->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
+			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/monster.obj", m_RedPng_Text_data,
+			m_RedPng_width, m_RedPng_height);
 
+	}
 	// missile 초기화 
 	/*if (m_Missile == nullptr)
 	{
@@ -208,19 +249,13 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		if (m_Floor[i] == nullptr)
 		{
 			m_Floor[i] = new CFloor;
-			m_Floor[i]->Init("./ObjectFile/FloorFile/grass.jpg");
+			m_Floor[i]->Init(m_Grass_Text_dtat, m_Grass_width, m_Grass_height);
 
 		}
 
 	}
 
-	if (m_Monster == nullptr)
-	{
-		m_Monster = new CMonster;
-		m_Monster->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/monster.obj");
 
-	}
 }
 
 void CScene::Init_BeginStage(SCENE_TYPE type)

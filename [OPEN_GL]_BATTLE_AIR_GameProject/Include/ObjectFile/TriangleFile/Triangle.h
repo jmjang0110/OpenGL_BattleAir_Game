@@ -42,7 +42,8 @@ private:
 
 	unsigned int m_texture;
 public:
-	void InitTexture_1(const char* filepath);
+	void InitTexture_1(stbi_uc* textData3,
+		int text_width, int text_height);
 
 	void InitBuffer();
 
@@ -50,7 +51,8 @@ public:
 	// 초기화 ( 위치 + 색 + Buffer 등록 )
 	void Init(glm::vec3 Pos0, glm::vec3 Pos1, glm::vec3 Pos2,
 		GLfloat R, GLfloat G, GLfloat B, glm::vec3 Normal1, glm::vec3 Normal2, glm::vec3 Normal3,
-		glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3, const char* filepath);
+		glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3, stbi_uc* textData3,
+		int text_width, int text_height);
 
 	void InitTexture(glm::vec2 Pos0, glm::vec2 Pos1, glm::vec2 Pos2);
 	//  삼각형의 0,1,2 위치 값을 받습니다. 

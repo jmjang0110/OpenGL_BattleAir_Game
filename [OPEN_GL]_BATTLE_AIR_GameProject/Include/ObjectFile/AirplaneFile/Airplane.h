@@ -118,8 +118,9 @@ public:
 
 
 public:
-	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
-		int text_airplane_width, int text_airplane_height, int text_bullet_width, int text_height_width);
+	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2, stbi_uc* textData3,
+		int text_airplane_width, int text_airplane_height, int text_bullet_width, int text_height_width, int textRed_bullet_width, int textRed_height_height);
+
 
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트

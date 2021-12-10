@@ -39,13 +39,14 @@ public:
 public:
 	void SetColor(glm::vec3 RGB);
 	// 가로 세로 높이 
-	void Init(GLfloat W, GLfloat D, GLfloat H, glm::vec3 pivot, const char* filepath);
+	void Init(GLfloat W, GLfloat D, GLfloat H, glm::vec3 pivot, stbi_uc* textData3,
+		int text_width, int text_height);
 
 public:
-	void Update_TranslateForm(glm::mat4 airplane_translateMat);
-	void Update_RotateForm(glm::mat4 airplane_RotateMat);
-	void Update_ScaleForm(glm::mat4 airplane_ScaleMat);
-
+	// ** 행렬 업데이트 함수 ** 
+	void Update_TranslateForm(glm::vec3 translate);
+	void Update_RotateForm(GLfloat Time, GLfloat Axis_x = 0.0f, GLfloat Axis_y = 0.0f, GLfloat Axis_z = 1.0f);
+	void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
 	void Update_ModelTransform();
 
 	void Render();
