@@ -51,15 +51,6 @@ private:
 	// Airplane Speed 
 	GLfloat m_Speed;
 
-<<<<<<< Updated upstream
-=======
-	GLfloat m_Dir = 1;
-
-
-public:
-	// collide box [ *** 충돌 박스 *** ]
-	class Chexahedron* m_CollideBox;
->>>>>>> Stashed changes
 
 private:
 	// collide box [ *** 충돌 박스 *** ]
