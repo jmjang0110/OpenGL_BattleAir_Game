@@ -51,13 +51,15 @@ void CMonster2::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	int text_monster_width, int text_monster_height, int textRed_height_width, int textRed_height_height)
 {
 	m_Monster2_Text_data = textData;
+	m_Pivot = pivot;
+	m_Color = color;
+	m_Pivot.y = m_Pivot.y + scaleInfo.y / 2;
 
 	// *** 충돌 박스 초기화 ***
 	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(scaleInfo.x * 1.0f, scaleInfo.y * 1.0f, scaleInfo.z * 1.0f, pivot, textData2, textRed_height_width, textRed_height_height);
+	m_CollideBox->Init(scaleInfo.x * 1.0f, scaleInfo.y * 1.0f, scaleInfo.z * 1.0f, m_Pivot, textData2, textRed_height_width, textRed_height_height);
 
-	m_Pivot = pivot;
-	m_Color = color;
+	
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_TranslateForm(m_Pivot);
 
@@ -110,7 +112,7 @@ void CMonster2::Render(float fDeltaTime)
 
 	Update_ModelTransform(fDeltaTime);
 
-	m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f, 102.0f / 255.0f);
+	//m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f, 102.0f / 255.0f);
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
 

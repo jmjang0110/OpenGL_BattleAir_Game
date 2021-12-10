@@ -111,7 +111,7 @@ void CMonster3::Render(float fDeltaTime)
 
 	Update_ModelTransform(fDeltaTime);
 
-	m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f, 102.0f / 255.0f);
+	//m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f, 102.0f / 255.0f);
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
 

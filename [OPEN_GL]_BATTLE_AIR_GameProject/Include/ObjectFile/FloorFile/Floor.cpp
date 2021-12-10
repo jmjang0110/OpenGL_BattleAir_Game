@@ -113,6 +113,7 @@ void CFloor::InitColor()
 
 void CFloor::Render()
 {
+	Update_ScaleForm(10.0f, 1.0f, 10.0f);
 	Update_ModelTransform();
 
 	if (m_Tri[0] != nullptr && m_Tri[1] != nullptr)

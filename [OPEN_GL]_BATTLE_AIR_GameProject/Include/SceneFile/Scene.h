@@ -30,6 +30,9 @@ private:
 private:
 	class CCamera*	m_Camera;
 	class CLight*	m_Light;
+	class CLight*	m_Light2;
+	class CLight*	m_Light3;
+	class CLight*	m_Light4;
 	class CAxis*	m_Axis;
 
 

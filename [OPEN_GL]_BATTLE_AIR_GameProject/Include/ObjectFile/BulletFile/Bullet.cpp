@@ -64,6 +64,10 @@ void CBullet::Update_ModelTransform(float fDeltaTime)
 void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle , stbi_uc* textData2,int text_width, int text_height)
 {
 
+	// *** 충돌 박스 초기화 ***
+	/*m_CollideBox = new Chexahedron;
+	m_CollideBox->Init(1.0f, 2.5f, 1.0f, pivot, textData2, text_width, text_height);*/
+
 	m_Angle = angle;
 	m_Pivot = pivot;
 	m_Color = color;
@@ -72,7 +76,7 @@ void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const 
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_Rotate_LR(0.0f, 1.0f, 0.0f);
 
-	cout << "CBullet Iniit :"<< m_Pivot.x << " " << m_Pivot.z << endl;
+	//cout << "CBullet Iniit :"<< m_Pivot.x << " " << m_Pivot.y << " " << m_Pivot.z << endl;
 
  	Update_TranslateForm(m_Pivot);
 
@@ -84,10 +88,13 @@ void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const 
 	InitTexture_1(textData2, text_width , text_height);
 	InitBuffer();
 
+	
+
 	m_Angle = angle;
 	m_Pivot = pivot;
 	m_Color = color;
 
+	
 }
 
 void CBullet::Input(float fDeltaTime)
@@ -96,10 +103,18 @@ void CBullet::Input(float fDeltaTime)
 
 int CBullet::Update(float fDeltaTime)
 {
+	m_dist += fDeltaTime * m_Speed;
 
 	m_Pivot.x += fDeltaTime * m_Speed * cos(glm::radians((m_Angle)));
 	m_Pivot.z += fDeltaTime * m_Speed * sin(glm::radians((m_Angle)));
 	Update_TranslateForm(m_Pivot);
+
+
+	if (m_dist >= m_Limit_dist)
+		m_bEnable = false;
+
+	/*if (m_CollideBox != nullptr)
+		m_CollideBox->Update_TranslateForm(m_Pivot);*/
 
 
 	return 0;
@@ -177,6 +192,18 @@ void CBullet::InitTexture_1(stbi_uc* textData2, int width, int height)
 
 }
 
+
+glm::vec3 CBullet::GetCollide_Position(int idx)
+{
+	
+		if (m_CollideBox != nullptr)
+		{
+			return m_CollideBox->GetCollide_Position(idx);
+		}
+
+		return glm::vec3(0.0f, 0.0f, 0.0f);
+
+}
 
 int CBullet::loadObj_normalize_center(const char* filename)
 {

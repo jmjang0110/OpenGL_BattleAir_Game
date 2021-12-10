@@ -51,14 +51,18 @@ void CMonster1::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	int text_monster_width, int text_monster_height, int textRed_height_width, int textRed_height_height)
 {
 	m_Monster1_Text_data = textData;
+	m_Pivot = pivot;
+	m_Color = color;
+	m_Pivot.y += 1.0f;
 
 	// *** 충돌 박스 초기화 ***
 	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(scaleInfo.x * 2.0f, scaleInfo.y * 2.0f, scaleInfo.z * 2.0f, pivot, textData2, textRed_height_width, textRed_height_height);
+	m_CollideBox->Init(scaleInfo.x * 2.0f, scaleInfo.y * 2.0f, scaleInfo.z * 2.0f, m_Pivot, textData2, textRed_height_width, textRed_height_height);
 
-	m_Pivot = pivot;
-	m_Color = color;
+	
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
+	
+
 	Update_TranslateForm(m_Pivot);
 
 	if (m_Tri_Num == 1)
@@ -110,7 +114,7 @@ void CMonster1::Render(float fDeltaTime)
 
 	Update_ModelTransform(fDeltaTime);
 	
-	m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f,102.0f / 255.0f);
+	//m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f,102.0f / 255.0f);
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
 
@@ -140,7 +144,7 @@ void CMonster1::InitTexture_1(stbi_uc* textData, int text_moster_width, int text
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+	//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 
 	cout << widthImage << " " << heightImage << endl;
 
@@ -155,7 +159,7 @@ void CMonster1::InitTexture_1(stbi_uc* textData, int text_moster_width, int text
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(m_Monster1_Text_data);
+	//stbi_image_free(m_Monster1_Text_data);
 
 }
 

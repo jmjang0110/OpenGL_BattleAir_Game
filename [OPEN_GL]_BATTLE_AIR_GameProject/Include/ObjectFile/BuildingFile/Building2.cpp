@@ -66,14 +66,19 @@ void CBuilding2::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, con
 	int text_building_width, int text_building_height, int textRed_height_width, int textRed_height_height)
 {
 	m_Building2_Text_data = textData;
-
-	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(scaleInfo.x * 1.0f, scaleInfo.y * 1.0f, scaleInfo.z * 2.5f, pivot, textData2, textRed_height_width, textRed_height_height);
-
-
-
 	m_Pivot = pivot;
 	m_Color = color;
+	m_Pivot.y += 7.0f;
+	m_Pivot.x = 50.0f;
+	m_Pivot.z = 50.0f;
+
+
+	m_CollideBox = new Chexahedron;
+	m_CollideBox->Init(scaleInfo.x * 1.0f, scaleInfo.y * 1.0f, scaleInfo.z * 2.5f, m_Pivot, textData2, textRed_height_width, textRed_height_height);
+
+
+
+	
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_TranslateForm(m_Pivot);
 
@@ -161,7 +166,7 @@ void CBuilding2::InitTexture_1(stbi_uc* textData, int text_building_width, int t
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(m_Building2_Text_data);
+	//stbi_image_free(m_Building2_Text_data);
 
 
 }

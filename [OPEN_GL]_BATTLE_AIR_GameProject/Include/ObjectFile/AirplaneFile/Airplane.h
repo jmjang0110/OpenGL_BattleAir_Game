@@ -96,7 +96,8 @@ public:
 private:
 	// 플레이어의 총알을 양뱡향 연결리스트로 관리합니다...
 	class CBulletList* m_myBulletList;	
-
+	float		    m_LastFireTime = NULL;
+	int			m_BulletShotCount;
 
 
 public:

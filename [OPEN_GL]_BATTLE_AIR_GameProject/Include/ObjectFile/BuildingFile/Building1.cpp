@@ -66,26 +66,22 @@ void CBuilding1::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, con
 	int text_building_width, int text_building_height, int textRed_height_width, int textRed_height_height)
 {
 	m_Building1_Text_data = textData;
-	
-	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(scaleInfo.x*2.3f, scaleInfo.y*3.0f, scaleInfo.z*2.0f, pivot, textData2, textRed_height_width, textRed_height_height);
-
-
-
 	m_Pivot = pivot;
 	m_Color = color;
+
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_RotateForm(-90.0f,1.0f,0.0f,0.0f);
 	Update_TranslateForm(m_Pivot);
 
 
-
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
-
-	InitTexture_1(m_Building1_Text_data, text_building_width, text_building_height);
+	InitTexture_1(textData, text_building_width, text_building_height);
 	InitBuffer();
+
+	m_CollideBox = new Chexahedron;
+	m_CollideBox->Init(scaleInfo.x * 2.3f, scaleInfo.y * 3.0f, scaleInfo.z * 2.0f, pivot, textData2, textRed_height_width, textRed_height_height);
 
 }
 
@@ -155,14 +151,14 @@ void CBuilding1::InitTexture_1(stbi_uc* textData, int text_building_width, int t
 		exit(0);
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, text_building_width, text_building_height, 0, GL_RGB, GL_UNSIGNED_BYTE, m_Building1_Text_data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, text_building_width, text_building_height, 0, GL_RGB, GL_UNSIGNED_BYTE, textData);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	unsigned int tLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "outTexture");
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(m_Building1_Text_data);
+	//stbi_image_free(m_Building1_Text_data);
 
 }
 
