@@ -48,6 +48,13 @@ private:
 	glm::vec3 m_Pivot = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 m_Color;
 
+private:
+	// collide box [ *** 충돌 박스 *** ]
+	class Chexahedron* m_CollideBox;
+	stbi_uc* m_Building1_Text_data = NULL;
+
+public:
+	glm::vec3 GetCollide_Position(int idx);
 
 private:
 	// 행렬 모음 
@@ -76,11 +83,12 @@ public:
 	void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
 	// ** 행렬 최종 함수 ** 
 	void Update_ModelTransform(float fDeltaTime);
-	void InitTexture_1();
+	void InitTexture_1(stbi_uc* textData, int text_building_width, int text_building_height);
 
 
 public:
-	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename);
+	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
+		int text_building_width, int text_building_heigh, int textRed_height_width, int textRed_height_height);
 
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트

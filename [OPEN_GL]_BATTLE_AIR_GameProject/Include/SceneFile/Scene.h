@@ -38,7 +38,12 @@ private:
 // **************************************
 private:
 	class CAirplane* m_Airplane;
-	class CMonster* m_Monster;
+	class CAirballon* m_AirBallon;
+
+	class CMonster1* m_Monster1;
+	class CMonster2* m_Monster2;
+	class CMonster3* m_Monster3;
+
 	class CBackground* m_Background;
 	class CBuilding1* m_Building1;
 	class CBuilding2* m_Building2;
@@ -66,11 +71,32 @@ private:
 	stbi_uc* m_Grass_Text_dtat = NULL;
 	int m_Grass_width = 0, m_Grass_height = 0;
 
+	stbi_uc* m_Monster1_Text_data = NULL;
+	int m_Monster1_width = 0, m_Monster1_height = 0;
 
+	stbi_uc* m_Monster2_Text_data = NULL;
+	int m_Monster2_width = 0, m_Monster2_height = 0;
+
+	stbi_uc* m_Monster3_Text_data = NULL;
+	int m_Monster3_width = 0, m_Monster3_height = 0;
+
+	stbi_uc* m_Building1_Text_data = NULL;
+	int m_Building1_width = 0, m_Building1_height = 0;
+
+	stbi_uc* m_Building2_Text_data = NULL;
+	int m_Building2_width = 0, m_Building2_height = 0;
+
+	stbi_uc* m_Building3_Text_data = NULL;
+	int m_Building3_width = 0, m_Building3_height = 0;
+
+	stbi_uc* m_airballon_Text_data = NULL;
+	int m_airballon_width = 0, m_airballon_height = 0;
 
 public:
 	void InitTexture_All();
 
+public:
+	bool check_crash(class Chexahedron* airplane, class Chexahedron* obj);
 
 public:
 	bool GetEnable()

@@ -1,8 +1,7 @@
 #include "Building2.h"
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
-
 #include "../../HeaderFile/stb_image.h"
-
+#include "../../ObjectFile/HexaheronFile/hexahedron.h"
 
 std::vector< glm::vec3 > CBuilding2::m_outvertex;
 std::vector< glm::vec3 > CBuilding2::m_outnormal;
@@ -51,9 +50,27 @@ void CBuilding2::Update_ModelTransform(float fDeltaTime)
 
 }
 
-
-void CBuilding2::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename)
+glm::vec3 CBuilding2::GetCollide_Position(int idx)
 {
+	if (m_CollideBox != nullptr)
+	{
+		return m_CollideBox->GetCollide_Position(idx);
+	}
+
+	return glm::vec3(0.0f, 0.0f, 0.0f);
+
+}
+
+
+void CBuilding2::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
+	int text_building_width, int text_building_height, int textRed_height_width, int textRed_height_height)
+{
+	m_Building2_Text_data = textData;
+
+	m_CollideBox = new Chexahedron;
+	m_CollideBox->Init(scaleInfo.x * 1.0f, scaleInfo.y * 1.0f, scaleInfo.z * 2.5f, pivot, textData2, textRed_height_width, textRed_height_height);
+
+
 
 	m_Pivot = pivot;
 	m_Color = color;
@@ -66,7 +83,7 @@ void CBuilding2::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, con
 		m_Tri_Num = loadObj_normalize_center(filename);
 
 
-	InitTexture_1();
+	InitTexture_1(m_Building2_Text_data, text_building_width, text_building_height);
 	InitBuffer();
 
 }
@@ -109,10 +126,13 @@ void CBuilding2::Render(float fDeltaTime)
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
+
+	if (m_CollideBox != nullptr)
+		m_CollideBox->Render();
 }
 
 
-void CBuilding2::InitTexture_1()
+void CBuilding2::InitTexture_1(stbi_uc* textData, int text_building_width, int text_building_height)
 {
 	unsigned int texture;
 	BITMAPINFO* bmp;
@@ -126,35 +146,23 @@ void CBuilding2::InitTexture_1()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-
-	//unsigned char* data = LoadDIBitmap("dog.bmp", &bmp);
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-
-	stbi_uc* data = NULL;
-	const char* filename = "./ObjectFile/BuildingFile/WindMill.jpg";
-
-	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
-	//cout << data << endl;
-
 
 	cout << widthImage << " " << heightImage << endl;
 
-
-
-	if (!data) {
-		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+	if (!m_Building2_Text_data) {
 		exit(0);
 	}
-	//cout << data << endl;
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImage, heightImage, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, text_building_width, text_building_height, 0, GL_RGB, GL_UNSIGNED_BYTE, m_Building2_Text_data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	unsigned int tLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "outTexture");
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(data);
+	stbi_image_free(m_Building2_Text_data);
+
 
 }
 
