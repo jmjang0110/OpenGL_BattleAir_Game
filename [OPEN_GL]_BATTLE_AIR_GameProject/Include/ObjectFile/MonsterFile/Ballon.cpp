@@ -88,7 +88,18 @@ void CAirballon::Input(float fDeltaTime)
 
 int CAirballon::Update(float fDeltaTime)
 {
+	
+	m_Pivot.y += (fDeltaTime * 5.0f * m_Dir);
 	Update_TranslateForm(m_Pivot);
+
+	if (m_Pivot.y >= 100.0f)
+		m_Dir = -1;
+	else if (m_Pivot.y <= 20.0f)
+		m_Dir = 1;
+
+	//if (m_CollideBox != nullptr)
+		//m_CollideBox->Update_TranslateForm(m_Pivot);
+
 
 
 	return 0;

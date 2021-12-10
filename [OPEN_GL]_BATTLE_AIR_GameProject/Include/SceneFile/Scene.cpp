@@ -462,6 +462,9 @@ int CScene::Update(float fDeltaTime)
 {
 	CSoundManager::GetInst()->Update();
 
+	if (m_AirBallon != nullptr)
+		m_AirBallon->Update(fDeltaTime);
+
 	if (m_Airplane != nullptr)
 	{
 		m_Airplane->Update(fDeltaTime);
@@ -496,24 +499,24 @@ int CScene::Update(float fDeltaTime)
 	//	m_Floor[0]->Update_TranslateForm(size, 0.0f, -size); // 1 사분면 
 
 	//}
-	if (m_Floor[1] != nullptr)
-	{
-		GLfloat size = m_Floor[1]->GetSize();
-		m_Floor[1]->Update_TranslateForm(-size, 0.01f, -size); // 2 사분면 
+	//if (m_Floor[1] != nullptr)
+	//{
+	//	GLfloat size = m_Floor[1]->GetSize();
+	//	m_Floor[1]->Update_TranslateForm(-size, 0.01f, -size); // 2 사분면 
 
-	}
-	if (m_Floor[2] != nullptr)
-	{
-		GLfloat size = m_Floor[2]->GetSize();
-		m_Floor[2]->Update_TranslateForm(-size, 0.02f, size); // 3 사분면 
+	//}
+	//if (m_Floor[2] != nullptr)
+	//{
+	//	GLfloat size = m_Floor[2]->GetSize();
+	//	m_Floor[2]->Update_TranslateForm(-size, 0.02f, size); // 3 사분면 
 
-	}
-	if (m_Floor[3] != nullptr)
-	{
-		GLfloat size = m_Floor[3]->GetSize();
-		m_Floor[3]->Update_TranslateForm(size, 0.03f, size); // 4 사분면 
+	//}
+	//if (m_Floor[3] != nullptr)
+	//{
+	//	GLfloat size = m_Floor[3]->GetSize();
+	//	m_Floor[3]->Update_TranslateForm(size, 0.03f, size); // 4 사분면 
 
-	}
+	//}
 	// ====================================================================
 	// ====================================================================
 

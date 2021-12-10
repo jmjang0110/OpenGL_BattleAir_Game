@@ -141,11 +141,15 @@ void Chexahedron::Init(GLfloat W, GLfloat D, GLfloat H, glm::vec3 pivot, stbi_uc
 
 void Chexahedron::Update_TranslateForm(glm::vec3 translate)
 {
-	m_Translate_Mat = glm::mat4(1.0f);
-	m_Translate_Mat = glm::translate(m_Translate_Mat, glm::vec3(translate));
 	m_Pivot.x = translate.x;
 	m_Pivot.y = translate.y;
 	m_Pivot.z = translate.z;
+
+
+
+	m_Translate_Mat = glm::mat4(1.0f);
+	m_Translate_Mat = glm::translate(m_Translate_Mat, glm::vec3(translate));
+
 }
 
 void Chexahedron::Update_RotateForm(GLfloat Time, GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
@@ -181,8 +185,9 @@ void Chexahedron::Update_ModelTransform()
 void Chexahedron::Render()
 {
 
-	Update_ModelTransform();
+	
 	InitPosition(m_Pivot);
+	Update_ModelTransform();
 
 	for (int i = 0; i < 12; ++i)
 	{
