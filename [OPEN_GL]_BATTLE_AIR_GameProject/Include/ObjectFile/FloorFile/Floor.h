@@ -37,7 +37,8 @@ public:
 	GLfloat GetSize() { return m_Floor_Size; };
 
 public:
-	void Init(const char* filepath);
+	void Init(stbi_uc* textData,
+		int text_width, int text_height);
 	
 public:
 	void Update_TranslateForm(GLfloat dx = 0.0f, GLfloat dy = 0.0f, GLfloat dz = 0.0f);

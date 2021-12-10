@@ -18,7 +18,8 @@ CFloor::~CFloor()
 
 }
 
-void CFloor::Init(const char* filepath)
+void CFloor::Init(stbi_uc* textData,
+	int text_width, int text_height)
 {
 	m_Tri[0] = new CTriangle;
 	m_Tri[1] = new CTriangle;
@@ -35,14 +36,14 @@ void CFloor::Init(const char* filepath)
 	
 	m_Tri[0]->Init(m_Position[0], m_Position[1], m_Position[2],
 		R, G, B, Normal, Normal, Normal,
-	glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f), filepath);
+	glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f), textData, text_width, text_height);
 
 
 	Normal = glm::normalize(glm::cross(m_Position[2] - m_Position[3], m_Position[2] - m_Position[0]));
 	
 	m_Tri[1]->Init(m_Position[0], m_Position[2], m_Position[3],
 		R, G, B, Normal, Normal, Normal,
-		glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 1.0f), filepath);
+		glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 1.0f), textData, text_width, text_height);
 
 		//"./ObjectFile/FloorFile/dog.png");
 		

@@ -11,7 +11,8 @@ CTriangle::~CTriangle()
 {
 }
 
-void CTriangle::InitTexture_1(const char* filepath)
+void CTriangle::InitTexture_1(stbi_uc* textData3,
+	int text_width, int text_height)
 {
 	unsigned int texture;
 	BITMAPINFO* bmp;
@@ -25,24 +26,24 @@ void CTriangle::InitTexture_1(const char* filepath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-	stbi_uc* data = NULL;
+	//stbi_uc* data = NULL;
 
-	const char* filename = filepath;// "./ObjectFile/FloorFile/grass.jpg";
+	//const char* filename = filepath;// "./ObjectFile/FloorFile/grass.jpg";
 
-	data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	//data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	cout << widthImage << " " << heightImage << endl;
 
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, widthImage, heightImage, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	if (!data) {
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, text_width, text_height, 0, GL_RGB, GL_UNSIGNED_BYTE, textData3);
+	/*if (!textData3) {
 		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
 		exit(0);
-	}
+	}*/
 
 	unsigned int tLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "outTexture");
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(data);
+	//stbi_image_free(data);
 
 }
 
@@ -84,14 +85,15 @@ void CTriangle::InitBuffer()
 }
 
 void CTriangle::Init(glm::vec3 Pos0, glm::vec3 Pos1, glm::vec3 Pos2, GLfloat R, GLfloat G, GLfloat B, glm::vec3 Normal1, glm::vec3 Normal2, glm::vec3 Normal3
-	, glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3, const char* filepath)
+	, glm::vec2 tex1, glm::vec2 tex2, glm::vec2 tex3, stbi_uc* textData3,
+	int text_width, int text_height)
 {
 	InitPosition(Pos0, Pos1, Pos2);
 	InitColor(R, G, B);
 	InitNormal(Normal1, Normal2, Normal3);
 	InitTexture(tex1, tex2, tex3);
 
-	InitTexture_1(filepath);
+	InitTexture_1(textData3, text_width, text_height);
 	InitBuffer();
 
 

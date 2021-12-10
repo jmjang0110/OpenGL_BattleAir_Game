@@ -65,8 +65,8 @@ void CAirplane::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 
 }
 
-void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
-	int text_airplane_width, int text_airplane_height, int text_bullet_width, int text_height_width)
+void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2, stbi_uc* textData3,
+	int text_airplane_width, int text_airplane_height, int text_bullet_width, int text_height_width, int textRed_bullet_width, int textRed_height_height)
 {
 	m_Airplane_Text_data = textData;
 
@@ -76,7 +76,7 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 
 	// *** 충돌 박스 초기화 ***
 	m_CollideBox = new Chexahedron;
-	m_CollideBox->Init(2.5f, 2.5f, 1.0f, pivot, "./ObjectFile/HexaheronFile/Red.png");
+	m_CollideBox->Init(2.5f, 2.5f, 1.0f, pivot, textData3,textRed_bullet_width, textRed_height_height);
 
 	m_Pivot = pivot;
 	m_Color = color;
@@ -203,6 +203,12 @@ int CAirplane::Update(float fDeltaTime)
 	if (m_myBulletList != nullptr)
 	{
 		m_myBulletList->Update(fDeltaTime);
+
+	}
+
+	if (m_CollideBox != nullptr)
+	{
+		m_CollideBox->Update_TranslateForm(m_Pivot);
 
 	}
 	return 0;
