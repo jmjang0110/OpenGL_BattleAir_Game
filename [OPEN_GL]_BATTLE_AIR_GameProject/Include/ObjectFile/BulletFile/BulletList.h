@@ -71,6 +71,8 @@ public:
 	void Update(float fDeltaTime);
 	//void Update(float fDeltaTime, _SIZE _size);
 
+	void CheckErase();
+
 	bool Empty()
 	{
 

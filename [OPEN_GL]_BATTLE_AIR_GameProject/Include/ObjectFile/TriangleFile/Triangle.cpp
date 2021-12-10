@@ -31,7 +31,7 @@ void CTriangle::InitTexture_1(stbi_uc* textData3,
 	//const char* filename = filepath;// "./ObjectFile/FloorFile/grass.jpg";
 
 	//data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
-	cout << widthImage << " " << heightImage << endl;
+	//cout << widthImage << " " << heightImage << endl;
 
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, text_width, text_height, 0, GL_RGB, GL_UNSIGNED_BYTE, textData3);
 	/*if (!textData3) {

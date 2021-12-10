@@ -195,6 +195,28 @@ void CBulletList::Update(float fDeltaTime)
 
 }
 
+void CBulletList::CheckErase()
+{
+	
+	for (PNODE pNode = m_pBegin->pNext; pNode != m_pEnd; pNode = pNode->pNext)
+	{
+		if (pNode->bullet)
+		{
+			if (pNode->bullet->GetEnable() == false)
+			{
+				PNODE delNode = pNode;
+				pNode = pNode->pPrev;
+				Erase(delNode);
+
+			}
+		}
+	}
+
+
+	m_Count -= 1;
+
+}
+
 
 //void CBulletList::Update(float fDeltaTime, _SIZE _size)
 //{

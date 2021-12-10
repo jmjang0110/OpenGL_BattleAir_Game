@@ -57,14 +57,20 @@ private:
 	// Airplane Speed 
 	GLfloat m_Speed = 15.0f;
 	GLfloat m_Angle = 0.0f;
+	GLfloat m_Limit_dist = 100;
+	GLfloat m_dist = 0.0f;
+
+
+	// 폭발 여부 표시 ( 충돌 했는지 혹은 사정거리 이상 지나면 사라지라는 신호 )
 	GLboolean m_bEnable = true;
 
 
 public:
 	bool GetEnable() { return m_bEnable; }
+	glm::vec3 GetCollide_Position(int idx);
 
 
-private:
+public:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
 

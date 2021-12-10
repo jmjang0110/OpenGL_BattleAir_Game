@@ -128,7 +128,7 @@ void CAirplane::InitTexture_1(stbi_uc* textData, int text_airplane_width, int te
 	//const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
 
 	//data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
-	cout << widthImage << " " << heightImage << endl;
+	//cout << widthImage << " " << heightImage << endl;
 
 	if (!m_Airplane_Text_data) {
 		//fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
@@ -152,15 +152,22 @@ void CAirplane::Input(float fDeltaTime)
 {
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
-		cout << "Present Airplane spot : "<< m_Pivot.x << " " << m_Pivot.z << endl;
+		cout << "Present Airplane spot : " << m_Pivot.x << " " << m_Pivot.z << endl;
+
 
 		glm::vec3 BulletPivot = m_Pivot;
 		BulletPivot.y -= 0.4f;
 		CSoundManager::GetInst()->playSound_Effect_Explode();
 
- 		m_myBulletList->PushBack(BulletPivot, (m_Angle_LR + 90.0f) * -1);
+		float currentTime = clock();
+		if (m_LastFireTime == NULL || currentTime - m_LastFireTime >= 50) {
 
+			m_myBulletList->PushBack(BulletPivot, (m_Angle_LR + 90.0f) * -1);
 
+		}
+
+		m_LastFireTime = currentTime;
+		m_BulletShotCount = 100;
 	}
 
 	// À§·Î 
@@ -230,7 +237,12 @@ int CAirplane::Update(float fDeltaTime)
 
 int CAirplane::LateUpdate(float fDeltaTime)
 {
+	/*if (m_myBulletList != nullptr)
+	{
+		m_myBulletList->late
+	}*/
 	return 0;
+
 }
 
 void CAirplane::Collision(float fDeltaTime)
