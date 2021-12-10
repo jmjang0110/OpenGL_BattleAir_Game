@@ -5,6 +5,7 @@
 #include "../../ObjectFile/HexaheronFile/hexahedron.h"
 #include "../BulletFile/Bullet.h"
 #include "../BulletFile/BulletList.h"
+#include "../../SoundFile/SoundManager.h"
 
 
 
@@ -62,6 +63,17 @@ void CAirplane::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 	m_Rotate_Mat_LR = glm::mat4(1.0f);
 	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle_LR), glm::vec3(Axis_x, Axis_y, Axis_z));
 
+
+}
+
+glm::vec3 CAirplane::GetCollide_Position(int idx)
+{
+	if (m_CollideBox != nullptr)
+	{
+		return m_CollideBox->GetCollide_Position(idx);
+	}
+
+	return glm::vec3(0.0f, 0.0f, 0.0f);
 
 }
 
@@ -144,6 +156,8 @@ void CAirplane::Input(float fDeltaTime)
 
 		glm::vec3 BulletPivot = m_Pivot;
 		BulletPivot.y -= 0.4f;
+		CSoundManager::GetInst()->playSound_Effect_Explode();
+
  		m_myBulletList->PushBack(BulletPivot, (m_Angle_LR + 90.0f) * -1);
 
 

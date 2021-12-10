@@ -115,6 +115,8 @@ public:
 
 public:
 	void Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z);
+	// CollideBox 의 idx 번째 점의 vec3 값을 반환 - Collide 에 사용 
+	glm::vec3 GetCollide_Position(int idx);
 
 
 public:

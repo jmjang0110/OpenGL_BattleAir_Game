@@ -20,6 +20,18 @@ Chexahedron::~Chexahedron()
 
 }
 
+glm::vec3 Chexahedron::GetCollide_Position(int idx)
+{
+	// 해당 idx 값이 존재한다면 반환 아니면 0.0f 0.0f ,0.0f 반환 
+	glm::vec3 Point = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	if(idx >= 0 && idx <= 7)
+		Point = m_Position[idx];
+
+	return Point;
+
+}
+
 void Chexahedron::InitPosition(glm::vec3 Pivot)
 {
 

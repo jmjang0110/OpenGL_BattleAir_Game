@@ -43,13 +43,13 @@ bool CSoundManager::Init()
 		FMOD_LOOP_NORMAL, 0, &m_bgmSound_End);
 
 	FMOD_System_CreateSound(soundSystem, "./Sound/MainMenu_Theme.mp3",
-		FMOD_LOOP_NORMAL, 0, &bgmSound_StageClear);
+		FMOD_LOOP_NORMAL, 0, &bgmSound_StageClear)*/;
 
-	FMOD_System_CreateSound(soundSystem, "./Sound/WraithBulletSound.wav",
+	FMOD_System_CreateSound(soundSystem, "./SoundFile/MP_Missle Launch.mp3",
 		FMOD_DEFAULT, 0, &m_effectSound_Explode);
 
-	FMOD_System_CreateSound(soundSystem, "./Sound/YouWin.wav",
-		FMOD_LOOP_NORMAL, 0, &bgmSound_StageClear);*/
+	//FMOD_System_CreateSound(soundSystem, "./Sound/YouWin.wav",
+	//	FMOD_LOOP_NORMAL, 0, &bgmSound_StageClear);
 
 
 	for (int i = 0; i < 10; ++i)
@@ -121,6 +121,7 @@ bool CSoundManager::playSound_Effect_Explode()
 
 	static int Soundidx = 0;
 	FMOD_System_PlaySound(soundSystem, m_effectSound_Explode, NULL, 0, &m_Explode_Sound_Channel[Soundidx++]);
+	FMOD_System_Update(soundSystem);
 
 	if (Soundidx > 9)
 		Soundidx = 0;
