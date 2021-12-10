@@ -550,7 +550,7 @@ bool CScene::check_crash(Chexahedron* airplane, Chexahedron* obj)
 	y4 = obj->GetCollide_Position(5).y;
 	z4 = obj->GetCollide_Position(5).z;
 
-	/*cout << "--------------------------------------------------------------------" << endl;
+	cout << "--------------------------------------------------------------------" << endl;
 	cout << "비행기" << endl;
 	cout << " x1 = " << x1 << " y1 = " << y1 << " z1 = " << z1 << endl;
 	cout << " x2 = " << x2 << " y2 = " << y2 << " z2 = " << z2 << endl;
@@ -558,7 +558,7 @@ bool CScene::check_crash(Chexahedron* airplane, Chexahedron* obj)
 	cout << "몬스터" << endl;
 	cout << " x3 = " << x3 << " y3 = " << y3 << " z3 = " << z3 << endl;
 	cout << " x4 = " << x4 << " y4 = " << y4 << " z4 = " << z4 << endl;
-	cout << "--------------------------------------------------------------------" << endl;*/
+	cout << "--------------------------------------------------------------------" << endl;
 
 
 	if ((x1 <= x4 && x2 >= x3) && (y1 <= y4 && y2 >= y3) && (z1 <= z4 && z2 >= z3)) {
