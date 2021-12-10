@@ -50,6 +50,8 @@ private:
 	glm::vec3 m_Color;
 	// Airplane Speed 
 	GLfloat m_Speed;
+	GLfloat m_Dir = 1;
+
 
 public:
 	// collide box [ *** 충돌 박스 *** ]
