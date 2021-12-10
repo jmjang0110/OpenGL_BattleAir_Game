@@ -312,6 +312,7 @@ void CScene::Input(float fDeltaTime)
 
 int CScene::Update(float fDeltaTime)
 {
+	CSoundManager::GetInst()->Update();
 
 	if (m_Airplane != nullptr)
 	{

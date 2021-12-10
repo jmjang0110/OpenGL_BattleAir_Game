@@ -44,6 +44,10 @@ public:
 	bool playSound_Effect();
 	bool playSound_Effect_Explode();
 
+public:
+	void Update();
+
+
 
 
 

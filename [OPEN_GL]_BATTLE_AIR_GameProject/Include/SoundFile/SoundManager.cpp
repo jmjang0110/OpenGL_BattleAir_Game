@@ -88,8 +88,19 @@ bool CSoundManager::playSound(SCENE_TYPE sceneType)
 	// 채널 볼륨 설정 
 	FMOD_Channel_SetVolume(m_effectChannel, 1.2);
 	FMOD_Channel_SetVolume(m_bgmChannel, 0.8);
+	FMOD_System_Update(soundSystem);
+	//while (true)
+	//{
+	//	FMOD_BOOL isplaying = false;
+	//	FMOD_Channel_IsPlaying(m_bgmChannel, &isplaying);
+	//	if (isplaying == false)
+	//	{
+	//		FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
+	//		break;
 
+	//	}
 
+	//}
 	return true;
 
 }
@@ -104,6 +115,7 @@ bool CSoundManager::stopSound()
 		FMOD_Channel_Stop(m_Explode_Sound_Channel[i]);
 
 	return true;
+
 }
 
 
@@ -127,4 +139,16 @@ bool CSoundManager::playSound_Effect_Explode()
 		Soundidx = 0;
 
 	return true;
+}
+
+void CSoundManager::Update()
+{
+	FMOD_BOOL isplaying = false;
+	FMOD_Channel_IsPlaying(m_bgmChannel, &isplaying);
+	if (isplaying == false)
+		FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
+
+	FMOD_System_Update(soundSystem);
+
+
 }
