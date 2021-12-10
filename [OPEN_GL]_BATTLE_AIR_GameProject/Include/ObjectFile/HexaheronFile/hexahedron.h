@@ -33,6 +33,10 @@ private:
 
 
 public:
+	// idx 번째 점의 vec3 값을 반환 - Collide 에 사용 
+	glm::vec3 GetCollide_Position(int idx);
+
+public:
 	// 3차원상의 Pivot 점을 기준으로 육면체 좌표값를 설정합니다. 
 	void InitPosition(glm::vec3 Pivot = glm::vec3(0.0f, 0.0f, 0.0f));
 
