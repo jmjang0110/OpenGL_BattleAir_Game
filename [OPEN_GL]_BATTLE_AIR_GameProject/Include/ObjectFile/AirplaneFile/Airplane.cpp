@@ -152,22 +152,23 @@ void CAirplane::Input(float fDeltaTime)
 {
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
-		cout << "Present Airplane spot : " << m_Pivot.x << " " << m_Pivot.z << endl;
+		
 
 
 		glm::vec3 BulletPivot = m_Pivot;
 		BulletPivot.y -= 0.4f;
-		CSoundManager::GetInst()->playSound_Effect_Explode();
+		
 
 		float currentTime = clock();
 		if (m_LastFireTime == NULL || currentTime - m_LastFireTime >= 50) {
-
+			cout << "Present Airplane spot : " << m_Pivot.x << " " << m_Pivot.z << endl;
+			CSoundManager::GetInst()->playSound_Effect_Explode();
 			m_myBulletList->PushBack(BulletPivot, (m_Angle_LR + 90.0f) * -1);
 
 		}
 
 		m_LastFireTime = currentTime;
-		m_BulletShotCount = 100;
+		m_BulletShotCount = 50;
 	}
 
 	// À§·Î 

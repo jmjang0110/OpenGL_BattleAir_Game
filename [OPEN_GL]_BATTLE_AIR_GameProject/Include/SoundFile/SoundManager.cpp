@@ -86,7 +86,7 @@ bool CSoundManager::playSound(SCENE_TYPE sceneType)
 		break;
 	}
 	// 채널 볼륨 설정 
-	FMOD_Channel_SetVolume(m_effectChannel, 1.2);
+	FMOD_Channel_SetVolume(m_effectChannel, 0.4);
 	FMOD_Channel_SetVolume(m_bgmChannel, 0.8);
 	FMOD_System_Update(soundSystem);
 	//while (true)
@@ -148,7 +148,6 @@ void CSoundManager::Update()
 	if (isplaying == false)
 		FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
 
+	//FMOD_System_Update(soundSystem);
 	FMOD_System_Update(soundSystem);
-
-
 }
