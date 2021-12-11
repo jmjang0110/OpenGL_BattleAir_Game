@@ -26,6 +26,10 @@
 #include "../ObjectFile/BulletFile/Bullet.h"
 
 #include "../ObjectFile/HexaheronFile/hexahedron.h"
+#include "../ObjectFile/BuildingFile/MapManager.h"
+#include "../ObjectFile/MonsterFile/MonsterManager.h"
+
+
 
 
 CScene::CScene()
@@ -266,9 +270,12 @@ void CScene::UpdateOrthoMat()
 
 void CScene::Init_MainStage(SCENE_TYPE type)
 {
+
 	// 텍스처 정보들을 저장합니다. 
 	InitTexture_All();
 
+
+	
 	if (CSoundManager::GetInst()->Init())
 	{
 		cout << "Sound File Load Success" << endl;
@@ -402,8 +409,13 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 
 	}
 
+	CMapManager::GetInst()->Init(m_Building1_Text_data, m_Building2_Text_data, m_Building3_Text_data, m_RedPng_Text_data,
+		m_Building1_width, m_Building1_height, m_Building2_width, m_Building2_height, m_Building3_width, m_Building3_height,
+		m_RedPng_width, m_RedPng_height);
 
-
+	CMonsterManager::GetInst()->Init(m_Monster1_Text_data, m_Monster2_Text_data, m_Monster3_Text_data, m_RedPng_Text_data,
+		m_Monster1_width, m_Monster1_height, m_Monster2_width, m_Monster2_height, m_Monster3_width, m_Monster3_height,
+		m_RedPng_width, m_RedPng_height);
 }
 
 void CScene::Init_BeginStage(SCENE_TYPE type)
@@ -668,6 +680,9 @@ void CScene::Render(float fDeltaTime)
 
 		}
 	}*/
+
+	CMapManager::GetInst()->Render(fDeltaTime);
+	CMonsterManager::GetInst()->Render(fDeltaTime);
 
 
 }

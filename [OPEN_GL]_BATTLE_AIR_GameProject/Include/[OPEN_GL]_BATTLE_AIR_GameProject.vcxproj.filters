@@ -159,6 +159,12 @@
     <ClCompile Include="ObjectFile\MonsterFile\Ballon.cpp">
       <Filter>03.Object\03-3.Monster</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectFile\BuildingFile\MapManager.cpp">
+      <Filter>03.Object\03-9 Building</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFile\MonsterFile\MonsterManager.cpp">
+      <Filter>03.Object\03-3.Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreFile\CCore.h">
@@ -243,6 +249,12 @@
       <Filter>03.Object\03-3.Monster</Filter>
     </ClInclude>
     <ClInclude Include="ObjectFile\MonsterFile\Ballon.h">
+      <Filter>03.Object\03-3.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\BuildingFile\MapManager.h">
+      <Filter>03.Object\03-9 Building</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFile\MonsterFile\MonsterManager.h">
       <Filter>03.Object\03-3.Monster</Filter>
     </ClInclude>
   </ItemGroup>

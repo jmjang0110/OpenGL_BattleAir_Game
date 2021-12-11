@@ -177,6 +177,7 @@
     <ClCompile Include="ObjectFile\BuildingFile\Building1.cpp" />
     <ClCompile Include="ObjectFile\BuildingFile\Building2.cpp" />
     <ClCompile Include="ObjectFile\BuildingFile\Building3.cpp" />
+    <ClCompile Include="ObjectFile\BuildingFile\MapManager.cpp" />
     <ClCompile Include="ObjectFile\BulletFile\Bullet.cpp" />
     <ClCompile Include="ObjectFile\BulletFile\BulletList.cpp" />
     <ClCompile Include="ObjectFile\FloorFile\Floor.cpp" />
@@ -187,6 +188,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjectFile\MonsterFile\Monster3.cpp" />
+    <ClCompile Include="ObjectFile\MonsterFile\MonsterManager.cpp" />
     <ClCompile Include="ObjectFile\TriangleFile\Triangle.cpp" />
     <ClCompile Include="SceneFile\Scene.cpp" />
     <ClCompile Include="SceneFile\SceneManager.cpp" />
@@ -211,6 +213,7 @@
     <ClInclude Include="ObjectFile\BuildingFile\Building1.h" />
     <ClInclude Include="ObjectFile\BuildingFile\Building2.h" />
     <ClInclude Include="ObjectFile\BuildingFile\Building3.h" />
+    <ClInclude Include="ObjectFile\BuildingFile\MapManager.h" />
     <ClInclude Include="ObjectFile\BulletFile\Bullet.h" />
     <ClInclude Include="ObjectFile\BulletFile\BulletList.h" />
     <ClInclude Include="ObjectFile\FloorFile\Floor.h" />
@@ -221,6 +224,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjectFile\MonsterFile\Monster3.h" />
+    <ClInclude Include="ObjectFile\MonsterFile\MonsterManager.h" />
     <ClInclude Include="ObjectFile\TriangleFile\Triangle.h" />
     <ClInclude Include="SceneFile\Scene.h" />
     <ClInclude Include="SceneFile\SceneManager.h" />
