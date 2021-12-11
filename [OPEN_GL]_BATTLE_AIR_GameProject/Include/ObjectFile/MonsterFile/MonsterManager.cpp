@@ -38,6 +38,8 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 
 				// building 1
 			case 1:
+			case 2:
+			case 4:
 				if (m_M1Cnt >= 50)
 					break;
 
@@ -50,10 +52,10 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 				m_M1Cnt += 1;
 
 				break;
-			case 2:
+			/*case 2:
 			case 4:
 				if (m_M2Cnt >= 50)
-					break;
+					break;*/
 
 				/*m_Monster2[m_M2Cnt] = new CMonster2;
 				m_Monster2[m_M2Cnt]->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
@@ -116,13 +118,13 @@ void CMonsterManager::Render(float fDeltaTime)
 {
 
 	// Building 1 Render 
-	/*for (int i = 0; i < m_M1Cnt; ++i)
+	for (int i = 0; i < m_M1Cnt; ++i)
 	{
 		if (m_Monster1[i] != nullptr)
 			m_Monster1[i]->Render(fDeltaTime);
 
 	}
-	for (int i = 0; i < m_M2Cnt; ++i)
+	/*for (int i = 0; i < m_M2Cnt; ++i)
 	{
 		if (m_Monster2[i] != nullptr)
 			m_Monster2[i]->Render(fDeltaTime);
