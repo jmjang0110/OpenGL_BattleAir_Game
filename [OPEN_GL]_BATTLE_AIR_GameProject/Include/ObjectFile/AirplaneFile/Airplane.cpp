@@ -51,7 +51,7 @@ void CAirplane::Update_ScaleForm(GLfloat sx, GLfloat sy, GLfloat sz)
 void CAirplane::Update_ModelTransform(float fDeltaTime)
 {
 
-	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Scale_Mat * m_Rotate_Mat_LR;
+	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Rotate_Mat_LR * m_Scale_Mat;// *m_Rotate_Mat_LR;
 
 	unsigned int MLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "modelTransform");
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
@@ -61,7 +61,7 @@ void CAirplane::Update_ModelTransform(float fDeltaTime)
 void CAirplane::Update_Rotate_LR(GLfloat Axis_x, GLfloat Axis_y, GLfloat Axis_z)
 {
 	m_Rotate_Mat_LR = glm::mat4(1.0f);
-	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle_LR), glm::vec3(Axis_x, Axis_y, Axis_z));
+	m_Rotate_Mat_LR = glm::rotate(m_Rotate_Mat_LR, glm::radians(m_Angle_LR), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
 }
@@ -94,7 +94,7 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	m_Color = color;
 
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
-	m_Rotate_Mat = glm::rotate(m_Rotate_Mat, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	m_Rotate_Mat = glm::rotate(m_Rotate_Mat, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);

@@ -68,6 +68,8 @@ void CBuilding1::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, con
 	m_Building1_Text_data = textData;
 	m_Pivot = pivot;
 	m_Color = color;
+	m_Pivot.y = rand() % 300 + 50.0f;
+
 
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_RotateForm(-90.0f,1.0f,0.0f,0.0f);
@@ -91,8 +93,8 @@ void CBuilding1::Input(float fDeltaTime)
 
 int CBuilding1::Update(float fDeltaTime)
 {
-	Update_RotateForm(fDeltaTime, 0.0f, 1.0f, 0.0f);
 
+	Update_RotateForm(fDeltaTime, 0.0f, 1.0f, 0.0f);
 	Update_TranslateForm(m_Pivot);
 
 

@@ -100,7 +100,7 @@ void CScene::InitTexture_All()
 
 	// *** 비행기 텍스처 데이터 저장 ***
 	stbi_set_flip_vertically_on_load(true);
-	const char* filename = "./ObjectFile/AirplaneFile/airplane_body_diffuse_v1.jpg";
+	const char* filename = "./ObjectFile/AirplaneFile/jet.jpg";
 	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
 	m_Airplane_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	m_Airplane_width = widthImage;
@@ -168,7 +168,7 @@ void CScene::InitTexture_All()
 
 	// *** Monster1 텍스처 데이터 저장 ***
 
-	filename = "./ObjectFile/MonsterFile/Gargoyle_1_Mask.jpg";
+	filename = "./ObjectFile/MonsterFile/bird.png";
 	m_Monster1_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	m_Monster1_width = widthImage;
 	m_Monster1_height = heightImage;
@@ -181,7 +181,7 @@ void CScene::InitTexture_All()
 	}
 
 	// *** Monster2 텍스처 데이터 저장 ***
-	filename = "./ObjectFile/MonsterFile/Demon.png";
+	filename = "./ObjectFile/MonsterFile/Gargoyle_1_Mask.jpg";
 	m_Monster2_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	m_Monster2_width = widthImage;
 	m_Monster2_height = heightImage;
@@ -287,8 +287,8 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Airplane = new CAirplane;
 		// Init( scale color Pivot FileName )  
-		m_Airplane->Init(glm::vec3(1.0f, 1.3f, 0.5f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/airplane3.obj",
+		m_Airplane->Init(glm::vec3(2.0f, 0.8f, 2.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/jet.obj",
 			m_Airplane_Text_data, m_Bullet_Text_data, m_RedPng_Text_data,
 			m_Airplane_width, m_Airplane_height,
 			m_Bullet_width, m_Bullet_height,
@@ -308,7 +308,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Monster1 = new CMonster1;
 		m_Monster1->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
-			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/monster.obj", m_Monster1_Text_data, m_RedPng_Text_data,
+			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/bird.obj", m_Monster1_Text_data, m_RedPng_Text_data,
 			m_Monster1_width, m_Monster1_height, m_RedPng_width, m_RedPng_height);
 
 	}
@@ -317,7 +317,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Monster2 = new CMonster2;
 		m_Monster2->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
-			glm::vec3(10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/Demon.obj", m_Monster2_Text_data, m_RedPng_Text_data,
+			glm::vec3(10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/Gargoyle_1.obj", m_Monster2_Text_data, m_RedPng_Text_data,
 			m_Monster2_width, m_Monster2_height, m_RedPng_width, m_RedPng_height);
 
 	}
@@ -391,8 +391,8 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	if (m_Building3 == nullptr)
 	{
 		m_Building3 = new CBuilding3;
-		m_Building3->Init(glm::vec3(15.0f, 3.0f, 15.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-			glm::vec3(-20.0f, 3.0f, -3.0f), "./ObjectFile/BuildingFile/top.obj", m_Building3_Text_data, m_RedPng_Text_data,
+		m_Building3->Init(glm::vec3(15.0f, 30.0f, 15.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(-20.0f, 3.0f, -3.0f), "./ObjectFile/BuildingFile/Floating Island.obj", m_Building3_Text_data, m_RedPng_Text_data,
 			m_Building3_width, m_Building3_height, m_RedPng_width, m_RedPng_height);
 
 	}
@@ -500,6 +500,8 @@ int CScene::Update(float fDeltaTime)
 		m_Camera->Update(fDeltaTime);
 
 	}
+
+	//CMapManager::GetInst()->Update(fDeltaTime);
 
 	// ====================================================================
 	// F L O O R 배치 ( 1 ~ 4 사분면 ) 위치로 Floor 객체 이동 - 처음 생성시 (0.0f , 0.0f , 0.0f) 위치

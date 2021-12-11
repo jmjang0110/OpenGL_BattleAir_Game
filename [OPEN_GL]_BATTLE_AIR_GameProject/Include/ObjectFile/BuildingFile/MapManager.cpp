@@ -68,7 +68,7 @@ bool CMapManager::Init(stbi_uc* m_Building1_Text_data, stbi_uc* m_Building2_Text
 					break;
 
 				m_Building3[m_b3Cnt] = new CBuilding3;
-				m_Building3[m_b3Cnt]->Init(glm::vec3(15.0f, 3.0f, 15.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+				m_Building3[m_b3Cnt]->Init(glm::vec3(10.0f, 13.0f, 10.0f), glm::vec3(1.0f, 1.0f, 1.0f),
 					glm::vec3(Position.x, 3.0f, Position.z), "./ObjectFile/BuildingFile/top.obj", m_Building3_Text_data, m_RedPng_Text_data,
 					text_building3_width, text_building3_height, textRed_height_width, textRed_height_height);
 
@@ -96,6 +96,13 @@ void CMapManager::Input(float fDeltaTime)
 
 int CMapManager::Update(float fDeltaTime)
 {
+	for (int i = 0; i < m_b1Cnt; ++i)
+	{
+		if (m_Building1[i] != nullptr)
+			m_Building1[i]->Update(fDeltaTime);
+
+	}
+
 	return 0;
 }
 

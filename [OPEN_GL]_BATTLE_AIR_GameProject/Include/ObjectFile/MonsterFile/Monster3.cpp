@@ -144,7 +144,7 @@ void CMonster3::InitTexture_1(stbi_uc* textData, int text_moster_width, int text
 
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 
-	cout << widthImage << " " << heightImage << endl;
+	//cout << widthImage << " " << heightImage << endl;
 
 	if (!m_Monster3_Text_data) {
 		exit(0);
