@@ -22,6 +22,9 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 	int textRed_height_width, int textRed_height_height)
 {
 	glm::vec3 Position = glm::vec3(-200.0f, 0.0f, -200.0f);
+	
+	//COUT << "TEST";
+	cout << endl;
 
 	for (int i = 0; i < 20; ++i)
 	{
