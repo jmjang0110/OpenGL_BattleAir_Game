@@ -132,6 +132,7 @@ void CMonster3::InitTexture_1(stbi_uc* textData, int text_moster_width, int text
 	unsigned int texture;
 	BITMAPINFO* bmp;
 	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
+	m_Monster3_Text_data = textData;
 
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -156,7 +157,7 @@ void CMonster3::InitTexture_1(stbi_uc* textData, int text_moster_width, int text
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(m_Monster3_Text_data);
+	//stbi_image_free(m_Monster3_Text_data);
 
 }
 

@@ -99,7 +99,7 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	if (m_Tri_Num == 1)
 		m_Tri_Num = loadObj_normalize_center(filename);
 
-	m_Speed = 10.0f;
+	m_Speed = 15.0f;
 
 	InitTexture_1(m_Airplane_Text_data,  text_airplane_width,  text_airplane_height);
 	InitBuffer();

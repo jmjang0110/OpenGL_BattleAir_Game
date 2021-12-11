@@ -59,7 +59,6 @@ private:
 
 	class CBullet* m_Missile;
 
-
 private:
 
 	stbi_uc* m_Airplane_Text_data = NULL;
