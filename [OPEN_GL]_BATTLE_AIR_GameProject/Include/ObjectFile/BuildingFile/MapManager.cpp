@@ -35,7 +35,7 @@ bool CMapManager::Init(stbi_uc* m_Building1_Text_data, stbi_uc* m_Building2_Text
 				break;
 
 				// building 1
-			case 1:
+			/*case 1:
 				if (m_b1Cnt >= 50)
 					break;
 
@@ -47,9 +47,11 @@ bool CMapManager::Init(stbi_uc* m_Building1_Text_data, stbi_uc* m_Building2_Text
 				Position.x += 10.0f;
 				m_b1Cnt += 1;
 
-				break;
+				break;*/
+			case 1:
 			case 2:
 			case 4:
+
 				if (m_b2Cnt >= 50)
 					break;
 
