@@ -100,6 +100,8 @@ public:
 
 public:
 	bool check_crash(class Chexahedron* airplane, class Chexahedron* obj);
+	bool check_crash_dot(glm::vec3 dot, class Chexahedron* obj);
+
 
 public:
 	bool GetEnable()

@@ -163,7 +163,7 @@ void CScene::InitTexture_All()
 	}
 
 	// *** Monster1 텍스처 데이터 저장 ***
-	
+
 	filename = "./ObjectFile/MonsterFile/Gargoyle_1_Mask.jpg";
 	m_Monster1_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	m_Monster1_width = widthImage;
@@ -347,7 +347,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		m_Light->Init(glm::vec3(-400.0f, 300.0f, 400.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	}
 
-	
+
 
 	if (m_Axis == nullptr)
 	{
@@ -396,7 +396,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		if (m_Floor[i] == nullptr)
 		{
 			m_Floor[i] = new CFloor;
-			m_Floor[i]->Init(m_Grass_Text_dtat, m_Grass_width , m_Grass_height );
+			m_Floor[i]->Init(m_Grass_Text_dtat, m_Grass_width, m_Grass_height);
 
 		}
 
@@ -532,6 +532,7 @@ int CScene::LateUpdate(float fDeltaTime)
 	return 0;
 }
 
+
 bool CScene::check_crash(Chexahedron* airplane, Chexahedron* obj)
 {
 	float x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4;
@@ -571,6 +572,25 @@ bool CScene::check_crash(Chexahedron* airplane, Chexahedron* obj)
 	return false;
 }
 
+bool CScene::check_crash_dot(glm::vec3 dot, class Chexahedron* obj)
+{
+	float x1, x2, y1, y2, z1, z2;
+
+	x1 = obj->GetCollide_Position(3).x;
+	y1 = obj->GetCollide_Position(3).y;
+	z1 = obj->GetCollide_Position(3).z;
+
+	x2 = obj->GetCollide_Position(5).x;
+	y2 = obj->GetCollide_Position(5).y;
+	z2 = obj->GetCollide_Position(5).z;
+
+	if (((x1 <= dot.x) && (dot.x <= x2)) && ((y1 <= dot.y) && (dot.y <= y2)) && ((z1 <= dot.z) && (dot.z <= z2))) {
+		return true;
+	}
+
+	return false;
+}
+
 void CScene::Collision(float fDeltaTime)
 {
 	if (m_Airplane != nullptr)
@@ -582,7 +602,6 @@ void CScene::Collision(float fDeltaTime)
 		if (m_Building2 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building2->m_CollideBox)) cout << "building2 충돌" << endl;
 		if (m_Building3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building3->m_CollideBox)) cout << "building3 충돌" << endl;
 		if (m_AirBallon != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_AirBallon->m_CollideBox)) cout << "air ballon 충돌" << endl;
-	
 	}
 }
 
@@ -646,7 +665,7 @@ void CScene::Render(float fDeltaTime)
 		if (m_Floor[i] != nullptr)
 		{
 			m_Floor[i]->Render();
-			
+
 		}
 	}*/
 
