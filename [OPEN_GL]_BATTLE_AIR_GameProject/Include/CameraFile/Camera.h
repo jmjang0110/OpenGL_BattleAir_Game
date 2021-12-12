@@ -26,7 +26,10 @@ private:
 private:
 	GLfloat m_Direction_Length = 100.0f;
 
-	
+public:
+	glm::vec3 GetCameraPos() { return m_cameraPos; };
+	glm::vec3 GetCameraDir() { return m_cameraDirection; };
+
 
 private:
 	friend class CLight;
