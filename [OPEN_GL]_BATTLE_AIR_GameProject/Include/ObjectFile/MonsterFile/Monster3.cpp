@@ -99,8 +99,6 @@ void CMonster3::Input(float fDeltaTime)
 
 int CMonster3::Update(float fDeltaTime)
 {
-	cout << "m_Dir= " << m_Dir << endl;
-
 	if (m_Dist > 5.0f) {
 		// 1 = +x 2= -x 3= +z 4= -z 방향 (추가가능)
 		m_Dir = uid_dir3(dre3);
@@ -172,9 +170,6 @@ void CMonster3::Render(float fDeltaTime)
 
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
 
-	// *** 충돌 박스 출력 ***
-	if (m_CollideBox != nullptr)
-		m_CollideBox->Render();
 }
 
 
