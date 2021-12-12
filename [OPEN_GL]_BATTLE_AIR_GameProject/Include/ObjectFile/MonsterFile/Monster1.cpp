@@ -102,7 +102,7 @@ void CMonster1::Input(float fDeltaTime)
 
 int CMonster1::Update(float fDeltaTime)
 {
-	cout << "m_Dir= " << m_Dir << endl;
+	//cout << "m_Dir= " << m_Dir << endl;
 
 	if (m_Dist > 5.0f) {
 		// 1 = +x 2= -x 3= +z 4= -z 방향 (추가가능)

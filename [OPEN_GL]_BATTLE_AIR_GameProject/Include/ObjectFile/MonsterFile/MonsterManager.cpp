@@ -3,7 +3,6 @@
 #include "Monster2.h"
 #include "Monster3.h"
 
-
 DEFINITION_SINGLE(CMonsterManager);
 
 CMonsterManager::CMonsterManager()
@@ -114,6 +113,8 @@ int CMonsterManager::LateUpdate(float fDeltaTime)
 
 void CMonsterManager::Collision(float fDeltaTime)
 {
+
+
 }
 
 void CMonsterManager::Render(float fDeltaTime)

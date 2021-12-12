@@ -610,8 +610,6 @@ void CScene::Collision(float fDeltaTime)
 		BulletList->Collision(m_Monster2->m_CollideBox);
 		BulletList->Collision(m_Monster3->m_CollideBox);
 
-		
-
 
 
 	}
