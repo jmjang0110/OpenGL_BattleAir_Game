@@ -235,7 +235,7 @@ void CScene::InitTexture_All()
 	}
 
 	// *** Building3 텍스처 데이터 저장 ***
-	filename = "./ObjectFile/BuildingFile/top.jpg";
+	filename = "./ObjectFile/BuildingFile/1.jpg";
 	m_Building3_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
 	m_Building3_width = widthImage;
 	m_Building3_height = heightImage;
@@ -517,7 +517,7 @@ int CScene::Update(float fDeltaTime)
 
 	}
 	//CMapManager::GetInst()->Update(fDeltaTime);
-
+	CMonsterManager::GetInst()->Update(fDeltaTime);
 	
 	return 0;
 }
