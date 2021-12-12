@@ -3,7 +3,16 @@
 
 #include "../../HeaderFile/Game.h"
 
+typedef struct BoomInfo
+{
+	GLfloat dir = 1.0f;
+	GLfloat angle = rand() % 360;
+	GLfloat angle2 = rand() % 360;
 
+	glm::vec3 pivot;
+
+
+}BOOM_INFO;
 
 class CBullet
 {
@@ -60,20 +69,32 @@ private:
 	GLfloat m_Limit_dist = 100;
 	GLfloat m_dist = 0.0f;
 
+	BOOM_INFO m_boomInfo[10];
+
+
 
 	// 폭발 여부 표시 ( 충돌 했는지 혹은 사정거리 이상 지나면 사라지라는 신호 )
 	GLboolean m_bEnable = true;
+	GLboolean m_bCollide = false;
 
+
+public:
+	void CollideState_Update(bool collide) { m_bCollide = collide; InitBoomInfo(); }
+	void InitBoomInfo();
 
 public:
 	bool GetEnable() { return m_bEnable; }
 	glm::vec3 GetCollide_Position(int idx);
+	GLfloat GetCollideState() { return m_bCollide; }
+
 
 
 public:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
-
+	class CTriangle** m_tri;
+	GLfloat m_tri_Size = 1.0f;
+	GLfloat m_tri_Angle = rand() % 180;
 
 private:
 	// 행렬 모음 
@@ -86,6 +107,10 @@ private:
 private:
 	// Angle ( for Updating Move Vector )
 	glm::mat4 m_Rotate_Mat_LR = glm::mat4(1.0f);
+
+
+private:
+	GLint m_boomDir = 1.0f;
 
 private:
 	unsigned int m_texture;
@@ -112,8 +137,19 @@ public:
 	void InitTexture_1(stbi_uc* textData2, int width, int height);
 
 public:
-	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle, stbi_uc* textData2, int text_width, int text_height);
+	void Update_airplane_angle(GLfloat angle) { m_Angle = angle; }
+	void Update_airplane_Pos(glm::vec3 pos) {
+		m_Pivot = pos;
+		Update_TranslateForm(m_Pivot);
+	}
+	void Update_BoomMotion(float fDeltaTime);
 
+
+
+public:
+	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot,
+		const char* filename, GLfloat angle, stbi_uc* textData2, int text_width, int text_height,class CTriangle** tri);
+	
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트
 	int LateUpdate(float fDeltaTime);				// * 업데이트 후처리

@@ -2,6 +2,7 @@
 #include "../../CoreFile/ShaderManagerFile/ShaderManger.h"
 #include "../../HeaderFile/stb_image.h"
 #include "../HexaheronFile/hexahedron.h"
+#include "../TriangleFile/Triangle.h"
 
 
 
@@ -18,6 +19,9 @@ CBullet::CBullet()
 
 CBullet::~CBullet()
 {
+
+	delete[] m_tri;
+
 }
 
 
@@ -61,8 +65,33 @@ void CBullet::Update_ModelTransform(float fDeltaTime)
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
 }
 
-void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, GLfloat angle , stbi_uc* textData2,int text_width, int text_height)
+void CBullet::Update_BoomMotion(float fDeltaTime)
 {
+
+
+
+
+
+}
+
+void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot,
+	const char* filename, GLfloat angle,
+	stbi_uc* textData2, int text_width, int text_height,
+	CTriangle** tri)
+{
+	m_tri = new CTriangle * [10];
+	for (int i = 0; i < 10; ++i)
+	{
+		m_tri[i] = new CTriangle;
+		//m_tri[i]->Init(0.5f, 0.5f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f), textData2, text_width, text_height);
+		m_tri[i] = tri[i];
+
+	}
+
+	//memcpy(m_tri, tri, sizeof(m_tri));
+
+
+
 
 	// *** 충돌 박스 초기화 ***
 	/*m_CollideBox = new Chexahedron;
@@ -71,7 +100,6 @@ void CBullet::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const 
 	m_Angle = angle;
 	m_Pivot = pivot;
 	m_Color = color;
-
 
 	Update_ScaleForm(scaleInfo.x, scaleInfo.y, scaleInfo.z);
 	Update_Rotate_LR(0.0f, 1.0f, 0.0f);
@@ -103,12 +131,36 @@ void CBullet::Input(float fDeltaTime)
 
 int CBullet::Update(float fDeltaTime)
 {
+	if (m_bCollide == false)
+	{
 	m_dist += fDeltaTime * m_Speed;
 
 	m_Pivot.x += fDeltaTime * m_Speed * cos(glm::radians((m_Angle)));
 	m_Pivot.z += fDeltaTime * m_Speed * sin(glm::radians((m_Angle)));
 	Update_TranslateForm(m_Pivot);
 
+
+	}
+	if (m_bCollide == true)
+	{
+		//m_Pivot.x += fDeltaTime * m_Speed / 3 * cos(glm::radians((m_Angle)));
+		//m_Pivot.y += fDeltaTime * m_Speed / 3 * sin(glm::radians((m_Angle)));
+		for (int i = 0; i < 10; ++i)
+		{
+			m_boomInfo[i].pivot.x += fDeltaTime * m_Speed / 10 * cos(glm::radians((m_boomInfo[i].angle)));
+			m_boomInfo[i].pivot.y += fDeltaTime * m_Speed / 10 * sin(glm::radians((m_boomInfo[i].angle)));
+			m_boomInfo[i].pivot.z += fDeltaTime * m_Speed / 10 * m_boomInfo[i].dir * sin(glm::radians((m_boomInfo[i].angle2)));
+
+		}
+
+		m_tri_Angle += 5.0f;
+
+		if (m_tri_Angle >= 1000.0f)
+			m_bEnable = false;
+
+		//Update_TranslateForm(m_Pivot);
+
+	}
 
 	if (m_dist >= m_Limit_dist)
 		m_bEnable = false;
@@ -140,14 +192,30 @@ void CBullet::Render(float fDeltaTime)
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); 
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
 
-	glActiveTexture(GL_TEXTURE0);
+	
 
-	glBindTexture(GL_TEXTURE_2D, m_texture);
-	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
-
+	if (m_bCollide == false)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, m_texture);
+		glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
+	}
+	else
+	{
+		for (int i = 0; i < 10; ++i)
+		{
+			
+			//m_tri[i]->Update_RotateForm(90.0f, 1.0f, 0.0f, 0.0f);
+			m_tri[i]->Update_TranslateForm(m_boomInfo[i].pivot.x, m_boomInfo[i].pivot.y, m_boomInfo[i].pivot.z);
+			m_tri[i]->Update_ModelTransform();
+			m_tri[i]->Render(RENDER_TYPE::TRIANGLES);
+			
+		}
+	}
 	// *** 충돌 박스 출력 ***
-	if (m_CollideBox != nullptr)
-		m_CollideBox->Render();
+	//if (m_CollideBox != nullptr)
+	//	m_CollideBox->Render();
+
 }
 
 
@@ -192,6 +260,15 @@ void CBullet::InitTexture_1(stbi_uc* textData2, int width, int height)
 
 }
 
+
+void CBullet::InitBoomInfo()
+{
+	for (int i = 0; i < 10; ++i)
+	{
+		m_boomInfo[i].pivot = m_Pivot;
+
+	}
+}
 
 glm::vec3 CBullet::GetCollide_Position(int idx)
 {

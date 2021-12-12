@@ -52,7 +52,7 @@ void CLight::UpdateLightPos(glm::vec3 AirplanePos, GLfloat airplane_Angle, glm::
 
 	//m_ViewPos.x += (10.0f * cos(glm::radians(airplane_Angle + 90.0f)));
 	//m_ViewPos.z += (10.0f * sin(glm::radians(airplane_Angle + 90.0f)));
-	cout << "Light : "<< m_LightPos.x << " " << m_LightPos.y << " " << m_LightPos.z << endl;
+	//cout << "Light : "<< m_LightPos.x << " " << m_LightPos.y << " " << m_LightPos.z << endl;
 
 
 }

@@ -63,6 +63,11 @@ void Chexahedron::SetColor(glm::vec3 RGB)
 void Chexahedron::Init(GLfloat W, GLfloat D, GLfloat H, glm::vec3 pivot, stbi_uc* textData3,
 	int text_width, int text_height)
 {
+	m_boomDir = rand() % 2;
+	if (m_boomDir == 1)
+		m_boomDir *= -1;
+
+	
 
 	m_W = W / 2;
 	m_D = D / 2;
@@ -137,6 +142,34 @@ void Chexahedron::Init(GLfloat W, GLfloat D, GLfloat H, glm::vec3 pivot, stbi_uc
 
 }
 
+void Chexahedron::Update_BoomMotion_translate(float fDeltaTime, glm::vec3 trnaslate)
+{
+	m_Pivot.x = trnaslate.x;
+	m_Pivot.y = trnaslate.y;
+	m_Pivot.z = trnaslate.z;
+	m_Pivot = trnaslate;
+
+
+
+
+	m_Pivot.x += fDeltaTime * 1.0f * m_BoomdDist;
+	m_BoomdDist += 1.0f;
+	cout << m_Pivot.x << m_BoomdDist << endl;
+
+
+	InitPosition(m_Pivot);
+
+	m_Translate_Mat = glm::mat4(1.0f);
+	m_Translate_Mat = glm::translate(m_Translate_Mat, glm::vec3(trnaslate));
+
+}
+
+void Chexahedron::Update_BoomMotion_rotate(float fDeltaTime)
+{
+	Update_RotateForm(m_BoomAngle, 0.0f, 1.0f, 0.0f);
+
+
+}
 
 
 void Chexahedron::Update_TranslateForm(glm::vec3 translate)
@@ -182,7 +215,7 @@ void Chexahedron::Update_ModelTransform()
 
 }
 
-void Chexahedron::Render()
+void Chexahedron::Render(RENDER_TYPE renderType)
 {
 
 	
@@ -194,7 +227,7 @@ void Chexahedron::Render()
 		glLineWidth(2.0f);
 		
 		if (m_Tri[i] != nullptr)
-			m_Tri[i]->Render(RENDER_TYPE::LINE_LOOP);
+			m_Tri[i]->Render(renderType);
 		
 	}
 
