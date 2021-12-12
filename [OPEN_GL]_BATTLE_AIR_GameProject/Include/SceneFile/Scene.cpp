@@ -351,7 +351,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	if (m_Light == nullptr)
 	{
 		m_Light = new CLight;
-		m_Light->Init(glm::vec3(-400.0f, 300.0f, 400.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		m_Light->Init(glm::vec3(-0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	}
 
 
@@ -398,16 +398,16 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	}
 
 
-	for (int i = 0; i < 4; ++i)
-	{
-		if (m_Floor[i] == nullptr)
-		{
-			m_Floor[i] = new CFloor;
-			m_Floor[i]->Init(m_Grass_Text_dtat, m_Grass_width, m_Grass_height);
+	//for (int i = 0; i < 4; ++i)
+	//{
+	//	if (m_Floor[i] == nullptr)
+	//	{
+	//		m_Floor[i] = new CFloor;
+	//		m_Floor[i]->Init(m_Grass_Text_dtat, m_Grass_width, m_Grass_height);
 
-		}
+	//	}
 
-	}
+	//}
 
 	CMapManager::GetInst()->Init(m_Building1_Text_data, m_Building2_Text_data, m_Building3_Text_data, m_RedPng_Text_data,
 		m_Building1_width, m_Building1_height, m_Building2_width, m_Building2_height, m_Building3_width, m_Building3_height,
@@ -501,6 +501,11 @@ int CScene::Update(float fDeltaTime)
 
 	}
 
+	if (m_Light != nullptr)
+	{
+		m_Light->UpdateLightPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR(),m_Camera->GetCameraDir());
+
+	}
 	//CMapManager::GetInst()->Update(fDeltaTime);
 
 	// ====================================================================
@@ -672,7 +677,7 @@ void CScene::Render(float fDeltaTime)
 	if (m_Building3 != nullptr)
 		m_Building3->Render(fDeltaTime);
 
-	m_Floor[0]->Render();
+	//m_Floor[0]->Render();
 
 	/*for (int i = 0; i < 4; ++i)
 	{

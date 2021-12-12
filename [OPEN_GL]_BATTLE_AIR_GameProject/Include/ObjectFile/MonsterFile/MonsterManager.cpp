@@ -47,7 +47,7 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 					break;
 
 				m_Monster1[m_M1Cnt] = new CMonster1;
-				m_Monster1[m_M1Cnt]->Init(glm::vec3(3.0f, 1.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+				m_Monster1[m_M1Cnt]->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f),
 					glm::vec3(Position.x, 40.0f, Position.z), "./ObjectFile/MonsterFile/monster.obj", m_Monster1_Text_data, m_RedPng_Text_data,
 					m_Monster1_width, m_Monster1_height, textRed_height_width, textRed_height_height);
 
@@ -55,14 +55,14 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 				m_M1Cnt += 1;
 
 				break;
-			case 2:
-				if (m_M2Cnt >= 10)
-					break;
+			//case 2:
+			//	if (m_M2Cnt >= 10)
+			//		break;
 
-				m_Monster2[m_M2Cnt] = new CMonster2;
-				m_Monster2[m_M2Cnt]->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
-					glm::vec3(10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/Demon.obj", m_Monster2_Text_data, m_RedPng_Text_data,
-					m_Monster2_width, m_Monster2_height, textRed_height_width, textRed_height_height);
+			//	m_Monster2[m_M2Cnt] = new CMonster2;
+			//	m_Monster2[m_M2Cnt]->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
+			//		glm::vec3(10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/Demon.obj", m_Monster2_Text_data, m_RedPng_Text_data,
+			//		m_Monster2_width, m_Monster2_height, textRed_height_width, textRed_height_height);
 				/*m_Monster2[m_M2Cnt] = new CMonster2;
 				m_Monster2[m_M2Cnt]->Init(glm::vec3(3.0f, 5.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
 					glm::vec3(Position.x, 40.0f, Position.z), "./ObjectFile/MonsterFile/Demon.obj", m_Monster2_Text_data, m_RedPng_Text_data,

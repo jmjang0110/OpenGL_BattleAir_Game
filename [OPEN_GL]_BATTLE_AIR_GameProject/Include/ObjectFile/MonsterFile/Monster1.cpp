@@ -53,7 +53,8 @@ void CMonster1::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	m_Monster1_Text_data = textData;
 	m_Pivot = pivot;
 	m_Color = color;
-	m_Pivot.y += 1.0f;
+	m_Pivot.y += rand() % 100;
+
 
 	// *** 충돌 박스 초기화 ***
 	m_CollideBox = new Chexahedron;
