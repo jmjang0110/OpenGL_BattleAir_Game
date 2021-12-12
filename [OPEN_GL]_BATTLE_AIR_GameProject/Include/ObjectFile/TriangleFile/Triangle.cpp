@@ -163,7 +163,7 @@ void CTriangle::Update_ModelTransform()
 {
 
 	//Update_TranslateForm(0.0f, 0.0f, 0.0f);
-	Update_RotateForm(0.0f);
+	//Update_RotateForm(0.0f);
 	Update_ScaleForm();
 
 	m_ModelMatrix_Result = glm::mat4(1.0f);

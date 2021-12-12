@@ -99,7 +99,7 @@ void CMonster3::Input(float fDeltaTime)
 
 int CMonster3::Update(float fDeltaTime)
 {
-	cout << "m_Dir= " << m_Dir << endl;
+	//cout << "m_Dir= " << m_Dir << endl;
 
 	if (m_Dist > 5.0f) {
 		// 1 = +x 2= -x 3= +z 4= -z 방향 (추가가능)
@@ -142,7 +142,10 @@ int CMonster3::Update(float fDeltaTime)
 	
 
 	if (m_CollideBox != nullptr)
+	{
 		m_CollideBox->Update_TranslateForm(m_Pivot);
+		
+	}
 
 	return 0;
 }
