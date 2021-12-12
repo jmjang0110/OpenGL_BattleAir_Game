@@ -12,6 +12,10 @@ GLint* CMonster3::m_Tri_Num2;
 GLint CMonster3::m_Tri_Num = 1;
 
 
+std::random_device rd3;
+std::default_random_engine dre3{ rd3() };
+std::uniform_int_distribution<> uid_dir3(1, 4);
+
 CMonster3::CMonster3()
 {
 }
@@ -20,6 +24,12 @@ CMonster3::~CMonster3()
 {
 }
 
+
+void CMonster3::Update_Turn_Mat()
+{
+	m_Rotate_Turn_Mat = glm::mat4(1.0f);
+	m_Rotate_Turn_Mat = glm::rotate(m_Rotate_Turn_Mat, glm::radians(m_Turn), glm::vec3(0.0f,1.0f, 0.0f));
+}
 
 void CMonster3::Update_TranslateForm(glm::vec3 translate)
 {
@@ -41,7 +51,7 @@ void CMonster3::Update_ScaleForm(GLfloat sx, GLfloat sy, GLfloat sz)
 
 void CMonster3::Update_ModelTransform(float fDeltaTime)
 {
-	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Mat * m_Scale_Mat;
+	m_ModelMatrix_Result = m_Translate_Mat * m_Rotate_Turn_Mat*m_Rotate_Mat * m_Scale_Mat;
 
 	unsigned int MLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "modelTransform");
 	glUniformMatrix4fv(MLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix_Result));
@@ -89,8 +99,50 @@ void CMonster3::Input(float fDeltaTime)
 
 int CMonster3::Update(float fDeltaTime)
 {
-	Update_TranslateForm(m_Pivot);
+	cout << "m_Dir= " << m_Dir << endl;
 
+	if (m_Dist > 5.0f) {
+		// 1 = +x 2= -x 3= +z 4= -z 방향 (추가가능)
+		m_Dir = uid_dir3(dre3);
+		m_Dist = 0.0f;
+		
+	}
+	//좌
+	if (m_Dir == 1) {
+		m_Pivot.x += (fDeltaTime * 2.0f);
+		m_Dist += (fDeltaTime * 2.0f);
+
+		m_Turn = 90.0f;
+
+	}
+	//우
+	else if (m_Dir == 2) {
+		m_Pivot.x -= (fDeltaTime * 1.0f);
+		m_Dist += (fDeltaTime * 1.0f);
+		m_Turn = 270.0f;
+
+	}
+	//하
+	else if (m_Dir == 3) {
+		m_Pivot.z += (fDeltaTime * 1.0f);
+		m_Dist += (fDeltaTime * 1.0f);
+		m_Turn = 0.0f;
+
+	}
+	//상
+	else if (m_Dir == 4) {
+		m_Pivot.z -= (fDeltaTime * 1.0f);
+		m_Dist += (fDeltaTime * 1.0f);
+		m_Turn = 180.0f;
+
+	}
+
+	Update_Turn_Mat();
+	Update_TranslateForm(m_Pivot);
+	
+
+	if (m_CollideBox != nullptr)
+		m_CollideBox->Update_TranslateForm(m_Pivot);
 
 	return 0;
 }
@@ -160,6 +212,8 @@ void CMonster3::InitTexture_1(stbi_uc* textData, int text_moster_width, int text
 	//stbi_image_free(m_Monster3_Text_data);
 
 }
+
+
 
 
 int CMonster3::loadObj_normalize_center(const char* filename)
