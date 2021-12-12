@@ -42,6 +42,8 @@ private:
 private:
 	GLuint m_VAO;
 	GLuint m_VBO[2];
+	
+
 
 private:
 	// 현재 위치

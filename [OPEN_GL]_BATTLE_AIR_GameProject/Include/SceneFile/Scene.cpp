@@ -23,6 +23,7 @@
 #include "../ObjectFile/TriangleFile/Triangle.h"
 #include "../SoundFile/SoundManager.h"
 
+#include "../ObjectFile/BulletFile/BulletList.h"
 #include "../ObjectFile/BulletFile/Bullet.h"
 
 #include "../ObjectFile/HexaheronFile/hexahedron.h"
@@ -517,37 +518,7 @@ int CScene::Update(float fDeltaTime)
 	}
 	//CMapManager::GetInst()->Update(fDeltaTime);
 
-	// ====================================================================
-	// F L O O R 배치 ( 1 ~ 4 사분면 ) 위치로 Floor 객체 이동 - 처음 생성시 (0.0f , 0.0f , 0.0f) 위치
-	// ====================================================================
-
-	//if (m_Floor[0] != nullptr)
-	//{
-	//	GLfloat size = m_Floor[0]->GetSize();
-	//	m_Floor[0]->Update_TranslateForm(size, 0.0f, -size); // 1 사분면 
-
-	//}
-	//if (m_Floor[1] != nullptr)
-	//{
-	//	GLfloat size = m_Floor[1]->GetSize();
-	//	m_Floor[1]->Update_TranslateForm(-size, 0.01f, -size); // 2 사분면 
-
-	//}
-	//if (m_Floor[2] != nullptr)
-	//{
-	//	GLfloat size = m_Floor[2]->GetSize();
-	//	m_Floor[2]->Update_TranslateForm(-size, 0.02f, size); // 3 사분면 
-
-	//}
-	//if (m_Floor[3] != nullptr)
-	//{
-	//	GLfloat size = m_Floor[3]->GetSize();
-	//	m_Floor[3]->Update_TranslateForm(size, 0.03f, size); // 4 사분면 
-
-	//}
-	// ====================================================================
-	// ====================================================================
-
+	
 	return 0;
 }
 
@@ -631,6 +602,20 @@ void CScene::Collision(float fDeltaTime)
 		if (m_Building3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building3->m_CollideBox)) cout << "building3 충돌" << endl;
 		if (m_AirBallon != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_AirBallon->m_CollideBox)) cout << "air ballon 충돌" << endl;
 	}
+
+	if (m_Airplane != nullptr)
+	{
+		CBulletList* BulletList = m_Airplane->GetBulletList();
+		BulletList->Collision(m_Monster1->m_CollideBox);
+		BulletList->Collision(m_Monster2->m_CollideBox);
+		BulletList->Collision(m_Monster3->m_CollideBox);
+
+		
+
+
+
+	}
+
 }
 
 void CScene::Render(float fDeltaTime)

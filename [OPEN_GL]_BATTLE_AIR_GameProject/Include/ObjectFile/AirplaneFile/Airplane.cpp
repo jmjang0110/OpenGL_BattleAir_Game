@@ -6,7 +6,7 @@
 #include "../BulletFile/Bullet.h"
 #include "../BulletFile/BulletList.h"
 #include "../../SoundFile/SoundManager.h"
-
+#include "../TriangleFile/Triangle.h"
 
 
 std::vector< glm::vec3 > CAirplane::m_outvertex;
@@ -81,7 +81,6 @@ void CAirplane::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 	int text_airplane_width, int text_airplane_height, int text_bullet_width, int text_height_width, int textRed_bullet_width, int textRed_height_height)
 {
 	m_Airplane_Text_data = textData;
-
 
 
 	m_myBulletList = new CBulletList;
@@ -259,7 +258,7 @@ void CAirplane::Render(float fDeltaTime)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	Update_ModelTransform(fDeltaTime);
-	m_Color = glm::vec3(1.0f, 1.0f, 1.0f);
+	m_Color = glm::vec3(0.8f, 0.8f, 0.8f);
 
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);

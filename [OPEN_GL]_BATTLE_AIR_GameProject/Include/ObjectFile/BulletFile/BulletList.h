@@ -33,7 +33,11 @@ private:
 
 private:
 	float m_fAttack = 100; // 총알 공격력 
+	class CTriangle* m_tri[10];
+	class CBullet* m_prototype_bullet;
 
+
+private:
 
 public:
 	// 공격력을 반환합니다. 
@@ -54,6 +58,7 @@ public:
 	}
 public:
 	void Init(stbi_uc* textData2,int text_width, int text_height);
+	bool check_crash_dot(glm::vec3 dot, class Chexahedron* obj);
 
 
 public:
@@ -72,6 +77,8 @@ public:
 	//void Update(float fDeltaTime, _SIZE _size);
 
 	void CheckErase();
+	bool Collision(class Chexahedron* obj);
+
 
 	bool Empty()
 	{

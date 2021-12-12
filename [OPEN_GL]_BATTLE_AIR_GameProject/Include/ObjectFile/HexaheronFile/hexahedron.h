@@ -30,6 +30,10 @@ private:
 	// 기준점 정보
 	glm::vec3 m_Pivot = glm::vec3(1.0f);
 	glm::vec3 m_Movedist = glm::vec3(0.0f, 0.0f, 0.0f);
+private:
+	GLint m_boomDir = 1.0f;
+	GLfloat m_BoomAngle = rand() % 180;
+	GLfloat m_BoomdDist = 1.0f;
 
 
 public:
@@ -46,6 +50,11 @@ public:
 	void Init(GLfloat W, GLfloat D, GLfloat H, glm::vec3 pivot, stbi_uc* textData3,
 		int text_width, int text_height);
 
+	void Update_BoomMotion_translate(float fDeltaTime, glm::vec3 trnaslate);
+	void Update_BoomMotion_rotate(float fDeltaTime);
+
+
+
 public:
 	// ** 행렬 업데이트 함수 ** 
 	void Update_TranslateForm(glm::vec3 translate);
@@ -53,7 +62,7 @@ public:
 	void Update_ScaleForm(GLfloat sx = 1.0f, GLfloat sy = 1.0f, GLfloat sz = 1.0f);
 	void Update_ModelTransform();
 
-	void Render();
+	void Render(RENDER_TYPE renderType = RENDER_TYPE::LINE_LOOP);
 	
 
 };

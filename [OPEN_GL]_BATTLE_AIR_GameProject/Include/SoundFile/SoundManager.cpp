@@ -59,7 +59,7 @@ bool CSoundManager::Init()
 	// 초기화 동시에 시작 브금을 틉니다. ( 로딩하면서 브금을 트는 효과 )
 	//CSoundManager::GetInst()->playSound(SCENE_TYPE::BEGIN);
 
-	CSoundManager::GetInst()->playSound(SCENE_TYPE::MAIN_STAGE);
+	//CSoundManager::GetInst()->playSound(SCENE_TYPE::MAIN_STAGE);
 
 	return true;
 
@@ -145,8 +145,8 @@ void CSoundManager::Update()
 {
 	FMOD_BOOL isplaying = false;
 	FMOD_Channel_IsPlaying(m_bgmChannel, &isplaying);
-	if (isplaying == false)
-		FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
+	//if (isplaying == false)
+		//FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
 
 	//FMOD_System_Update(soundSystem);
 	FMOD_System_Update(soundSystem);
