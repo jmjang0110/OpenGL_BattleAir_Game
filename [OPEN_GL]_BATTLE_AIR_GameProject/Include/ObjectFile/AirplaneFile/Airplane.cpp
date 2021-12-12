@@ -164,7 +164,7 @@ void CAirplane::Input(float fDeltaTime)
 		float currentTime = clock();
 		if (m_LastFireTime == NULL || currentTime - m_LastFireTime >= 50) {
 			cout << "Present Airplane spot : " << m_Pivot.x << " " << m_Pivot.z << endl;
-			CSoundManager::GetInst()->playSound_Effect_Explode();
+			CSoundManager::GetInst()->playSound_Effect_Explode(0);
 			m_myBulletList->PushBack(BulletPivot, (m_Angle_LR + 90.0f) * -1);
 
 		}
@@ -269,8 +269,8 @@ void CAirplane::Render(float fDeltaTime)
 
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
 
-	if (m_CollideBox != nullptr)
-		m_CollideBox->Render();
+	//if (m_CollideBox != nullptr)
+	//	m_CollideBox->Render();
 
 	if (m_myBulletList != nullptr)
 		m_myBulletList->RenderAll(fDeltaTime);

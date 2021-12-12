@@ -173,8 +173,8 @@ void CMonster2::Render(float fDeltaTime)
 	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
 
 	// *** 충돌 박스 출력 ***
-	if (m_CollideBox != nullptr)
-		m_CollideBox->Render();
+	//if (m_CollideBox != nullptr)
+	//	m_CollideBox->Render();
 }
 
 

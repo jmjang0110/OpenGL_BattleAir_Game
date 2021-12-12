@@ -4,6 +4,7 @@
 #include "../HexaheronFile/hexahedron.h"
 #include "../BulletFile/BulletList.h"
 #include "../TriangleFile/Triangle.h"
+#include "../../SoundFile/SoundManager.h"
 
 
 CBulletList::CBulletList()
@@ -281,6 +282,7 @@ bool CBulletList::Collision(Chexahedron* obj)
 			if (check_crash_dot(pNode->bullet->GetPivot(), obj) == true && pNode->bullet->GetCollideState() == false)
 			{
 				pNode->bullet->CollideState_Update(true);
+				CSoundManager::GetInst()->playSound_Effect_Explode(1);
 
 			}
 		}
