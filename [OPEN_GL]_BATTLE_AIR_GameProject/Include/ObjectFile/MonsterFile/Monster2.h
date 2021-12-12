@@ -50,6 +50,9 @@ private:
 	glm::vec3 m_Color;
 	// Airplane Speed 
 	GLfloat m_Speed;
+	int m_Dir = 1;
+	float m_Turn;
+	float m_Dist;
 
 public:
 	class Chexahedron* m_CollideBox;
@@ -63,11 +66,14 @@ public:
 
 private:
 	// 행렬 모음 
+	glm::mat4 m_Rotate_Turn_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Translate_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Rotate_Mat = glm::mat4(1.0f);
 	glm::mat4 m_Scale_Mat = glm::mat4(1.0f);
 	// 적용할 모델 헹렬의 최종
 	glm::mat4 m_ModelMatrix_Result = glm::mat4(1.0f);
+public:
+	void Update_Turn_Mat();
 
 private:
 	unsigned int m_texture;

@@ -476,6 +476,15 @@ int CScene::Update(float fDeltaTime)
 
 	if (m_AirBallon != nullptr)
 		m_AirBallon->Update(fDeltaTime);
+	
+	if (m_Monster1 != nullptr)
+		m_Monster1->Update(fDeltaTime);
+	
+	if (m_Monster2 != nullptr)
+		m_Monster2->Update(fDeltaTime);
+
+	if (m_Monster3 != nullptr)
+		m_Monster3->Update(fDeltaTime);
 
 	if (m_Airplane != nullptr)
 	{
