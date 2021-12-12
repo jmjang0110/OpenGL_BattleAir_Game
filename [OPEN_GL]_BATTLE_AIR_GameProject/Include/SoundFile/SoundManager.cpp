@@ -47,7 +47,10 @@ bool CSoundManager::Init()
 
 	FMOD_System_CreateSound(soundSystem, "./SoundFile/MP_Missle Launch.mp3",
 		FMOD_DEFAULT, 0, &m_effectSound_Explode);
-
+	
+	
+	FMOD_System_CreateSound(soundSystem, "./SoundFile/MP_Mortar Round.mp3",
+		FMOD_DEFAULT, 0, &m_effectSound_Explode2);
 	//FMOD_System_CreateSound(soundSystem, "./Sound/YouWin.wav",
 	//	FMOD_LOOP_NORMAL, 0, &bgmSound_StageClear);
 
@@ -128,11 +131,24 @@ bool CSoundManager::playSound_Effect()
 
 }
 
-bool CSoundManager::playSound_Effect_Explode()
+bool CSoundManager::playSound_Effect_Explode(int type )
 {
 
+
 	static int Soundidx = 0;
-	FMOD_System_PlaySound(soundSystem, m_effectSound_Explode, NULL, 0, &m_Explode_Sound_Channel[Soundidx++]);
+
+	if (type == 0)
+	{
+		FMOD_System_PlaySound(soundSystem, m_effectSound_Explode, NULL, 0, &m_Explode_Sound_Channel[Soundidx++]);
+	}
+	else if (type == 1)
+	{
+		FMOD_System_PlaySound(soundSystem, m_effectSound_Explode2, NULL, 0, &m_Explode_Sound_Channel[Soundidx++]);
+
+	}
+	else
+		return false;
+
 	FMOD_System_Update(soundSystem);
 
 	if (Soundidx > 9)
@@ -145,8 +161,8 @@ void CSoundManager::Update()
 {
 	FMOD_BOOL isplaying = false;
 	FMOD_Channel_IsPlaying(m_bgmChannel, &isplaying);
-	//if (isplaying == false)
-		//FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
+	if (isplaying == false)
+		FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
 
 	//FMOD_System_Update(soundSystem);
 	FMOD_System_Update(soundSystem);
