@@ -33,12 +33,21 @@ void CLight::Update_Light_info_to_glsl()
 void CLight::UpdateLightPos(glm::vec3 AirplanePos, GLfloat airplane_Angle, glm::vec3 Camerapos)
 {
 	m_ViewPos = Camerapos;
+	//m_LightPos = AirplanePos;
+
+
+	//m_LightPos.y = 200.0f;
+	//m_LightPos.x = 300.0f * cos(glm::radians((airplane_Angle + 90.0f) * -1));
+	//m_LightPos.z = 300.0f * sin(glm::radians((airplane_Angle + 90.0f) * -1));
+
+
+	m_ViewPos = glm::vec3(0.0f,0.0f,0.0f);
 	m_LightPos = AirplanePos;
+	m_LightPos.y += 1000.0f;
 
+	m_LightPos.x += 1000.0f * cos(glm::radians((airplane_Angle + 90.0f) * -1));
+	m_LightPos.z += 1000.0f * sin(glm::radians((airplane_Angle + 90.0f) * -1));
 
-	m_LightPos.y += 3.0f;
-	m_LightPos.x += 2.0f * cos(glm::radians((airplane_Angle + 90.0f) * -1));
-	m_LightPos.z += 2.0f * sin(glm::radians((airplane_Angle + 90.0f) * -1));
 
 
 	//m_ViewPos.x += (10.0f * cos(glm::radians(airplane_Angle + 90.0f)));
