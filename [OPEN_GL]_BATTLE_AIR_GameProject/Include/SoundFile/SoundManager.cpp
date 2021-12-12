@@ -30,7 +30,7 @@ bool CSoundManager::Init()
 
 
 	FMOD_System_Create(&soundSystem);
-	FMOD_System_Init(soundSystem, 32, FMOD_INIT_NORMAL, NULL);
+	FMOD_System_Init(soundSystem, 16, FMOD_INIT_NORMAL, NULL);
 
 
 	/*FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme1.mp3",
@@ -56,7 +56,11 @@ bool CSoundManager::Init()
 
 
 	for (int i = 0; i < 10; ++i)
+	{
 		FMOD_Channel_SetVolume(m_Explode_Sound_Channel[i], 50.0);
+		FMOD_Channel_SetVolume(m_Explode_Sound_Channel2[i], 100);
+
+	}
 
 
 	// 초기화 동시에 시작 브금을 틉니다. ( 로딩하면서 브금을 트는 효과 )
@@ -89,8 +93,9 @@ bool CSoundManager::playSound(SCENE_TYPE sceneType)
 		break;
 	}
 	// 채널 볼륨 설정 
-	FMOD_Channel_SetVolume(m_effectChannel, 0.4);
-	FMOD_Channel_SetVolume(m_bgmChannel, 0.8);
+	/*FMOD_Channel_SetVolume(m_effectChannel, 0.4);
+	FMOD_Channel_SetVolume(m_effectChannel2, 1.0);
+	*/FMOD_Channel_SetVolume(m_bgmChannel, 0.8);
 	FMOD_System_Update(soundSystem);
 	//while (true)
 	//{
@@ -137,13 +142,14 @@ bool CSoundManager::playSound_Effect_Explode(int type )
 
 	static int Soundidx = 0;
 
+	static int Soundidx2 = 0;
 	if (type == 0)
 	{
 		FMOD_System_PlaySound(soundSystem, m_effectSound_Explode, NULL, 0, &m_Explode_Sound_Channel[Soundidx++]);
 	}
 	else if (type == 1)
 	{
-		FMOD_System_PlaySound(soundSystem, m_effectSound_Explode2, NULL, 0, &m_Explode_Sound_Channel[Soundidx++]);
+		FMOD_System_PlaySound(soundSystem, m_effectSound_Explode2, NULL, 0, &m_Explode_Sound_Channel2[Soundidx2++]);
 
 	}
 	else
@@ -153,6 +159,10 @@ bool CSoundManager::playSound_Effect_Explode(int type )
 
 	if (Soundidx > 9)
 		Soundidx = 0;
+
+	if (Soundidx2 > 9)
+		Soundidx2 = 0;
+
 
 	return true;
 }

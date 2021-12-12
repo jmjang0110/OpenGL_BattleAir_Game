@@ -26,13 +26,14 @@ private:
 private:
 	// 폭발 / 미사일 발사시 생기는 Effect 사운드 재생 채널 입니다. 
 	FMOD_CHANNEL*	m_effectChannel;
+	FMOD_CHANNEL* m_effectChannel2;
 	FMOD_SOUND*		m_effectSound_Explode;
 	FMOD_SOUND*		m_effectSound_Explode2;
 
 private:
 
 	FMOD_CHANNEL* m_Explode_Sound_Channel[10];
-
+	FMOD_CHANNEL* m_Explode_Sound_Channel2[10];
 
 public:
 	bool Init();
