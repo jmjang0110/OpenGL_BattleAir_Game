@@ -16,6 +16,10 @@
 #include "../ObjectFile/BuildingFile/Building1.h"
 #include "../ObjectFile/BuildingFile/Building2.h"
 #include "../ObjectFile/BuildingFile/Building3.h"
+#include "../ObjectFile/BuildingFile/Door.h"
+#include "../ObjectFile/BuildingFile/Bridge.h"
+
+
 
 
 
@@ -81,6 +85,11 @@ CScene::~CScene()
 	if (m_Floor != nullptr)
 		delete[] m_Floor;
 
+	if (m_Door != nullptr)
+		delete[] m_Door;
+
+	if (m_Bridge != nullptr)
+		delete[] m_Bridge;
 
 	stbi_image_free(m_Airplane_Text_data);
 	stbi_image_free(m_Bullet_Text_data);
@@ -93,6 +102,9 @@ CScene::~CScene()
 	stbi_image_free(m_Building1_Text_data);
 	stbi_image_free(m_Building2_Text_data);
 	stbi_image_free(m_Building3_Text_data);
+
+	stbi_image_free(m_Door_Text_data);
+	stbi_image_free(m_Bridge_Text_data);
 
 }
 
@@ -247,6 +259,32 @@ void CScene::InitTexture_All()
 		exit(0);
 	}
 
+	// *** Door 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BuildingFile/Door.jpg";
+	m_Door_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Door_width = widthImage;
+	m_Door_height = heightImage;
+
+	cout << m_Door_width << " " << m_Door_height << endl;
+
+	if (!m_Door_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+
+	// *** Bridge 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BuildingFile/Brown.jpg";
+	m_Bridge_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Bridge_width = widthImage;
+	m_Bridge_height = heightImage;
+
+	cout << m_Bridge_width << " " << m_Bridge_height << endl;
+
+	if (!m_Bridge_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
 }
 
 void CScene::UpdateProjectionMat()
@@ -276,7 +314,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	InitTexture_All();
 
 
-	
+
 	if (CSoundManager::GetInst()->Init())
 	{
 		cout << "Sound File Load Success" << endl;
@@ -398,6 +436,24 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 
 	}
 
+	if (m_Door == nullptr)
+	{
+		m_Door = new CDoor;
+		m_Door->Init(glm::vec3(60.0f, 15.0f, 60.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(50.0f, 5.0f, 565.0f), "./ObjectFile/BuildingFile/Door.obj", m_Door_Text_data, m_RedPng_Text_data,
+			m_Door_width, m_Door_height, m_RedPng_width, m_RedPng_height);
+
+	}
+
+	if (m_Bridge == nullptr)
+	{
+		m_Bridge = new CBridge;
+		m_Bridge->Init(glm::vec3(10.0f, 10.0f, 10.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(-0.5f, -0.7f, 540.0f), "./ObjectFile/BuildingFile/Bridge3.obj", m_Bridge_Text_data, m_RedPng_Text_data,
+			m_Bridge_width, m_Bridge_height, m_RedPng_width, m_RedPng_height);
+
+	}
+
 
 	//for (int i = 0; i < 4; ++i)
 	//{
@@ -477,10 +533,10 @@ int CScene::Update(float fDeltaTime)
 
 	if (m_AirBallon != nullptr)
 		m_AirBallon->Update(fDeltaTime);
-	
+
 	if (m_Monster1 != nullptr)
 		m_Monster1->Update(fDeltaTime);
-	
+
 	if (m_Monster2 != nullptr)
 		m_Monster2->Update(fDeltaTime);
 
@@ -513,12 +569,12 @@ int CScene::Update(float fDeltaTime)
 
 	if (m_Light != nullptr)
 	{
-		m_Light->UpdateLightPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR(),m_Camera->GetCameraDir());
+		m_Light->UpdateLightPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR(), m_Camera->GetCameraDir());
 
 	}
 	//CMapManager::GetInst()->Update(fDeltaTime);
 	CMonsterManager::GetInst()->Update(fDeltaTime);
-	
+
 	return 0;
 }
 
@@ -642,7 +698,7 @@ void CScene::Render(float fDeltaTime)
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 
-
+	//cout << "(" << m_Airplane->GetPivot().x << "," << m_Airplane->GetPivot().y << "," << m_Airplane->GetPivot().z << ")" << endl;
 
 	if (m_Camera != nullptr)
 		m_Camera->Render(fDeltaTime);
@@ -686,6 +742,12 @@ void CScene::Render(float fDeltaTime)
 
 	if (m_Building3 != nullptr)
 		m_Building3->Render(fDeltaTime);
+
+	if (m_Door != nullptr)
+		m_Door->Render(fDeltaTime);
+
+	if (m_Bridge != nullptr)
+		m_Bridge->Render(fDeltaTime);
 
 	//m_Floor[0]->Render();
 

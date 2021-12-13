@@ -174,9 +174,11 @@
     <ClCompile Include="ObjectFile\BackgroundFile\Background.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjectFile\BuildingFile\Bridge.cpp" />
     <ClCompile Include="ObjectFile\BuildingFile\Building1.cpp" />
     <ClCompile Include="ObjectFile\BuildingFile\Building2.cpp" />
     <ClCompile Include="ObjectFile\BuildingFile\Building3.cpp" />
+    <ClCompile Include="ObjectFile\BuildingFile\Door.cpp" />
     <ClCompile Include="ObjectFile\BuildingFile\MapManager.cpp" />
     <ClCompile Include="ObjectFile\BulletFile\Bullet.cpp" />
     <ClCompile Include="ObjectFile\BulletFile\BulletList.cpp" />
@@ -210,9 +212,11 @@
     <ClInclude Include="ObjectFile\BackgroundFile\Background.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="ObjectFile\BuildingFile\Bridge.h" />
     <ClInclude Include="ObjectFile\BuildingFile\Building1.h" />
     <ClInclude Include="ObjectFile\BuildingFile\Building2.h" />
     <ClInclude Include="ObjectFile\BuildingFile\Building3.h" />
+    <ClInclude Include="ObjectFile\BuildingFile\Door.h" />
     <ClInclude Include="ObjectFile\BuildingFile\MapManager.h" />
     <ClInclude Include="ObjectFile\BulletFile\Bullet.h" />
     <ClInclude Include="ObjectFile\BulletFile\BulletList.h" />

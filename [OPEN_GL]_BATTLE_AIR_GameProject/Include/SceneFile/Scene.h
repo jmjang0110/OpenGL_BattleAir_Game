@@ -51,10 +51,13 @@ private:
 	class CBuilding1* m_Building1;
 	class CBuilding2* m_Building2;
 	class CBuilding3* m_Building3;
+	class CDoor* m_Door;
+	class CBridge* m_Bridge;
 
 	class CFloor* m_Floor[4]; // Floor 을 4개 생성하고 각 (1~4)사분면에 배치 
 	class CFloor* m_Floor_test;
 	class CTriangle* m_triangle;
+	
 
 
 	class CBullet* m_Missile;
@@ -93,6 +96,12 @@ private:
 
 	stbi_uc* m_airballon_Text_data = NULL;
 	int m_airballon_width = 0, m_airballon_height = 0;
+
+	stbi_uc* m_Door_Text_data = NULL;
+	int m_Door_width = 0, m_Door_height = 0;
+
+	stbi_uc* m_Bridge_Text_data = NULL;
+	int m_Bridge_width = 0, m_Bridge_height = 0;
 
 public:
 	void InitTexture_All();
