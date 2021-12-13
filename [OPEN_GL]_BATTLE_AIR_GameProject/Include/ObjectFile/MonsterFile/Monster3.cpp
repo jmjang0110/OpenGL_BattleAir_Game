@@ -78,7 +78,7 @@ void CMonster3::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, cons
 
 	InitTexture_1(m_Monster3_Text_data, text_monster_width, text_monster_height);
 	InitBuffer();
-
+	m_Pivot = pivot;
 }
 
 
