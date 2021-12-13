@@ -15,7 +15,7 @@ private:
 	class CMonster3* m_Monster3[50]{ nullptr };
 
 
-private:
+public:
 	// 생성된 몬스터 개수 
 	GLint m_M1Cnt = 0;
 	GLint m_M2Cnt = 0;
@@ -24,6 +24,11 @@ private:
 
 private:
 	GLint m_MonsterMap[50][50];
+
+public:
+	class CMonster1** GetMonster1List() { return m_Monster1; };
+	class CMonster2** GetMonster2List() { return m_Monster2; };
+	class CMonster3** GetMonster3List() { return m_Monster3; };
 
 
 public:

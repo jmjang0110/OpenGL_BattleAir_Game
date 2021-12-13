@@ -384,7 +384,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 	{
 		m_Building2 = new CBuilding2;
 		m_Building2->Init(glm::vec3(3.0f, 5.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-			glm::vec3(-3.0f, -3.0f, -3.0f), "./ObjectFile/BuildingFile/WindMill.obj", m_Building2_Text_data, m_RedPng_Text_data,
+			glm::vec3(-3.0f, -3.0f, -3.0f), "./ObjectFile/BuildingFile/Floating Island.obj", m_Building2_Text_data, m_RedPng_Text_data,
 			m_Building2_width, m_Building2_height, m_RedPng_width, m_RedPng_height);
 
 	}
@@ -606,6 +606,24 @@ void CScene::Collision(float fDeltaTime)
 	if (m_Airplane != nullptr)
 	{
 		CBulletList* BulletList = m_Airplane->GetBulletList();
+		CMonster1** MonsterList_1 = CMonsterManager::GetInst()->GetMonster1List();
+		CMonster2** MonsterList_2 = CMonsterManager::GetInst()->GetMonster2List();
+		CMonster3** MonsterList_3 = CMonsterManager::GetInst()->GetMonster3List();
+
+		for (int i = 0; i < CMonsterManager::GetInst()->m_M1Cnt; ++i)
+		{
+			BulletList->Collision(MonsterList_1[i]->m_CollideBox);
+		}
+		for (int i = 0; i < CMonsterManager::GetInst()->m_M2Cnt; ++i)
+		{
+			BulletList->Collision(MonsterList_2[i]->m_CollideBox);
+		}
+
+		for (int i = 0; i < CMonsterManager::GetInst()->m_M3Cnt; ++i)
+		{
+			BulletList->Collision(MonsterList_3[i]->m_CollideBox);
+		}
+
 		BulletList->Collision(m_Monster1->m_CollideBox);
 		BulletList->Collision(m_Monster2->m_CollideBox);
 		BulletList->Collision(m_Monster3->m_CollideBox);
