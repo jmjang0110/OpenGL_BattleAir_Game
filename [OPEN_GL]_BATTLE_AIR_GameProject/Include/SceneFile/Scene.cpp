@@ -289,7 +289,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		m_Airplane = new CAirplane;
 		// Init( scale color Pivot FileName )  
 		m_Airplane->Init(glm::vec3(2.0f, 0.8f, 2.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f), "./ObjectFile/AirplaneFile/jet.obj",
+			glm::vec3(0.0f, 0.0f, 550.0f), "./ObjectFile/AirplaneFile/jet.obj",
 			m_Airplane_Text_data, m_Bullet_Text_data, m_RedPng_Text_data,
 			m_Airplane_width, m_Airplane_height,
 			m_Bullet_width, m_Bullet_height,
