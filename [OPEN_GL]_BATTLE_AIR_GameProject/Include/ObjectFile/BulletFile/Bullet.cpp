@@ -206,7 +206,7 @@ void CBullet::Render(float fDeltaTime)
 		{
 			
 			m_tri[i]->Update_TranslateForm(m_boomInfo[i].pivot.x, m_boomInfo[i].pivot.y, m_boomInfo[i].pivot.z);
-			m_tri[i]->Update_RotateForm(m_boomInfo[i].angle2, 0.0f, 1.0f, 1.0f);
+			m_tri[i]->Update_RotateForm(m_boomInfo[i].angle2, 1.0f, 1.0f, 1.0f);
 
 			m_tri[i]->Update_ModelTransform();
 

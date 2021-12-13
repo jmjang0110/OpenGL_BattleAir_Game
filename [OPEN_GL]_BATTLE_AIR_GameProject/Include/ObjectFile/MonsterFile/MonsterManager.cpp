@@ -41,7 +41,7 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 
 				m_Monster1[m_M1Cnt] = new CMonster1;
 				m_Monster1[m_M1Cnt]->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-					glm::vec3(Position.x, 40.0f, Position.z), "./ObjectFile/MonsterFile/bird.obj", m_Monster1_Text_data, m_RedPng_Text_data,
+					glm::vec3(Position.x, rand() % 200, Position.z), "./ObjectFile/MonsterFile/bird.obj", m_Monster1_Text_data, m_RedPng_Text_data,
 					m_Monster1_width, m_Monster1_height, textRed_height_width, textRed_height_height);
 
 				Position.x += 50.0f;
@@ -55,7 +55,7 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 
 				m_Monster2[m_M2Cnt] = new CMonster2;
 				m_Monster2[m_M2Cnt]->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
-					glm::vec3(10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/Gargoyle_1.obj", m_Monster2_Text_data, m_RedPng_Text_data,
+					glm::vec3(Position.x, rand() % 200, Position.z), "./ObjectFile/MonsterFile/Gargoyle_1.obj", m_Monster2_Text_data, m_RedPng_Text_data,
 					m_Monster2_width, m_Monster2_height, textRed_height_width, textRed_height_height);
 
 				Position.x += 50.0f;
@@ -68,7 +68,7 @@ bool CMonsterManager::Init(stbi_uc* m_Monster1_Text_data, stbi_uc* m_Monster2_Te
 
 				m_Monster3[m_M3Cnt] = new CMonster3;
 				m_Monster3[m_M3Cnt]->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-					glm::vec3(Position.x, 40.0f, Position.z), "./ObjectFile/MonsterFile/monster2.obj", m_Monster3_Text_data, m_RedPng_Text_data,
+					glm::vec3(Position.x, rand() % 200, Position.z), "./ObjectFile/MonsterFile/monster2.obj", m_Monster3_Text_data, m_RedPng_Text_data,
 					m_Monster3_width, m_Monster3_height, textRed_height_width, textRed_height_height);
 
 				Position.x += 50.0f;
