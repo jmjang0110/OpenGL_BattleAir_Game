@@ -287,6 +287,79 @@ void CScene::InitTexture_All()
 	}
 }
 
+void CScene::InitTexture_Begin()
+{
+	// *** 비행기 텍스처 데이터 저장 ***
+	stbi_set_flip_vertically_on_load(true);
+	const char* filename = "./ObjectFile/AirplaneFile/jet.jpg";
+	int widthImage = 0, heightImage = 0, numberOfChannel = 0;
+	m_Airplane_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Airplane_width = widthImage;
+	m_Airplane_height = heightImage;
+
+	cout << widthImage << " " << heightImage << endl;
+
+	if (!m_Airplane_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+	// *** 미사일( Bullet ) 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BulletFile/MissileTexture.png";
+	m_Bullet_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Bullet_width = widthImage;
+	m_Bullet_height = heightImage;
+
+	cout << widthImage << " " << heightImage << endl;
+
+	if (!m_Bullet_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+
+	// *** Red 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/HexaheronFile/Red.png";
+	m_RedPng_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_RedPng_width = widthImage;
+	m_RedPng_height = heightImage;
+
+	cout << widthImage << " " << heightImage << endl;
+
+	if (!m_RedPng_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+	// *** Door 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BuildingFile/Door.jpg";
+	m_Door_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Door_width = widthImage;
+	m_Door_height = heightImage;
+
+	cout << m_Door_width << " " << m_Door_height << endl;
+
+	if (!m_Door_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+
+	// *** Bridge 텍스처 데이터 저장 ***
+	filename = "./ObjectFile/BuildingFile/Brown.jpg";
+	m_Bridge_Text_data = stbi_load(filename, &widthImage, &heightImage, &numberOfChannel, STBI_rgb);
+	m_Bridge_width = widthImage;
+	m_Bridge_height = heightImage;
+
+	cout << m_Bridge_width << " " << m_Bridge_height << endl;
+
+	if (!m_Bridge_Text_data) {
+		fprintf(stderr, "Cannot load file image %s\nSTB Reason: %s\n", filename, stbi_failure_reason());
+		exit(0);
+	}
+
+}
+
 void CScene::UpdateProjectionMat()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
@@ -327,7 +400,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		m_Airplane = new CAirplane;
 		// Init( scale color Pivot FileName )  
 		m_Airplane->Init(glm::vec3(2.0f, 0.8f, 2.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
-			glm::vec3(0.0f, 0.0f, 550.0f), "./ObjectFile/AirplaneFile/jet.obj",
+			glm::vec3(0.0f, 0.0f, 500.0f), "./ObjectFile/AirplaneFile/jet.obj",
 			m_Airplane_Text_data, m_Bullet_Text_data, m_RedPng_Text_data,
 			m_Airplane_width, m_Airplane_height,
 			m_Bullet_width, m_Bullet_height,
@@ -436,7 +509,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 
 	}
 
-	if (m_Door == nullptr)
+	/*if (m_Door == nullptr)
 	{
 		m_Door = new CDoor;
 		m_Door->Init(glm::vec3(60.0f, 15.0f, 60.0f), glm::vec3(1.0f, 1.0f, 1.0f),
@@ -452,7 +525,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 			glm::vec3(-0.5f, -0.7f, 540.0f), "./ObjectFile/BuildingFile/Bridge3.obj", m_Bridge_Text_data, m_RedPng_Text_data,
 			m_Bridge_width, m_Bridge_height, m_RedPng_width, m_RedPng_height);
 
-	}
+	}*/
 
 
 	//for (int i = 0; i < 4; ++i)
@@ -477,6 +550,59 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 
 void CScene::Init_BeginStage(SCENE_TYPE type)
 {
+	InitTexture_Begin();
+
+	if (CSoundManager::GetInst()->Init())
+	{
+		cout << "Sound File Load Success" << endl;
+
+	}
+
+
+	if (m_Airplane == nullptr)
+	{
+		m_Airplane = new CAirplane;
+		// Init( scale color Pivot FileName )  
+		m_Airplane->Init(glm::vec3(2.0f, 0.8f, 2.0f), glm::vec3(255.0f / 255.0f, 153.0f / 255.0f, rand() % 255 / 255.0f),
+			glm::vec3(0.0f, 0.0f, 1100.0f), "./ObjectFile/AirplaneFile/jet.obj",
+			m_Airplane_Text_data, m_Bullet_Text_data, m_RedPng_Text_data,
+			m_Airplane_width, m_Airplane_height,
+			m_Bullet_width, m_Bullet_height,
+			m_RedPng_width, m_RedPng_height);
+	}
+
+	if (m_Camera == nullptr)
+	{
+		m_Camera = new CCamera;
+		// 카메라 위치 , 바라보고있는 방향은 비행기 피봇값에의해 변동되므로 아래 파라미터 값들은 의미 없음
+		m_Camera->Init(glm::vec3(0.01f, 0.01f, 0.01f), glm::vec3(0.001f, 5.0f, -2.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	}
+	if (m_Light == nullptr)
+	{
+		m_Light = new CLight;
+		m_Light->Init(glm::vec3(-0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+	}
+
+	if (m_Door == nullptr)
+	{
+		m_Door = new CDoor;
+		m_Door->Init(glm::vec3(60.0f, 15.0f, 60.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(50.0f, 5.0f, 565.0f), "./ObjectFile/BuildingFile/Door.obj", m_Door_Text_data, m_RedPng_Text_data,
+			m_Door_width, m_Door_height, m_RedPng_width, m_RedPng_height);
+
+	}
+
+	if (m_Bridge == nullptr)
+	{
+		m_Bridge = new CBridge;
+		m_Bridge->Init(glm::vec3(10.0f, 10.0f, 10.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+			glm::vec3(-0.5f, -0.7f, 540.0f), "./ObjectFile/BuildingFile/Bridge3.obj", m_Bridge_Text_data, m_RedPng_Text_data,
+			m_Bridge_width, m_Bridge_height, m_RedPng_width, m_RedPng_height);
+
+	}
+
+
 }
 
 void CScene::Init_EndStage(SCENE_TYPE type)
@@ -485,6 +611,8 @@ void CScene::Init_EndStage(SCENE_TYPE type)
 
 bool CScene::Init(SCENE_TYPE type)
 {
+	m_SceneStage = type;
+
 	switch (type)
 	{
 	case NONE:
@@ -529,51 +657,91 @@ void CScene::Input(float fDeltaTime)
 
 int CScene::Update(float fDeltaTime)
 {
-	CSoundManager::GetInst()->Update();
-
-	if (m_AirBallon != nullptr)
-		m_AirBallon->Update(fDeltaTime);
-
-	if (m_Monster1 != nullptr)
-		m_Monster1->Update(fDeltaTime);
-
-	if (m_Monster2 != nullptr)
-		m_Monster2->Update(fDeltaTime);
-
-	if (m_Monster3 != nullptr)
-		m_Monster3->Update(fDeltaTime);
-
-	if (m_Airplane != nullptr)
+	if (m_SceneStage == SCENE_TYPE::MAIN_STAGE)
 	{
-		m_Airplane->Update(fDeltaTime);
-		m_Airplane->Update_Rotate_LR(0.0f, 0.0f, 1.0f);
+	
+		CSoundManager::GetInst()->Update(m_SceneStage);
+
+		if (m_AirBallon != nullptr)
+			m_AirBallon->Update(fDeltaTime);
+
+		if (m_Monster1 != nullptr)
+			m_Monster1->Update(fDeltaTime);
+
+		if (m_Monster2 != nullptr)
+			m_Monster2->Update(fDeltaTime);
+
+		if (m_Monster3 != nullptr)
+			m_Monster3->Update(fDeltaTime);
+
+		if (m_Airplane != nullptr)
+		{
+			m_Airplane->Update(fDeltaTime);
+			m_Airplane->Update_Rotate_LR(0.0f, 0.0f, 1.0f);
+
+		}
+
+		if (m_Missile != nullptr)
+		{
+			m_Missile->Update_Rotate_LR(0.0f, 1.0f, 0.0f);
+			//m_Missile->Update(fDeltaTime);
+
+
+		}
+
+		if (m_Camera != nullptr)
+		{
+			m_Camera->UpdateCameraPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR());
+			m_Camera->UpdateCameraDirection(m_Airplane->GetAngleLR());
+
+			m_Camera->Update(fDeltaTime);
+
+		}
+
+		if (m_Light != nullptr)
+		{
+			m_Light->UpdateLightPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR(), m_Camera->GetCameraDir());
+
+		}
+		//CMapManager::GetInst()->Update(fDeltaTime);
+		CMonsterManager::GetInst()->Update(fDeltaTime);
+	}
+	
+
+	else if (m_SceneStage == SCENE_TYPE::BEGIN)
+	{
+		if (m_Airplane != nullptr)
+		{
+			if(m_Airplane->GetPivot().z <= 500.0f)
+				m_bEnable = false;
+
+		}
+		CSoundManager::GetInst()->Update(m_SceneStage);
+
+		if (m_Airplane != nullptr)
+		{
+			m_Airplane->Update(fDeltaTime);
+			m_Airplane->Update_Rotate_LR(0.0f, 0.0f, 1.0f);
+
+		}
+
+
+		if (m_Camera != nullptr)
+		{
+			m_Camera->UpdateCameraPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR());
+			m_Camera->UpdateCameraDirection(m_Airplane->GetAngleLR());
+
+			m_Camera->Update(fDeltaTime);
+
+		}
+
+		if (m_Light != nullptr)
+		{
+			m_Light->UpdateLightPos_Begin(m_Airplane->GetPivot(), m_Airplane->GetAngleLR(), m_Camera->GetCameraDir());
+
+		}
 
 	}
-
-	if (m_Missile != nullptr)
-	{
-		m_Missile->Update_Rotate_LR(0.0f, 1.0f, 0.0f);
-		//m_Missile->Update(fDeltaTime);
-
-
-	}
-
-	if (m_Camera != nullptr)
-	{
-		m_Camera->UpdateCameraPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR());
-		m_Camera->UpdateCameraDirection(m_Airplane->GetAngleLR());
-
-		m_Camera->Update(fDeltaTime);
-
-	}
-
-	if (m_Light != nullptr)
-	{
-		m_Light->UpdateLightPos(m_Airplane->GetPivot(), m_Airplane->GetAngleLR(), m_Camera->GetCameraDir());
-
-	}
-	//CMapManager::GetInst()->Update(fDeltaTime);
-	CMonsterManager::GetInst()->Update(fDeltaTime);
 
 	return 0;
 }
@@ -648,120 +816,161 @@ bool CScene::check_crash_dot(glm::vec3 dot, class Chexahedron* obj)
 
 void CScene::Collision(float fDeltaTime)
 {
-	if (m_Airplane != nullptr)
+	if (m_SceneStage == SCENE_TYPE::MAIN_STAGE)
 	{
-		if (m_Monster1 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster1->m_CollideBox)) cout << "monster1 충돌" << endl;
-		if (m_Monster2 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster2->m_CollideBox)) cout << "monster2 충돌" << endl;
-		if (m_Monster3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster3->m_CollideBox)) cout << "monster3 충돌" << endl;
-		if (m_Building1 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building1->m_CollideBox)) cout << "building1 충돌" << endl;
-		if (m_Building2 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building2->m_CollideBox)) cout << "building2 충돌" << endl;
-		if (m_Building3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building3->m_CollideBox)) cout << "building3 충돌" << endl;
-		if (m_AirBallon != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_AirBallon->m_CollideBox)) cout << "air ballon 충돌" << endl;
+		if (m_Airplane != nullptr)
+		{
+			if (m_Monster1 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster1->m_CollideBox)) cout << "monster1 충돌" << endl;
+			if (m_Monster2 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster2->m_CollideBox)) cout << "monster2 충돌" << endl;
+			if (m_Monster3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Monster3->m_CollideBox)) cout << "monster3 충돌" << endl;
+			if (m_Building1 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building1->m_CollideBox)) cout << "building1 충돌" << endl;
+			if (m_Building2 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building2->m_CollideBox)) cout << "building2 충돌" << endl;
+			if (m_Building3 != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_Building3->m_CollideBox)) cout << "building3 충돌" << endl;
+			if (m_AirBallon != nullptr) if (check_crash(m_Airplane->m_CollideBox, m_AirBallon->m_CollideBox)) cout << "air ballon 충돌" << endl;
+		}
+
+		if (m_Airplane != nullptr)
+		{
+			CBulletList* BulletList = m_Airplane->GetBulletList();
+			CMonster1** MonsterList_1 = CMonsterManager::GetInst()->GetMonster1List();
+			CMonster2** MonsterList_2 = CMonsterManager::GetInst()->GetMonster2List();
+			CMonster3** MonsterList_3 = CMonsterManager::GetInst()->GetMonster3List();
+
+			for (int i = 0; i < CMonsterManager::GetInst()->m_M1Cnt; ++i)
+			{
+				BulletList->Collision(MonsterList_1[i]->m_CollideBox);
+			}
+			for (int i = 0; i < CMonsterManager::GetInst()->m_M2Cnt; ++i)
+			{
+				BulletList->Collision(MonsterList_2[i]->m_CollideBox);
+			}
+
+			for (int i = 0; i < CMonsterManager::GetInst()->m_M3Cnt; ++i)
+			{
+				BulletList->Collision(MonsterList_3[i]->m_CollideBox);
+			}
+
+			BulletList->Collision(m_Monster1->m_CollideBox);
+			BulletList->Collision(m_Monster2->m_CollideBox);
+			BulletList->Collision(m_Monster3->m_CollideBox);
+
+
+
+		}
 	}
 
-	if (m_Airplane != nullptr)
-	{
-		CBulletList* BulletList = m_Airplane->GetBulletList();
-		CMonster1** MonsterList_1 = CMonsterManager::GetInst()->GetMonster1List();
-		CMonster2** MonsterList_2 = CMonsterManager::GetInst()->GetMonster2List();
-		CMonster3** MonsterList_3 = CMonsterManager::GetInst()->GetMonster3List();
-
-		for (int i = 0; i < CMonsterManager::GetInst()->m_M1Cnt; ++i)
-		{
-			BulletList->Collision(MonsterList_1[i]->m_CollideBox);
-		}
-		for (int i = 0; i < CMonsterManager::GetInst()->m_M2Cnt; ++i)
-		{
-			BulletList->Collision(MonsterList_2[i]->m_CollideBox);
-		}
-
-		for (int i = 0; i < CMonsterManager::GetInst()->m_M3Cnt; ++i)
-		{
-			BulletList->Collision(MonsterList_3[i]->m_CollideBox);
-		}
-
-		BulletList->Collision(m_Monster1->m_CollideBox);
-		BulletList->Collision(m_Monster2->m_CollideBox);
-		BulletList->Collision(m_Monster3->m_CollideBox);
-
-
-
-	}
 
 }
 
 void CScene::Render(float fDeltaTime)
 {
 
-	UpdateProjectionMat();
-
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
-
-	//cout << "(" << m_Airplane->GetPivot().x << "," << m_Airplane->GetPivot().y << "," << m_Airplane->GetPivot().z << ")" << endl;
-
-	if (m_Camera != nullptr)
-		m_Camera->Render(fDeltaTime);
-
-	if (m_Light != nullptr)
-		m_Light->Render(fDeltaTime, m_Camera);
-
-	if (m_Axis != nullptr)
-		m_Axis->Render(fDeltaTime);
-
-	if (m_Airplane != nullptr)
-		m_Airplane->Render(fDeltaTime);
-
-
-	if (m_Missile != nullptr)
+	if (m_SceneStage == SCENE_TYPE::MAIN_STAGE)
 	{
-		m_Missile->Render(fDeltaTime);
+		UpdateProjectionMat();
 
-	}
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
 
-	if (m_AirBallon != nullptr)
-		m_AirBallon->Render(fDeltaTime);
+		//cout << "(" << m_Airplane->GetPivot().x << "," << m_Airplane->GetPivot().y << "," << m_Airplane->GetPivot().z << ")" << endl;
 
-	if (m_Monster1 != nullptr)
-		m_Monster1->Render(fDeltaTime);
+		if (m_Camera != nullptr)
+			m_Camera->Render(fDeltaTime);
 
-	if (m_Monster2 != nullptr)
-		m_Monster2->Render(fDeltaTime);
+		if (m_Light != nullptr)
+			m_Light->Render(fDeltaTime, m_Camera);
 
-	if (m_Monster3 != nullptr)
-		m_Monster3->Render(fDeltaTime);
+		if (m_Axis != nullptr)
+			m_Axis->Render(fDeltaTime);
 
-	if (m_Background != nullptr)
-		m_Background->Render(fDeltaTime);
+		if (m_Airplane != nullptr)
+			m_Airplane->Render(fDeltaTime);
 
-	if (m_Building1 != nullptr)
-		m_Building1->Render(fDeltaTime);
 
-	if (m_Building2 != nullptr)
-		m_Building2->Render(fDeltaTime);
-
-	if (m_Building3 != nullptr)
-		m_Building3->Render(fDeltaTime);
-
-	if (m_Door != nullptr)
-		m_Door->Render(fDeltaTime);
-
-	if (m_Bridge != nullptr)
-		m_Bridge->Render(fDeltaTime);
-
-	//m_Floor[0]->Render();
-
-	/*for (int i = 0; i < 4; ++i)
-	{
-		if (m_Floor[i] != nullptr)
+		if (m_Missile != nullptr)
 		{
-			m_Floor[i]->Render();
+			m_Missile->Render(fDeltaTime);
 
 		}
-	}*/
 
-	CMapManager::GetInst()->Render(fDeltaTime);
-	CMonsterManager::GetInst()->Render(fDeltaTime);
+		if (m_AirBallon != nullptr)
+			m_AirBallon->Render(fDeltaTime);
+
+		if (m_Monster1 != nullptr)
+			m_Monster1->Render(fDeltaTime);
+
+		if (m_Monster2 != nullptr)
+			m_Monster2->Render(fDeltaTime);
+
+		if (m_Monster3 != nullptr)
+			m_Monster3->Render(fDeltaTime);
+
+		if (m_Background != nullptr)
+			m_Background->Render(fDeltaTime);
+
+		if (m_Building1 != nullptr)
+			m_Building1->Render(fDeltaTime);
+
+		if (m_Building2 != nullptr)
+			m_Building2->Render(fDeltaTime);
+
+		if (m_Building3 != nullptr)
+			m_Building3->Render(fDeltaTime);
+
+		if (m_Door != nullptr)
+			m_Door->Render(fDeltaTime);
+
+		if (m_Bridge != nullptr)
+			m_Bridge->Render(fDeltaTime);
+
+		//m_Floor[0]->Render();
+
+		/*for (int i = 0; i < 4; ++i)
+		{
+			if (m_Floor[i] != nullptr)
+			{
+				m_Floor[i]->Render();
+
+			}
+		}*/
+
+		CMapManager::GetInst()->Render(fDeltaTime);
+		CMonsterManager::GetInst()->Render(fDeltaTime);
+	}
+	else if (m_SceneStage == SCENE_TYPE::BEGIN)
+	{
+		UpdateProjectionMat();
+
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+
+		if (m_Camera != nullptr)
+			m_Camera->Render(fDeltaTime);
+
+		if (m_Light != nullptr)
+			m_Light->Render(fDeltaTime, m_Camera);
+
+
+		if (m_Airplane != nullptr)
+			m_Airplane->Render(fDeltaTime);
+
+
+		if (m_Missile != nullptr)
+		{
+			m_Missile->Render(fDeltaTime);
+
+		}
+
+
+		if (m_Door != nullptr)
+			m_Door->Render(fDeltaTime);
+
+		if (m_Bridge != nullptr)
+			m_Bridge->Render(fDeltaTime);
+
+
+	}
+	
 
 
 }

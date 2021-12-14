@@ -26,6 +26,9 @@ private:
 	class CScene * m_Scene_MainStage	;		// 실제 게임 구동 스테이지 
 	class CScene * m_Scene_End		;		// 게임 끝 
 
+private:
+	GLboolean m_ChangeStage_Begin_to_Main = false;
+
 public:
 	
 	// =====================================================
@@ -40,6 +43,7 @@ public:
 	void Collision(float fDeltaTime);				// * 충돌
 	void Render(float fDeltaTime);					// * 출력
 
+	void UpdateChange_Stage();
 
 };
 

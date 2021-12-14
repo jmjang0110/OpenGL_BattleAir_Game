@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "Scene.h"
+#include "../SoundFile/SoundManager.h"
 
 
 
@@ -34,20 +35,22 @@ bool CSceneManager::Init()
 {
 
 	if (m_Scene_Begin == nullptr)
+	{
 		m_Scene_Begin = new CScene;
 		m_Scene_Begin->Init(SCENE_TYPE::BEGIN);
-
-
+		m_Scene_Begin->SetEnable(true);
+	}
 	if (m_Scene_MainStage == nullptr)
+	{
 		m_Scene_MainStage = new CScene;
 		m_Scene_MainStage->Init(SCENE_TYPE::MAIN_STAGE);
-		m_Scene_MainStage->SetEnable(true);
-
-
+	}
 	if (m_Scene_End == nullptr)
+	{
 		m_Scene_End = new CScene;
 		m_Scene_End->Init(SCENE_TYPE::END);
 	
+	}
 
 
 
@@ -73,6 +76,17 @@ void CSceneManager::Input(float fDeltaTime)
 
 int CSceneManager::Update(float fDeltaTime)
 {
+
+	if (m_Scene_Begin->GetEnable() == false &&
+		m_ChangeStage_Begin_to_Main == false)
+	{
+		m_Scene_MainStage->SetEnable(true);
+		CSoundManager::GetInst()->stopSound();
+		CSoundManager::GetInst()->playSound(SCENE_TYPE::MAIN_STAGE);
+
+		m_ChangeStage_Begin_to_Main = true;
+	}
+
 	// Scene이 활성화 TRUE 인것만 구동합니다. 
 	if (m_Scene_Begin->GetEnable() == true)
 		m_Scene_Begin->Update(fDeltaTime);
@@ -129,4 +143,8 @@ void CSceneManager::Render(float fDeltaTime)
 		m_Scene_End->Render(fDeltaTime);
 
 
+}
+
+void CSceneManager::UpdateChange_Stage()
+{
 }

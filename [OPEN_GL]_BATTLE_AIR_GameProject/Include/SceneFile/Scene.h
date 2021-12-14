@@ -26,6 +26,7 @@ private:
 	// ( false : 화면 비활성화 , true : 화면 활성화 )
 	// 화면에 대한 활성화 정보 입니다. 
 	GLboolean m_bEnable = false;
+	SCENE_TYPE m_SceneStage = SCENE_TYPE::NONE;
 
 private:
 	class CCamera*	m_Camera;
@@ -105,6 +106,8 @@ private:
 
 public:
 	void InitTexture_All();
+	void InitTexture_Begin();
+
 
 public:
 	bool check_crash(class Chexahedron* airplane, class Chexahedron* obj);

@@ -36,6 +36,10 @@ bool CSoundManager::Init()
 	/*FMOD_System_CreateSound(soundSystem, "./Sound/Terran_Theme1.mp3",
 		FMOD_LOOP_NORMAL, 0, &m_bgmSound_Begin);*/
 
+	FMOD_System_CreateSound(soundSystem, "./SoundFile/the-introvert-michael-kobrin-10959.mp3",
+		FMOD_LOOP_NORMAL, 0, &m_bgmSound_Begin);
+
+
 	FMOD_System_CreateSound(soundSystem, "./SoundFile/honor-and-sword-main-11222.mp3",
 		FMOD_LOOP_NORMAL, 0, &m_bgmSound_MainStage);
 
@@ -167,12 +171,23 @@ bool CSoundManager::playSound_Effect_Explode(int type )
 	return true;
 }
 
-void CSoundManager::Update()
+void CSoundManager::Update(SCENE_TYPE type)
 {
 	FMOD_BOOL isplaying = false;
 	FMOD_Channel_IsPlaying(m_bgmChannel, &isplaying);
 	if (isplaying == false)
-		FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
+	{
+		if (type == SCENE_TYPE::MAIN_STAGE)
+		{
+			FMOD_System_PlaySound(soundSystem, m_bgmSound_MainStage, NULL, 0, &m_bgmChannel);
+
+		}
+		else if (type == SCENE_TYPE::BEGIN)
+		{
+			FMOD_System_PlaySound(soundSystem, m_bgmSound_Begin, NULL, 0, &m_bgmChannel);
+
+		}
+	}
 
 	//FMOD_System_Update(soundSystem);
 	FMOD_System_Update(soundSystem);
