@@ -68,9 +68,15 @@ void CBuilding2::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, con
 	m_Building2_Text_data = textData;
 	m_Pivot = pivot;
 	m_Color = color;
-	m_Pivot.y += 7.0f;
-	m_Pivot.x = 50.0f;
-	m_Pivot.z = 50.0f;
+	if (rand() % 2 == 1)
+		m_Pivot.x *= -1;
+	else if (rand() % 2 == 0)
+		m_Pivot.z *= -1;
+
+
+	//m_Pivot.y += 7.0f;
+	//m_Pivot.x = 50.0f;
+	//m_Pivot.z = 50.0f;
 
 
 	m_CollideBox = new Chexahedron;

@@ -407,14 +407,14 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 			m_RedPng_width, m_RedPng_height);
 	}
 
-	if (m_AirBallon == nullptr)
+	/*if (m_AirBallon == nullptr)
 	{
 		m_AirBallon = new CAirballon;
 		m_AirBallon->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f),
 			glm::vec3(-15.0f, 15.0f, 15.0f), "./ObjectFile/MonsterFile/ballon.obj", m_airballon_Text_data, m_RedPng_Text_data,
 			m_airballon_width, m_airballon_height, m_RedPng_width, m_RedPng_height);
 
-	}
+	}*/
 
 	/*if (m_Monster1 == nullptr)
 	{
@@ -543,8 +543,9 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 		m_Building1_width, m_Building1_height, m_Building2_width, m_Building2_height, m_Building3_width, m_Building3_height,
 		m_RedPng_width, m_RedPng_height);
 
-	CMonsterManager::GetInst()->Init(m_Monster1_Text_data, m_Monster2_Text_data, m_Monster3_Text_data, m_RedPng_Text_data,
-		m_Monster1_width, m_Monster1_height, m_Monster2_width, m_Monster2_height, m_Monster3_width, m_Monster3_height,
+	CMonsterManager::GetInst()->Init(m_Monster1_Text_data, m_Monster2_Text_data, m_Monster3_Text_data,m_airballon_Text_data ,m_RedPng_Text_data,
+		m_Monster1_width, m_Monster1_height, m_Monster2_width, m_Monster2_height, m_Monster3_width, m_Monster3_height, 
+		m_airballon_width, m_airballon_height,
 		m_RedPng_width, m_RedPng_height);
 }
 
@@ -835,6 +836,7 @@ void CScene::Collision(float fDeltaTime)
 			CMonster1** MonsterList_1 = CMonsterManager::GetInst()->GetMonster1List();
 			CMonster2** MonsterList_2 = CMonsterManager::GetInst()->GetMonster2List();
 			CMonster3** MonsterList_3 = CMonsterManager::GetInst()->GetMonster3List();
+			CAirballon** MonsterList_4 = CMonsterManager::GetInst()->GetMonster4List();
 
 			for (int i = 0; i < CMonsterManager::GetInst()->m_M1Cnt; ++i)
 			{
@@ -849,7 +851,11 @@ void CScene::Collision(float fDeltaTime)
 			{
 				BulletList->Collision_M3(MonsterList_3[i]);
 			}
-
+			
+			for (int i = 0; i < CMonsterManager::GetInst()->m_M4Cnt; ++i)
+			{
+				BulletList->Collision_M4(MonsterList_4[i]);
+			}
 			//BulletList->Collision(m_Monster1->m_CollideBox);
 			//BulletList->Collision(m_Monster2->m_CollideBox);
 			//BulletList->Collision(m_Monster3->m_CollideBox);

@@ -19,7 +19,7 @@ bool CMapManager::Init(stbi_uc* m_Building1_Text_data, stbi_uc* m_Building2_Text
 	int text_building3_width, int text_building3_height, 
 	int textRed_height_width, int textRed_height_height)
 {
-	glm::vec3 Position = glm::vec3(-200.0f, 0.0f, -200.0f);
+	glm::vec3 Position = glm::vec3(-400.0f, 0.0f, -400.0f);
 
 	for (int i = 0; i < 20; ++i)
 	{
@@ -35,19 +35,19 @@ bool CMapManager::Init(stbi_uc* m_Building1_Text_data, stbi_uc* m_Building2_Text
 				break;
 
 				// building 1
-			//case 1:
-			//	if (m_b1Cnt >= 50)
-			//		break;
+			case 1:
+				if (m_b1Cnt >= 50)
+					break;
 
-			//	m_Building1[m_b1Cnt] = new CBuilding1;
-			//	m_Building1[m_b1Cnt]->Init(glm::vec3(3.0f, 1.0f, 3.0f), glm::vec3(1.0f,1.0f,1.0f),
-			//		glm::vec3(Position.x , 3.0f, Position.z), "./ObjectFile/BuildingFile/BrownTown.obj", m_Building1_Text_data, m_RedPng_Text_data,
-			//		text_building1_width, text_building1_height, textRed_height_width, textRed_height_height);
-			//	
-			//	Position.x += 10.0f;
-			//	m_b1Cnt += 1;
+				m_Building1[m_b1Cnt] = new CBuilding1;
+				m_Building1[m_b1Cnt]->Init(glm::vec3(3.0f, 1.0f, 3.0f), glm::vec3(1.0f,1.0f,1.0f),
+					glm::vec3(rand() % 300 , 3.0f, rand() % 300 ), "./ObjectFile/BuildingFile/BrownTown.obj", m_Building1_Text_data, m_RedPng_Text_data,
+					text_building1_width, text_building1_height, textRed_height_width, textRed_height_height);
+				
+				Position.x += 50.0f;
+				m_b1Cnt += 1;
 
-			//	break;
+				break;
 
 			case 2:
 			case 4:
@@ -57,10 +57,10 @@ bool CMapManager::Init(stbi_uc* m_Building1_Text_data, stbi_uc* m_Building2_Text
 
 				m_Building2[m_b2Cnt] = new CBuilding2;
 				m_Building2[m_b2Cnt]->Init(glm::vec3(3.0f, 5.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-					glm::vec3(Position.x, -3.0f, Position.z), "./ObjectFile/BuildingFile/WindMill.obj", m_Building2_Text_data, m_RedPng_Text_data,
+					glm::vec3(Position.x, -3.0f, rand() % 300), "./ObjectFile/BuildingFile/WindMill.obj", m_Building2_Text_data, m_RedPng_Text_data,
 					text_building2_width, text_building2_height, textRed_height_width, textRed_height_height);
 
-				Position.x += 10.0f;
+				Position.x += 50.0f;
 				m_b2Cnt += 1;
 				break;
 			case 3:
@@ -69,7 +69,7 @@ bool CMapManager::Init(stbi_uc* m_Building1_Text_data, stbi_uc* m_Building2_Text
 
 				m_Building3[m_b3Cnt] = new CBuilding3;
 				m_Building3[m_b3Cnt]->Init(glm::vec3(10.0f, 13.0f, 10.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-					glm::vec3(Position.x, 3.0f, Position.z), "./ObjectFile/BuildingFile/Floating Island.obj", m_Building3_Text_data, m_RedPng_Text_data,
+					glm::vec3(rand() % 300, 3.0f, rand() % 300), "./ObjectFile/BuildingFile/Floating Island.obj", m_Building3_Text_data, m_RedPng_Text_data,
 					text_building3_width, text_building3_height, textRed_height_width, textRed_height_height);
 
 				Position.x += 10.0f;

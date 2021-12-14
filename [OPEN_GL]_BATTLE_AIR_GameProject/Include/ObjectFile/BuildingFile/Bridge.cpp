@@ -68,7 +68,10 @@ void CBridge::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const 
 
 	m_Pivot = pivot;
 	m_Color = color;
-
+	if (rand() % 2 == 1)
+		m_Pivot.x *= -1;
+	else if (rand() % 2 == 0)
+		m_Pivot.z *= -1;
 
 	m_CollideBox = new Chexahedron;
 	m_CollideBox->Init(scaleInfo.x * 1.0f, scaleInfo.y * 1.0f, scaleInfo.z * 1.0f, m_Pivot, textData2, textRed_height_width, textRed_height_height);

@@ -3,6 +3,7 @@
 #include "../../HeaderFile/stb_image.h"
 #include "../HexaheronFile/hexahedron.h"
 
+#include "../TriangleFile/Triangle.h"
 
 
 std::vector< glm::vec3 > CAirballon::m_outvertex;
@@ -48,8 +49,17 @@ void CAirballon::Update_ModelTransform(float fDeltaTime)
 }
 
 void CAirballon::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
-	int text_monster_width, int text_monster_height, int textRed_height_width, int textRed_height_height)
+	int text_monster_width, int text_monster_height, int textRed_height_width, int textRed_height_height, CTriangle** tri)
 {
+	m_tri = new CTriangle * [10];
+	for (int i = 0; i < 10; ++i)
+	{
+		m_tri[i] = new CTriangle;
+		//m_tri[i]->Init(0.5f, 0.5f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f), textData2, text_width, text_height);
+		m_tri[i] = tri[i];
+
+	}
+
 	m_airballon_Text_data = textData;
 
 	// *** 충돌 박스 초기화 ***
@@ -68,7 +78,7 @@ void CAirballon::Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, con
 
 	InitTexture_1(m_airballon_Text_data, text_monster_width, text_monster_height);
 	InitBuffer();
-
+	m_Pivot = pivot;
 }
 
 glm::vec3 CAirballon::GetCollide_Position(int idx)
@@ -88,20 +98,41 @@ void CAirballon::Input(float fDeltaTime)
 
 int CAirballon::Update(float fDeltaTime)
 {
-	
+	if (m_bDie == true)
+		return 0;
 	m_Pivot.y += (fDeltaTime * 5.0f * m_Dir);
 	Update_TranslateForm(m_Pivot);
+	if (m_bDie == false)
+	{
+		if (m_Pivot.y >= 100.0f)
+			m_Dir = -1;
+		else if (m_Pivot.y <= 20.0f)
+			m_Dir = 1;
+
+		if (m_CollideBox != nullptr)
+			m_CollideBox->Update_TranslateForm(m_Pivot);
+
+	}
 	
-	if (m_Pivot.y >= 100.0f)
-		m_Dir = -1;
-	else if (m_Pivot.y <= 20.0f)
-		m_Dir = 1;
 
-	if (m_CollideBox != nullptr)
-		m_CollideBox->Update_TranslateForm(m_Pivot);
+	else if (m_bDie == true)
+	{
+		//m_Pivot.x += fDeltaTime * m_Speed / 3 * cos(glm::radians((m_Angle)));
+		//m_Pivot.y += fDeltaTime * m_Speed / 3 * sin(glm::radians((m_Angle)));
+		for (int i = 0; i < 10; ++i)
+		{
+			m_boomInfo[i].pivot.x += fDeltaTime * m_Speed / 10 * cos(glm::radians((m_boomInfo[i].angle)));
+			m_boomInfo[i].pivot.y += fDeltaTime * m_Speed / 10 * sin(glm::radians((m_boomInfo[i].angle)));
+			m_boomInfo[i].pivot.z += fDeltaTime * m_Speed / 10 * m_boomInfo[i].dir * sin(glm::radians((m_boomInfo[i].angle2)));
 
+		}
+		m_tri_Angle += 5.0f;
 
+		if (m_tri_Angle >= 1000.0f)
+			m_bEnable = false;
 
+		//Update_TranslateForm(m_Pivot);
+	}
 	return 0;
 }
 
@@ -116,19 +147,41 @@ void CAirballon::Collision(float fDeltaTime)
 
 void CAirballon::Render(float fDeltaTime)
 {
+	if (m_bDie == true)
+		return;
+
+
 	glBindVertexArray(m_VAO);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	Update_ModelTransform(fDeltaTime);
 
-	m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f, 102.0f / 255.0f);
+	//m_Color = glm::vec3(255.0f / 255.0f, 102.0f / 255.0f,102.0f / 255.0f);
 	GLint objColorLocation = glGetUniformLocation(CShaderProgramManger::Get_ShaderProgramID(), "objectColor"); //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(objColorLocation, m_Color.x, m_Color.y, m_Color.z);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+	if (m_bDie == false)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
+		glDrawArrays(GL_TRIANGLES, 0, m_Tri_Num);
+
+	}
+	else
+	{
+		for (int i = 0; i < 10; ++i)
+		{
+
+			m_tri[i]->Update_TranslateForm(m_boomInfo[i].pivot.x, m_boomInfo[i].pivot.y, m_boomInfo[i].pivot.z);
+			m_tri[i]->Update_RotateForm(m_boomInfo[i].angle2, 1.0f, 1.0f, 1.0f);
+
+			m_tri[i]->Update_ModelTransform();
+
+			m_tri[i]->Render(RENDER_TYPE::TRIANGLES);
+
+		}
+	}
 
 	// *** 충돌 박스 출력 ***
 	//if (m_CollideBox != nullptr)
@@ -151,9 +204,9 @@ void CAirballon::InitTexture_1(stbi_uc* textData, int text_moster_width, int tex
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+	//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 
-	cout << widthImage << " " << heightImage << endl;
+	//cout << widthImage << " " << heightImage << endl;
 
 	if (!m_airballon_Text_data) {
 		exit(0);
@@ -166,7 +219,7 @@ void CAirballon::InitTexture_1(stbi_uc* textData, int text_moster_width, int tex
 	glUniform1i(tLocation, 0);
 
 	int i = 0;
-	stbi_image_free(m_airballon_Text_data);
+	//stbi_image_free(m_airballon_Text_data);
 
 }
 
