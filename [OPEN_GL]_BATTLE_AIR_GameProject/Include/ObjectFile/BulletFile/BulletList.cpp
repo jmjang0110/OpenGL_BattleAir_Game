@@ -5,7 +5,9 @@
 #include "../BulletFile/BulletList.h"
 #include "../TriangleFile/Triangle.h"
 #include "../../SoundFile/SoundManager.h"
-
+#include "../MonsterFile/Monster1.h"
+#include "../MonsterFile/Monster2.h"
+#include "../MonsterFile/Monster3.h"
 
 CBulletList::CBulletList()
 {
@@ -289,6 +291,87 @@ bool CBulletList::Collision(Chexahedron* obj)
 	}
 
 
+	return false;
+}
+
+bool CBulletList::Collision_M1(CMonster1* obj)
+{
+
+	for (PNODE pNode = m_pBegin->pNext; pNode != m_pEnd; pNode = pNode->pNext)
+	{
+		if (pNode->bullet)
+		{
+			if (obj->m_bDie == true)
+				continue;
+			// 미사일과 오브젝트 충돌 O
+			if (check_crash_dot(pNode->bullet->GetPivot(), obj->m_CollideBox) == true && pNode->bullet->GetCollideState() == false)
+			{
+				
+
+				pNode->bullet->CollideState_Update(true);
+				obj->m_HP -= 100.0f;
+				if (obj->m_HP <= 0.0f)
+					obj->m_bDie = true;
+				CSoundManager::GetInst()->playSound_Effect_Explode(1);
+
+			}
+		}
+	}
+	return false;
+}
+
+bool CBulletList::Collision_M2(CMonster2* obj)
+{
+	for (PNODE pNode = m_pBegin->pNext; pNode != m_pEnd; pNode = pNode->pNext)
+	{
+		if (pNode->bullet)
+		{
+			if (obj->m_bDie == true)
+				continue;
+			// 미사일과 오브젝트 충돌 O
+			if (check_crash_dot(pNode->bullet->GetPivot(), obj->m_CollideBox) == true && pNode->bullet->GetCollideState() == false)
+			{
+				if (obj->m_bDie == true)
+					continue;
+
+
+				pNode->bullet->CollideState_Update(true);
+				obj->m_HP -= 100.0f;
+				if (obj->m_HP <= 0.0f)
+					obj->m_bDie = true;
+
+				CSoundManager::GetInst()->playSound_Effect_Explode(1);
+
+			}
+		}
+	}
+	return false;
+}
+
+bool CBulletList::Collision_M3(CMonster3* obj)
+{
+	for (PNODE pNode = m_pBegin->pNext; pNode != m_pEnd; pNode = pNode->pNext)
+	{
+		if (pNode->bullet)
+		{
+			if (obj->m_bDie == true)
+				continue;
+
+			// 미사일과 오브젝트 충돌 O
+			if (check_crash_dot(pNode->bullet->GetPivot(), obj->m_CollideBox) == true && pNode->bullet->GetCollideState() == false)
+			{
+				if (obj->m_bDie == true)
+					continue;
+
+				pNode->bullet->CollideState_Update(true);
+				obj->m_HP -= 100.0f;
+				if (obj->m_HP <= 0.0f)
+					obj->m_bDie = true;
+				CSoundManager::GetInst()->playSound_Effect_Explode(1);
+
+			}
+		}
+	}
 	return false;
 }
 

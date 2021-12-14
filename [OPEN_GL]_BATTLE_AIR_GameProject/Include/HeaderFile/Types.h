@@ -29,3 +29,13 @@ typedef enum SCENE_TYPE
 	END
 }SCENE_TYPE, * PSCENE_TYPE;
 
+typedef struct BoomInfo
+{
+	GLfloat dir = 1.0f;
+	GLfloat angle = rand() % 360;
+	GLfloat angle2 = rand() % 360;
+
+	glm::vec3 pivot;
+
+
+}BOOM_INFO;

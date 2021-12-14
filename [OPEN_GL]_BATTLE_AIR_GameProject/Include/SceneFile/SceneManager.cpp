@@ -44,6 +44,7 @@ bool CSceneManager::Init()
 	{
 		m_Scene_MainStage = new CScene;
 		m_Scene_MainStage->Init(SCENE_TYPE::MAIN_STAGE);
+		
 	}
 	if (m_Scene_End == nullptr)
 	{

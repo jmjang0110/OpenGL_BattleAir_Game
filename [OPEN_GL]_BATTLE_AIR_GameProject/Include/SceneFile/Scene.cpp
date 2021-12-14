@@ -416,16 +416,16 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 
 	}
 
-	if (m_Monster1 == nullptr)
+	/*if (m_Monster1 == nullptr)
 	{
 		m_Monster1 = new CMonster1;
 		m_Monster1->Init(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
 			glm::vec3(0.0f, 0.0f, -0.0f), "./ObjectFile/MonsterFile/bird.obj", m_Monster1_Text_data, m_RedPng_Text_data,
 			m_Monster1_width, m_Monster1_height, m_RedPng_width, m_RedPng_height);
 
-	}
+	}*/
 
-	if (m_Monster2 == nullptr)
+	/*if (m_Monster2 == nullptr)
 	{
 		m_Monster2 = new CMonster2;
 		m_Monster2->Init(glm::vec3(5.0f, 5.0f, 5.0f), glm::vec3(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f),
@@ -441,7 +441,7 @@ void CScene::Init_MainStage(SCENE_TYPE type)
 			glm::vec3(-10.0f, 10.0f, -0.0f), "./ObjectFile/MonsterFile/monster2.obj", m_Monster3_Text_data, m_RedPng_Text_data,
 			m_Monster3_width, m_Monster3_height, m_RedPng_width, m_RedPng_height);
 
-	}
+	}*/
 
 	// missile √ ±‚»≠ 
 	/*if (m_Missile == nullptr)
@@ -838,21 +838,21 @@ void CScene::Collision(float fDeltaTime)
 
 			for (int i = 0; i < CMonsterManager::GetInst()->m_M1Cnt; ++i)
 			{
-				BulletList->Collision(MonsterList_1[i]->m_CollideBox);
+				BulletList->Collision_M1(MonsterList_1[i]);
 			}
 			for (int i = 0; i < CMonsterManager::GetInst()->m_M2Cnt; ++i)
 			{
-				BulletList->Collision(MonsterList_2[i]->m_CollideBox);
+				BulletList->Collision_M2(MonsterList_2[i]);
 			}
 
 			for (int i = 0; i < CMonsterManager::GetInst()->m_M3Cnt; ++i)
 			{
-				BulletList->Collision(MonsterList_3[i]->m_CollideBox);
+				BulletList->Collision_M3(MonsterList_3[i]);
 			}
 
-			BulletList->Collision(m_Monster1->m_CollideBox);
-			BulletList->Collision(m_Monster2->m_CollideBox);
-			BulletList->Collision(m_Monster3->m_CollideBox);
+			//BulletList->Collision(m_Monster1->m_CollideBox);
+			//BulletList->Collision(m_Monster2->m_CollideBox);
+			//BulletList->Collision(m_Monster3->m_CollideBox);
 
 
 

@@ -55,8 +55,19 @@ private:
 	float m_Dist;
 
 public:
+public:
+	GLboolean m_bDie = false;
+	GLfloat m_HP = 1000.0f;
+	GLfloat m_tri_Angle = 0.0f;
+
+	BOOM_INFO m_boomInfo[10];
+	GLboolean m_bEnable = true;
+
+public:
 	// collide box [ *** 충돌 박스 *** ]
 	class Chexahedron* m_CollideBox;
+	class CTriangle** m_tri;
+
 
 private:
 	stbi_uc* m_Monster3_Text_data = NULL;
@@ -99,7 +110,8 @@ public:
 
 public:
 	void Init(glm::vec3 scaleInfo, glm::vec3 color, glm::vec3 pivot, const char* filename, stbi_uc* textData, stbi_uc* textData2,
-		int text_monster_width, int text_monster_heigh, int textRed_height_width, int textRed_height_height);
+		int text_monster_width, int text_monster_heigh,
+		int textRed_height_width, int textRed_height_height,CTriangle** tri);
 
 	void Input(float fDeltaTime);					// * 입력
 	int Update(float fDeltaTime);					// * 업데이트

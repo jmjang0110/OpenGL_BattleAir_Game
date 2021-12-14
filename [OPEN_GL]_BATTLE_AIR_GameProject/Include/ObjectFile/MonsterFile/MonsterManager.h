@@ -24,6 +24,8 @@ public:
 
 private:
 	GLint m_MonsterMap[50][50];
+	class CTriangle* m_tri[10];
+
 
 public:
 	class CMonster1** GetMonster1List() { return m_Monster1; };

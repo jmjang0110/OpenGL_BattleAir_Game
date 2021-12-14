@@ -78,6 +78,9 @@ public:
 
 	void CheckErase();
 	bool Collision(class Chexahedron* obj);
+	bool Collision_M1(class CMonster1* obj);
+	bool Collision_M2(class CMonster2* obj);
+	bool Collision_M3(class CMonster3* obj);
 
 
 	bool Empty()
