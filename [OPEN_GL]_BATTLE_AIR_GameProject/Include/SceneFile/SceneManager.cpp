@@ -38,13 +38,13 @@ bool CSceneManager::Init()
 	{
 		m_Scene_Begin = new CScene;
 		m_Scene_Begin->Init(SCENE_TYPE::BEGIN);
-		m_Scene_Begin->SetEnable(true);
+		//m_Scene_Begin->SetEnable(true);
 	}
 	if (m_Scene_MainStage == nullptr)
 	{
 		m_Scene_MainStage = new CScene;
 		m_Scene_MainStage->Init(SCENE_TYPE::MAIN_STAGE);
-		
+		m_Scene_MainStage->SetEnable(true);
 	}
 	if (m_Scene_End == nullptr)
 	{
