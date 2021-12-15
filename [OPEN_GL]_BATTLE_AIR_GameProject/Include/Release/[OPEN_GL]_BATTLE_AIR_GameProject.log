@@ -1,58 +1,6 @@
-﻿  Camera.cpp
-  CCore.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\CoreFile\CCore.cpp(38,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\CoreFile\CCore.cpp(38,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\CoreFile\CCore.cpp(142,2): warning C4065: switch문에 'default'가 있으나 'case' 레이블이 없습니다.
-  FileManager.cpp
-  ShaderManger.cpp
-  Timer.cpp
-  Light.cpp
-  main.cpp
-  Airplane.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\AirplaneFile\Airplane.cpp(111,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\AirplaneFile\Airplane.cpp(112,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Axis.cpp
-  Background.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BackgroundFile\Background.cpp(119,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BackgroundFile\Background.cpp(120,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Building1.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BuildingFile\Building1.cpp(138,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BuildingFile\Building1.cpp(139,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Building2.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BuildingFile\Building2.cpp(137,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BuildingFile\Building2.cpp(138,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Building3.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BuildingFile\Building3.cpp(135,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\BuildingFile\Building3.cpp(136,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Bullet.cpp
-  BulletList.cpp
-  Floor.cpp
-  hexahedron.cpp
-  Ballon.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Ballon.cpp(131,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Ballon.cpp(132,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Monster1.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Monster1.cpp(131,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Monster1.cpp(132,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Monster2.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Monster2.cpp(131,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Monster2.cpp(132,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  컴파일하고 있습니다...
-  Monster3.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Monster3.cpp(132,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\MonsterFile\Monster3.cpp(133,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Triangle.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\TriangleFile\Triangle.cpp(17,15): warning C4101: 'texture' :참조되지 않은 지역 변수입니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\ObjectFile\TriangleFile\Triangle.cpp(18,14): warning C4101: 'bmp' :참조되지 않은 지역 변수입니다.
-  Scene.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\SceneFile\Scene.cpp(77,19): warning C4154: 배열 식을 삭제했습니다. 포인터로 변환이 제공됩니다.
-  SceneManager.cpp
-  SoundManager.cpp
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\SoundFile\SoundManager.cpp(89,45): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\SoundFile\SoundManager.cpp(90,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-  코드를 생성하고 있습니다.
-  Previous IPDB not found, fall back to full compilation.
+﻿  코드를 생성하고 있습니다.
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
 C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Include\CoreFile\ShaderManagerFile\ShaderManger.h(25): warning C4715: 'CShaderProgramManger::Get_ShaderProgramID': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  All 691 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 785 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
   [OPEN_GL]_BATTLE_AIR_GameProject.vcxproj -> C:\MyGithub\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\openGL_BATTLE_AIR\[OPEN_GL]_BATTLE_AIR_GameProject\Bin\[OPEN_GL]_BATTLE_AIR_GameProject.exe
